@@ -1,0 +1,87 @@
+═══════════════════════════════════════════════════
+  A. REHMAN & SONS — EMAIL ORDER TEMPLATE
+  Send to: ar_sons@hotmail.com
+═══════════════════════════════════════════════════
+
+SUBJECT: Order Inquiry — [Your Company Name]
+
+──────────────────────────────────────────────────
+
+Dear A. Rehman & Sons,
+
+I would like to place an order for the following products:
+
+CUSTOMER DETAILS
+--------------------
+Company / Business Name:
+Contact Person:
+Phone / WhatsApp:
+City:
+Delivery Address:
+
+PRODUCTS REQUESTED
+--------------------
+1. Product Name: _________________  Quantity: _____  (25kg / 5kg)
+2. Product Name: _________________  Quantity: _____  (25kg / 5kg)
+3. Product Name: _________________  Quantity: _____  (25kg / 5kg)
+4. Product Name: _________________  Quantity: _____  (25kg / 5kg)
+5. Product Name: _________________  Quantity: _____  (25kg / 5kg)
+
+SPECIAL REQUIREMENTS / NOTES:
+_________________________________________________
+_________________________________________________
+
+Please confirm product availability, pricing, and estimated delivery time.
+
+Thank you.
+
+Best regards,
+[Your Name]
+[Your Company]
+[Your Phone]
+
+──────────────────────────────────────────────────
+
+EXPORT INQUIRY SUBJECT: Export Inquiry — [Country Name]
+
+Dear A. Rehman & Sons,
+
+We are interested in importing your laundry / housekeeping chemicals.
+
+Company Name:
+Country:
+Contact Person:
+Email / Phone:
+Products of Interest:
+Estimated Monthly Volume:
+Required Certifications: (ISO 9001, HALAL, HACCP, etc.)
+
+Please share your export price list and documentation.
+
+Thank you.
+
+──────────────────────────────────────────────────
+
+AUTO-REPLY TEMPLATE (for ar_sons@hotmail.com):
+
+Subject: Re: Order Inquiry — [Customer Name]
+
+Dear [Name],
+
+Thank you for your inquiry to A. Rehman & Sons.
+
+We have received your order request and will confirm availability, pricing, and delivery schedule within 24 business hours.
+
+For urgent orders, please WhatsApp us:
+  0321-8502997
+  0333-2158113
+
+Warehouse: Rawalpindi, Pakistan
+Tel: 051-5503203
+
+Best regards,
+A. Rehman & Sons
+Chemical & General Order Supplier
+Est. 1988
+
+═══════════════════════════════════════════════════

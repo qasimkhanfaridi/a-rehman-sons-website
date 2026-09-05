@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" role="img" aria-label="Commercial chemical container">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#004080"/>
+      <stop offset="50%" stop-color="#0066b3"/>
+      <stop offset="100%" stop-color="#003366"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <!-- Handle -->
+  <path d="M42 28 Q60 8 78 28 L78 38 Q60 22 42 38 Z" fill="none" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+  <!-- Cap -->
+  <rect x="38" y="36" width="44" height="14" rx="3" fill="url(#cap)"/>
+  <!-- Body -->
+  <rect x="28" y="48" width="64" height="98" rx="6" fill="url(#g)"/>
+  <!-- Label area -->
+  <rect x="34" y="68" width="52" height="52" rx="3" fill="#ffffff" opacity="0.92"/>
+  <text x="60" y="92" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#003366">ARS</text>
+  <text x="60" y="108" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#0066b3">25 KG</text>
+  <!-- Shine -->
+  <rect x="32" y="52" width="8" height="86" rx="4" fill="#ffffff" opacity="0.12"/>
+</svg>
