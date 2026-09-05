@@ -29,29 +29,51 @@ npx serve .
 # visit http://localhost:3000
 ```
 
-## Deploy
+## Deploy on your VPS
 
-### Option 1 — Netlify (recommended)
+Static site — no Node.js on the server. Only **Nginx** to serve files.
 
-1. Push this repo to GitHub
-2. Go to [netlify.com](https://netlify.com) → **Add new site** → **Import from Git**
-3. Select `Qasimkhanfaridi/a-rehman-sons-website`
-4. Build settings:
-   - **Build command:** *(leave empty)*
-   - **Publish directory:** `/` (root)
-5. Deploy → connect custom domain when ready
+### 1. Upload to VPS
 
-### Option 2 — GitHub Pages
+**Git (after GitHub push):**
 
-1. Repo → **Settings** → **Pages**
-2. Source: **Deploy from branch** → `main` → `/ (root)`
-3. Site URL: `https://qasimkhanfaridi.github.io/a-rehman-sons-website/`
+```bash
+ssh user@YOUR_VPS_IP
+sudo mkdir -p /var/www/a-rehman-sons
+sudo chown $USER:$USER /var/www/a-rehman-sons
+git clone https://github.com/Qasimkhanfaridi/a-rehman-sons-website.git /var/www/a-rehman-sons
+```
 
-### Option 3 — cPanel / shared hosting
+**SCP from Windows:**
 
-1. Upload all files to `public_html`
-2. Ensure `index.html` is in the web root
-3. PDF catalog: `assets/A-Rehman-Sons-Catalog.pdf`
+```powershell
+scp -r "C:\Users\Faridi\source\repos\Zindigi_Rebranding\Zindigi.Rebranding\a-rehman-sons-website\*" user@YOUR_VPS_IP:/var/www/a-rehman-sons/
+```
+
+### 2. Nginx (Ubuntu/Debian)
+
+```bash
+sudo apt update && sudo apt install nginx -y
+sudo cp /var/www/a-rehman-sons/deploy/nginx.conf /etc/nginx/sites-available/a-rehman-sons
+sudo ln -sf /etc/nginx/sites-available/a-rehman-sons /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Edit `server_name` in `deploy/nginx.conf` when domain is ready.
+
+### 3. Firewall & HTTPS
+
+```bash
+sudo ufw allow OpenSSH && sudo ufw allow 'Nginx Full' && sudo ufw enable
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+```
+
+### 4. Updates
+
+```bash
+cd /var/www/a-rehman-sons && git pull
+```
 
 ## Replace assets
 
@@ -105,7 +127,7 @@ a-rehman-sons-website/
 
 ## Domain (pending)
 
-When domain is chosen, point DNS to Netlify/hosting and add custom domain in hosting panel.
+When domain is chosen, set an **A record** pointing to your VPS IP, update `server_name` in `deploy/nginx.conf`, then run Certbot for HTTPS.
 
 Suggested: `arehmansons.com` · `ars-chemicals.pk`
 
