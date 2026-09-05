@@ -41,7 +41,7 @@ Static site — no Node.js on the server. Only **Nginx** to serve files.
 ssh user@YOUR_VPS_IP
 sudo mkdir -p /var/www/a-rehman-sons
 sudo chown $USER:$USER /var/www/a-rehman-sons
-git clone https://github.com/Qasimkhanfaridi/a-rehman-sons-website.git /var/www/a-rehman-sons
+git clone https://github.com/qasimkhanfaridi/a-rehman-sons-website.git /var/www/a-rehman-sons
 ```
 
 **SCP from Windows:**
