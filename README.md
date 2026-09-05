@@ -105,6 +105,11 @@ node scripts/fetch-logos.js
 Default: `assets/products/gallon-blue.svg` (blue 25 kg container).  
 Replace or add per-product images in `js/products.js` if needed.
 
+### Catalog page previews
+
+`assets/catalog-preview/page-01.png` … `page-39.png` — PNG exports of each page from `assets/A-Rehman-Sons-Catalog.pdf`.  
+`page-01.png` matches `assets/catalog-cover.png` (homepage hero image).
+
 ## Project structure
 
 ```
