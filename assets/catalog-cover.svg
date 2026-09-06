@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1180" role="img" aria-label="A. Rehman and Sons Company Profile">
+  <defs>
+    <linearGradient id="pageBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7faf8"/>
+      <stop offset="100%" stop-color="#eef5f0"/>
+    </linearGradient>
+    <linearGradient id="ovalFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4b483"/>
+      <stop offset="100%" stop-color="#a67c52"/>
+    </linearGradient>
+    <linearGradient id="letterFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ddd0f0"/>
+      <stop offset="100%" stop-color="#b49fd4"/>
+    </linearGradient>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#003366" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1180" fill="url(#pageBg)"/>
+
+  <!-- Top blue swooshes -->
+  <path d="M-20 120 C180 20 420 10 620 80 C760 130 860 210 940 280" fill="none" stroke="#003366" stroke-width="28" stroke-linecap="round"/>
+  <path d="M-10 170 C170 80 400 70 590 130 C720 175 820 245 920 310" fill="none" stroke="#0066b3" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <path d="M0 210 C160 130 380 120 560 175 C690 215 790 275 900 330" fill="none" stroke="#0085ca" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Bottom blue swooshes -->
+  <path d="M900 980 C700 1080 460 1090 260 1020 C120 970 20 890 -40 820" fill="none" stroke="#003366" stroke-width="28" stroke-linecap="round"/>
+  <path d="M900 940 C710 1030 480 1040 290 980 C150 935 60 865 0 800" fill="none" stroke="#0066b3" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- ARS logo -->
+  <g transform="translate(450 250)">
+    <path d="M-120 55 C-70 95 -10 110 50 102 C10 82 -35 68 -120 55 Z" fill="none" stroke="#00a3a1" stroke-width="10" stroke-linecap="round"/>
+    <path d="M120 -45 C70 -85 -10 -98 -70 -90 C-30 -72 25 -58 120 -45 Z" fill="none" stroke="#a83279" stroke-width="10" stroke-linecap="round"/>
+    <ellipse cx="0" cy="0" rx="118" ry="78" fill="url(#ovalFill)"/>
+    <text x="0" y="28" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="72" font-weight="900" fill="url(#letterFill)" stroke="#ffffff" stroke-width="5" paint-order="stroke fill">ARS</text>
+  </g>
+
+  <!-- Company name -->
+  <text x="450" y="390" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="54" font-weight="900" fill="#c7b3e8" stroke="#5b4d78" stroke-width="2" paint-order="stroke fill">A. REHMAN &amp; SONS</text>
+  <text x="450" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#003366">CHEMICAL &amp; GENERAL ORDER SUPPLIER</text>
+  <text x="720" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#111111">Estb Since: 1988</text>
+
+  <!-- Certification badges -->
+  <g transform="translate(170 520)">
+    <circle cx="0" cy="0" r="58" fill="#fff" stroke="#222" stroke-width="3"/>
+    <text x="0" y="-8" text-anchor="middle" font-size="14" font-weight="700">OHSAS</text>
+    <text x="0" y="12" text-anchor="middle" font-size="18" font-weight="900">18001</text>
+  </g>
+  <g transform="translate(450 520)">
+    <circle cx="0" cy="0" r="58" fill="#0066b3" stroke="#003366" stroke-width="3"/>
+    <text x="0" y="8" text-anchor="middle" font-size="24" font-weight="900" fill="#fff">HACCP</text>
+  </g>
+  <g transform="translate(730 520)">
+    <circle cx="0" cy="0" r="58" fill="#fff" stroke="#0066b3" stroke-width="4"/>
+    <text x="0" y="-4" text-anchor="middle" font-size="22" font-weight="900" fill="#0066b3">ISO</text>
+    <text x="0" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#003366">9001:2015</text>
+  </g>
+
+  <!-- Company profile block -->
+  <text x="450" y="680" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="42" font-weight="900" fill="#007a78">COMPANY PROFILE</text>
+  <g filter="url(#cardShadow)">
+    <rect x="220" y="720" width="460" height="180" rx="8" fill="#dff4f2" stroke="#007a78" stroke-width="3"/>
+    <text x="450" y="775" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#003366">LAUNDRY, STEWARDING</text>
+    <text x="450" y="815" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#003366">&amp;</text>
+    <text x="450" y="855" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#003366">HOUSE KEEPING</text>
+    <text x="450" y="895" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#003366">PRODUCTS</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="0" y="980" width="900" height="56" fill="#0066b3"/>
+  <text x="450" y="1016" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">We Look Forward Hearing From You</text>
+  <text x="450" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#111">G.P.O. Box No. 1020, Rwp.  |  Tel: 051-5503203  |  ar_sons@hotmail.com</text>
+  <rect x="0" y="1140" width="900" height="40" fill="#003366"/>
+</svg>
