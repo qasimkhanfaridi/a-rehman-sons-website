@@ -59,8 +59,7 @@ const ARS_CERTIFICATES = [
   { id: "iso-9001", name: "ISO 9001:2015", desc: "Quality Management Systems", image: "assets/certificates/iso-9001.png" },
   { id: "iso-45001", name: "ISO 45001:2018", desc: "Occupational Health & Safety", image: "assets/certificates/iso-45001.png" },
   { id: "haccp", name: "HACCP", desc: "Food Safety Critical Control Points", image: "assets/certificates/haccp.png" },
-  { id: "halal", name: "HALAL", desc: "Halal Certified Products", image: "assets/certificates/halal.png" },
-  { id: "ohsas-18001", name: "OHSAS 18001", desc: "Health & Safety Management", image: "assets/certificates/ohsas-18001.png", fallback: "assets/certificates/placeholder.svg" }
+  { id: "halal", name: "HALAL", desc: "Halal Certified Products", image: "assets/certificates/halal.png" }
 ];
 
 const ARS_CONTACT = {
