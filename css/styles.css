@@ -249,23 +249,26 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .hero-visual {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 1.25rem;
-  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 0.65rem;
+  backdrop-filter: blur(6px);
   animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hero-visual:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 
 .hero-visual img {
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: var(--shadow-md);
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Cert strip — immediate credibility */
