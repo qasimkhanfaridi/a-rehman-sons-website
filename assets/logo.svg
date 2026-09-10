@@ -1,40 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="A. Rehman and Sons ARS Logo">
-  <!-- Faithful recreation of the original ARS logo: tan oval, lavender ARS, magenta top-right arc, green bottom-left arc -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Radial gradient for oval fill - warm beige/tan -->
+    <radialGradient id="ovalFill" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#d4b896"/>
+      <stop offset="60%" stop-color="#c4a07a"/>
+      <stop offset="100%" stop-color="#a8835a"/>
+    </radialGradient>
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.25)"/>
+    </filter>
+    <!-- Glow for text -->
+    <filter id="textShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
 
-  <!-- Main oval -->
-  <ellipse cx="210" cy="140" rx="178" ry="102" fill="#c8a56e"/>
-
-  <!-- Magenta arc — top-right edge of oval -->
+  <!-- Pink arc (top) - sweeping above the oval -->
   <path
+    d="M 38,105 A 75,75 0 0,1 162,105"
     fill="none"
-    stroke="#c4007a"
+    stroke="#d4337a"
     stroke-width="7"
     stroke-linecap="round"
-    d="M 355 78
-       A 178 102 0 0 0 285 48
-       A 178 102 0 0 0 210 38"/>
+    opacity="0.92"
+  />
 
-  <!-- Green arc — bottom-left edge of oval -->
+  <!-- Green arc (bottom) - sweeping below the oval -->
   <path
+    d="M 45,118 A 70,70 0 0,0 155,118"
     fill="none"
-    stroke="#1a6b35"
+    stroke="#1e7d44"
     stroke-width="7"
     stroke-linecap="round"
-    d="M 65 202
-       A 178 102 0 0 0 135 232
-       A 178 102 0 0 0 210 242"/>
+    opacity="0.92"
+  />
 
-  <!-- ARS letters — rounded bold sans, lavender fill, white outline -->
+  <!-- Outer oval border -->
+  <ellipse cx="100" cy="108" rx="62" ry="40"
+    fill="none"
+    stroke="#8a6840"
+    stroke-width="2"
+    opacity="0.5"
+  />
+
+  <!-- Main oval (beige/tan fill) -->
+  <ellipse cx="100" cy="108" rx="60" ry="38"
+    fill="url(#ovalFill)"
+    filter="url(#shadow)"
+  />
+
+  <!-- Inner oval subtle border highlight -->
+  <ellipse cx="100" cy="104" rx="58" ry="34"
+    fill="none"
+    stroke="rgba(255,255,255,0.35)"
+    stroke-width="1.5"
+  />
+
+  <!-- "ARS" text -->
   <text
-    x="210"
-    y="162"
+    x="100"
+    y="119"
     text-anchor="middle"
-    font-family="'Arial Rounded MT Bold', 'Nunito', 'Segoe UI', Arial, sans-serif"
-    font-size="96"
-    font-weight="800"
-    fill="#b8a4d4"
-    stroke="#ffffff"
-    stroke-width="9"
-    paint-order="stroke fill"
-    letter-spacing="-2">ARS</text>
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-size="38"
+    font-weight="bold"
+    font-style="italic"
+    fill="#6b4fa0"
+    filter="url(#textShadow)"
+    letter-spacing="2"
+  >ARS</text>
+
+  <!-- Subtle text highlight -->
+  <text
+    x="100"
+    y="118"
+    text-anchor="middle"
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-size="38"
+    font-weight="bold"
+    font-style="italic"
+    fill="rgba(255,255,255,0.15)"
+    letter-spacing="2"
+  >ARS</text>
 </svg>

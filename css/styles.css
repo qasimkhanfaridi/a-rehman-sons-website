@@ -233,17 +233,42 @@ img { max-width: 100%; height: auto; display: block; }
   display: block;
 }
 
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content {
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .hero-visual {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 1.25rem;
-  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 0.65rem;
+  backdrop-filter: blur(6px);
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-visual:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 
 .hero-visual img {
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: var(--shadow-md);
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Cert strip — immediate credibility */
@@ -539,7 +564,7 @@ section { padding: 4rem 0; }
   border-radius: var(--radius);
   padding: 1.25rem 1rem;
   text-align: center;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -548,6 +573,7 @@ section { padding: 4rem 0; }
 }
 
 .client-logo-card:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--blue-light);
 }
@@ -588,11 +614,11 @@ section { padding: 4rem 0; }
   line-height: 1.35;
 }
 
-/* Certificates — 5 separate cards */
+/* Certificates — 4 cards */
 #certificates-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
   margin-bottom: 1rem;
 }
 
@@ -658,19 +684,30 @@ section { padding: 4rem 0; }
 
 /* Products — gallon image */
 .product-card__image {
-  background: linear-gradient(180deg, #eef4fa 0%, #f8fafc 100%);
+  background: linear-gradient(180deg, #f0f6fc 0%, #f8fafc 100%);
   border-radius: var(--radius);
-  padding: 1rem;
+  padding: 0.85rem 0.5rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 120px;
-  margin-bottom: 0.25rem;
+  min-height: 155px;
+  margin-bottom: 0.35rem;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  overflow: hidden;
+}
+
+.product-card__image .gallon-svg {
+  height: 145px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card__image img {
-  height: 100px;
+  height: 140px;
   width: auto;
+  display: block;
 }
 
 .clients-section { background: var(--off-white); }
@@ -718,12 +755,17 @@ section { padding: 4rem 0; }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .product-card:hover {
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.1), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
   border-color: var(--blue-light);
+}
+
+.product-card:hover .gallon-svg {
+  transform: translateY(-2px) scale(1.02);
 }
 
 .product-card__cat {
@@ -946,7 +988,7 @@ section { padding: 4rem 0; }
 @media (max-width: 1024px) {
   .industries-grid,
   .cert-grid { grid-template-columns: repeat(3, 1fr); }
-  #certificates-grid { grid-template-columns: repeat(3, 1fr); }
+  #certificates-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -998,5 +1040,16 @@ section { padding: 4rem 0; }
   .cert-grid,
   #certificates-grid { grid-template-columns: 1fr; }
 
-  .brand-text { display: none; }
+  .brand-logo { height: 48px; }
+  .brand-text h1 { font-size: 0.95rem; }
+  .brand-text p { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
