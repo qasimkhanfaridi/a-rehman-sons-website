@@ -142,78 +142,179 @@ function initOrderForm() {
 }
 
 function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "default") {
-  // Label artwork (assets/products/product-label-template.png) has the product
-  // name baked in at ~33%-45% of its own canvas height. We paint over that
-  // band and redraw each product's own name in the same relative spot/style,
-  // scaled to this SVG's larger label panel.
-  const words = (pname || "").trim().split(/\s+/);
+  const cleanName = (pname || "").trim();
+  const words = cleanName.split(/\s+/);
   let nameSvg = "";
-  if (pname.length > 15 && words.length > 1) {
+
+  if (cleanName.length > 18 && words.length > 1) {
     const mid = Math.ceil(words.length / 2);
     const line1 = words.slice(0, mid).join(" ");
     const line2 = words.slice(mid).join(" ");
-    nameSvg = `<text x="100" y="134.5" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.2" font-weight="800" fill="#003a7e">${line1}</text>
-    <text x="100" y="143" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.2" font-weight="800" fill="#003a7e">${line2}</text>`;
+    nameSvg = `
+      <text x="120" y="167" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#002b5c" letter-spacing="-0.2">${line1}</text>
+      <text x="120" y="179" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#002b5c" letter-spacing="-0.2">${line2}</text>
+    `;
+  } else if (cleanName.length > 13) {
+    nameSvg = `<text x="120" y="173" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="900" fill="#002b5c" letter-spacing="-0.3">${cleanName}</text>`;
   } else {
-    nameSvg = `<text x="100" y="139" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="800" fill="#003a7e">${pname}</text>`;
+    nameSvg = `<text x="120" y="173" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="900" fill="#002b5c" letter-spacing="-0.3">${cleanName}</text>`;
   }
 
-  return `<svg class="gallon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 252" role="img" aria-label="${pname} — ${packaging} commercial container">
+  const safeUid = (uid || "uid").replace(/[^a-zA-Z0-9]/g, "_");
+
+  return `<svg class="gallon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 290" role="img" aria-label="${cleanName} — ${packaging} commercial container">
     <defs>
-      <linearGradient id="bodyGrad_${uid}" gradientUnits="userSpaceOnUse" x1="24" y1="0" x2="176" y2="0">
-        <stop offset="0%" stop-color="#082f49"/>
-        <stop offset="12%" stop-color="#0284c7"/>
-        <stop offset="28%" stop-color="#0369a1"/>
-        <stop offset="70%" stop-color="#0284c7"/>
-        <stop offset="100%" stop-color="#075985"/>
+      <!-- Gallon Plastic Gradient -->
+      <linearGradient id="hdpeGrad_${safeUid}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#cbd5e1"/>
+        <stop offset="6%" stop-color="#f1f5f9"/>
+        <stop offset="25%" stop-color="#ffffff"/>
+        <stop offset="75%" stop-color="#f8fafc"/>
+        <stop offset="92%" stop-color="#e2e8f0"/>
+        <stop offset="100%" stop-color="#94a3b8"/>
       </linearGradient>
-      <linearGradient id="bodyShine_${uid}" gradientUnits="userSpaceOnUse" x1="0" y1="16" x2="0" y2="222">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
-        <stop offset="18%" stop-color="#ffffff" stop-opacity="0.05"/>
-        <stop offset="100%" stop-color="#000000" stop-opacity="0.22"/>
+
+      <!-- Gloss & Specular -->
+      <linearGradient id="shineGrad_${safeUid}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+        <stop offset="25%" stop-color="#ffffff" stop-opacity="0.1"/>
+        <stop offset="85%" stop-color="#0f172a" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="#0f172a" stop-opacity="0.2"/>
       </linearGradient>
-      <linearGradient id="capGrad_${uid}" gradientUnits="userSpaceOnUse" x1="79" y1="0" x2="121" y2="0">
+
+      <!-- Red Cap Gradient -->
+      <linearGradient id="capGrad_${safeUid}" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#991b1b"/>
-        <stop offset="35%" stop-color="#ef4444"/>
-        <stop offset="70%" stop-color="#dc2626"/>
+        <stop offset="25%" stop-color="#ef4444"/>
+        <stop offset="75%" stop-color="#dc2626"/>
         <stop offset="100%" stop-color="#7f1d1d"/>
       </linearGradient>
-      <filter id="blurSoft_${uid}" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="7"/>
+
+      <!-- Drop Shadow Filter -->
+      <filter id="shadow_${safeUid}" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.16"/>
       </filter>
     </defs>
 
-    <ellipse cx="100" cy="239" rx="72" ry="8" fill="#0f172a" opacity="0.18" />
+    <!-- Ground Contact Shadow -->
+    <ellipse cx="120" cy="276" rx="84" ry="9" fill="#0f172a" opacity="0.22" filter="blur(3px)"/>
 
+    <!-- GALLON CONTAINER BODY -->
+    <g filter="url(#shadow_${safeUid})">
+      <!-- Ergonomic Carry Handle -->
+      <path d="M 88 56 Q 88 20 120 18 Q 152 20 152 56 Z" fill="none" stroke="url(#hdpeGrad_${safeUid})" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 88 56 Q 88 20 120 18 Q 152 20 152 56 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+      <!-- Main Jug Vessel -->
+      <path d="M 52 74 Q 38 74 36 92 L 30 248 Q 30 268 48 268 L 192 268 Q 210 268 210 248 L 204 92 Q 202 74 188 74 Z" fill="url(#hdpeGrad_${safeUid})"/>
+      <path d="M 52 74 Q 38 74 36 92 L 30 248 Q 30 268 48 268 L 192 268 Q 210 268 210 248 L 204 92 Q 202 74 188 74 Z" fill="url(#shineGrad_${safeUid})"/>
+
+      <!-- Shoulder Ridge -->
+      <path d="M 40 92 Q 120 86 200 92" stroke="#cbd5e1" stroke-width="2.5" fill="none" opacity="0.6"/>
+
+      <!-- Threaded Spout & Industrial Cap -->
+      <rect x="52" y="38" width="36" height="24" rx="4" fill="url(#hdpeGrad_${safeUid})" stroke="#94a3b8" stroke-width="0.8"/>
+      <rect x="50" y="24" width="40" height="20" rx="3" fill="url(#capGrad_${safeUid})"/>
+      <!-- Cap Grip Ribs -->
+      <line x1="56" y1="26" x2="56" y2="42" stroke="#7f1d1d" stroke-width="1.2"/>
+      <line x1="62" y1="26" x2="62" y2="42" stroke="#7f1d1d" stroke-width="1.2"/>
+      <line x1="70" y1="26" x2="70" y2="42" stroke="#f87171" stroke-width="1.2" opacity="0.8"/>
+      <line x1="78" y1="26" x2="78" y2="42" stroke="#7f1d1d" stroke-width="1.2"/>
+      <line x1="84" y1="26" x2="84" y2="42" stroke="#7f1d1d" stroke-width="1.2"/>
+
+      <!-- Side Volume Measurement Graduations -->
+      <line x1="37" y1="120" x2="43" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="44" y="122" font-size="5" fill="#64748b" font-weight="700">20L</text>
+      <line x1="36" y1="150" x2="43" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="44" y="152" font-size="5" fill="#64748b" font-weight="700">15L</text>
+      <line x1="35" y1="180" x2="43" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="44" y="182" font-size="5" fill="#64748b" font-weight="700">10L</text>
+      <line x1="34" y1="210" x2="42" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="43" y="212" font-size="5" fill="#64748b" font-weight="700">5L</text>
+    </g>
+
+    <!-- OFFICIAL FRONT LABEL PANEL (matching checking.png) -->
     <g>
-      <!-- main body, flat centered shoulder -->
-      <rect x="30" y="60" width="140" height="162" rx="14" fill="url(#bodyGrad_${uid})"/>
-      <rect x="30" y="60" width="140" height="162" rx="14" fill="url(#bodyShine_${uid})"/>
-      <ellipse cx="140" cy="145" rx="11" ry="68" fill="#ffffff" opacity="0.15" filter="url(#blurSoft_${uid})"/>
+      <!-- Label Base Paper -->
+      <rect x="48" y="98" width="144" height="156" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.12))"/>
 
-      <!-- carry handle: single centered loop arching over the cap -->
-      <path d="M 52 60 L 52 34 Q 52 16 70 16 L 130 16 Q 148 16 148 34 L 148 60 L 134 60 L 134 36 Q 134 30 128 30 L 72 30 Q 66 30 66 36 L 66 60 Z" fill="url(#bodyGrad_${uid})"/>
-      <path d="M 52 60 L 52 34 Q 52 16 70 16 L 130 16 Q 148 16 148 34 L 148 60 L 134 60 L 134 36 Q 134 30 128 30 L 72 30 Q 66 30 66 36 L 66 60 Z" fill="none" stroke="#082f49" stroke-width="0.6" opacity="0.3"/>
+      <!-- LABEL HEADER: ARS Oval Logo (Left) -->
+      <g transform="translate(54, 103)">
+        <!-- Oval Gold Frame -->
+        <ellipse cx="23" cy="12" rx="20" ry="10" fill="#fef08a" stroke="#ca8a04" stroke-width="1.2"/>
+        <!-- Pink Arc -->
+        <path d="M 5 10 A 18 8 0 0 1 41 8" fill="none" stroke="#e11d48" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Green Arc -->
+        <path d="M 5 14 A 18 8 0 0 0 41 15" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- ARS Text -->
+        <text x="23" y="15.5" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="9" font-weight="900" fill="#4c0519" letter-spacing="0.5">ARS</text>
+      </g>
 
-      <!-- screw cap, centered inside the handle loop -->
-      <rect x="79" y="38" width="42" height="22" rx="4" fill="url(#capGrad_${uid})"/>
-      <line x1="87" y1="40" x2="87" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="95" y1="40" x2="95" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="105" y1="40" x2="105" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="113" y1="40" x2="113" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <rect x="77" y="56" width="46" height="4" rx="1.2" fill="#fca5a5" opacity="0.8"/>
+      <!-- LABEL HEADER: 3 Certifications (Right) -->
+      <g transform="translate(136, 104)">
+        <!-- 18001 / Safety -->
+        <circle cx="9" cy="11" r="7" fill="#f0fdf4" stroke="#0284c7" stroke-width="0.8"/>
+        <text x="9" y="9" text-anchor="middle" font-size="3.2" font-weight="700" fill="#0369a1">18001</text>
+        <text x="9" y="13" text-anchor="middle" font-size="2.6" font-weight="600" fill="#0f172a">CERT</text>
 
-      <!-- recessed label panel -->
-      <rect x="42" y="82" width="116" height="134" rx="6" fill="#082f49" opacity="0.3"/>
-      <rect x="44" y="84" width="112" height="130" rx="5" fill="#ffffff"/>
-      <image href="assets/products/product-label-template.png" x="45" y="85" width="110" height="128" preserveAspectRatio="xMidYMid meet"/>
-      <rect x="45" y="127" width="110" height="16" fill="#ffffff"/>
+        <!-- HACCP -->
+        <circle cx="27" cy="11" r="7" fill="#eff6ff" stroke="#1d4ed8" stroke-width="0.8"/>
+        <text x="27" y="12" text-anchor="middle" font-size="3.4" font-weight="800" fill="#1e40af">HACCP</text>
+
+        <!-- ISO 9001 -->
+        <circle cx="45" cy="11" r="7" fill="#f8fafc" stroke="#0f172a" stroke-width="0.8"/>
+        <text x="45" y="9" text-anchor="middle" font-size="3.4" font-weight="800" fill="#0f172a">ISO</text>
+        <text x="45" y="13" text-anchor="middle" font-size="2.4" font-weight="600" fill="#475569">9001:2015</text>
+      </g>
+
+      <!-- Blue Wave Accent Band (from checking.png) -->
+      <path d="M 48 128 C 90 133, 140 125, 192 131 L 192 133 C 140 127, 90 135, 48 130 Z" fill="#0284c7"/>
+      <path d="M 48 130 C 85 135, 145 127, 192 133" stroke="#e11d48" stroke-width="0.8" fill="none"/>
+
+      <!-- BRAND NAME: A.R. & SONS® -->
+      <text x="120" y="141" text-anchor="middle" font-family="'Georgia', serif, system-ui" font-size="11.5" font-weight="900" font-style="italic" fill="#be123c" letter-spacing="0.4">A.R. &amp; SONS<tspan font-size="7" font-style="normal" dy="-4">®</tspan></text>
+      
+      <!-- SUBTITLE: CHEMICAL & GENERAL ORDER SUPPLIER -->
+      <text x="120" y="148" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="4.8" font-weight="800" fill="#0369a1" letter-spacing="0.5">CHEMICAL &amp; GENERAL ORDER SUPPLIER</text>
+
+      <!-- Center Separator Bar -->
+      <line x1="56" y1="152" x2="184" y2="152" stroke="#0284c7" stroke-width="1.2"/>
+
+      <!-- HIGH-CONTRAST READABLE PRODUCT NAME -->
       ${nameSvg}
-      <rect x="44" y="84" width="112" height="130" rx="5" fill="none" stroke="#e2e8f0" stroke-width="1"/>
 
-      <!-- packaging size sticker, tucked on the label's top-right corner -->
-      <rect x="120" y="76" width="36" height="16" rx="3" fill="#b45309"/>
-      <text x="138" y="87.5" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="800" fill="#ffffff">${(packaging || "").toUpperCase()}</text>
+      <!-- Bottom Separator -->
+      <line x1="56" y1="190" x2="184" y2="190" stroke="#e2e8f0" stroke-width="0.8"/>
+
+      <!-- GHS HAZARD WARNING DIAMONDS (from checking.png) -->
+      <g transform="translate(56, 195)">
+        <!-- Exclamation / Harmful Diamond -->
+        <g transform="translate(10, 8)">
+          <rect x="-6.5" y="-6.5" width="13" height="13" transform="rotate(45)" fill="#ffffff" stroke="#dc2626" stroke-width="1.3"/>
+          <text x="0" y="3.5" text-anchor="middle" font-size="8.5" font-weight="900" fill="#0f172a">!</text>
+        </g>
+        <text x="10" y="21" text-anchor="middle" font-size="3.6" font-weight="800" fill="#dc2626">HARMFUL</text>
+
+        <!-- Corrosive Diamond -->
+        <g transform="translate(30, 8)">
+          <rect x="-6.5" y="-6.5" width="13" height="13" transform="rotate(45)" fill="#ffffff" stroke="#dc2626" stroke-width="1.3"/>
+          <path d="M -3.5 -2 L -1.5 1 L 0 -1 L 2 2" stroke="#0f172a" stroke-width="0.8" fill="none"/>
+          <rect x="-3" y="1.5" width="6" height="1" fill="#0f172a"/>
+        </g>
+        <text x="30" y="21" text-anchor="middle" font-size="3.6" font-weight="800" fill="#dc2626">CORROSIVE</text>
+      </g>
+
+      <!-- PACKAGING BADGE -->
+      <g transform="translate(142, 196)">
+        <rect x="0" y="0" width="44" height="14" rx="3" fill="#002b5c"/>
+        <text x="22" y="9.5" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.8" font-weight="800" fill="#ffffff">${(packaging || "25 KG").toUpperCase()}</text>
+        <text x="22" y="20" text-anchor="middle" font-size="3.8" font-weight="700" fill="#64748b">COMMERCIAL GRADE</text>
+      </g>
+
+      <!-- Purple Contact & Safety Footer Band (from checking.png) -->
+      <path d="M 48 238 Q 120 234 192 238 L 192 254 L 48 254 Z" fill="#0f172a"/>
+      <text x="120" y="244" text-anchor="middle" font-size="3.7" font-weight="600" fill="#93c5fd">Rawalpindi · Mob: 0321-8502997, 0333-2158113</text>
+      <text x="120" y="249" text-anchor="middle" font-size="3.4" font-weight="500" fill="#cbd5e1">Email: ar_sons@hotmail.com · G.P.O. Box 1020</text>
     </g>
   </svg>`;
 }
@@ -235,7 +336,13 @@ function renderProducts(filter = "all") {
     return `
     <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${p.packaging}" data-category="${p.category}">
       <div class="product-card__image">
-        ${renderGallonSvg(p.name, p.packaging, p.category, p.id)}
+        <img
+          src="assets/products/mockups/${p.id}.jpg"
+          alt="${p.name} — A. Rehman & Sons Commercial Gallon"
+          class="product-mockup-img"
+          loading="lazy"
+          onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${p.packaging}', '${p.category}', '${p.id}');"
+        >
       </div>
       <div class="product-card__head">
         <span class="product-card__cat">${ARS_CATEGORIES[p.category]?.label || p.category}</span>
