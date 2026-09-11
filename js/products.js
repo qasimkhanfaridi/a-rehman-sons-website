@@ -42,7 +42,7 @@ const ARS_PRODUCTS = [
   { id: "scale-h3-mild", name: "SCALE H3 MILD", category: "housekeeping", packaging: "25 kg", description: "Liquid acid descaler for heating and cooling systems." },
   { id: "carpet-shampoo", name: "CARPET SHAMPOO", category: "housekeeping", packaging: "25 kg", description: "Mild antibacterial formula for carpets, rugs, and upholstery." },
   { id: "zepol-gpc", name: "ZEPOL G P C", category: "housekeeping", packaging: "25 kg", description: "Removes soap scum, lime, scale from shower walls, tiles, and stainless steel." },
-  { id: "natural-hand-cleaner", name: "NATURAL HAND CLEANER", category: "housekeeping", packaging: "25 kg / 5 kg", description: "Rich-lather hand cleaner — neutral pH with glycerine, biodegradable." },
+  { id: "natural-hand-cleaner", name: "NATURAL HAND CLEANER", category: "housekeeping", packaging: "5 kg", description: "Rich-lather hand cleaner — neutral pH with glycerine, biodegradable." },
   { id: "zeklor-ct-descaler", name: "ZEKLOR CT DESCALER", category: "housekeeping", packaging: "25 kg", description: "Low-foaming descaler for lime scale and hard-water deposits." }
 ];
 
@@ -52,6 +52,20 @@ const ARS_CATEGORIES = {
   stewarding: { label: "Stewarding & Kitchen", icon: "" },
   housekeeping: { label: "Housekeeping", icon: "" }
 };
+
+// Canonical size options a customer can pick when adding a product to their
+// order. Spotting agents are small spot-treatment bottles (no bulk drum);
+// every other category is a bulk industrial chemical sold across the full range.
+const ARS_PACKAGE_SIZES = {
+  laundry: ["5 kg", "10 kg", "25 kg", "200 kg"],
+  spotting: ["5 kg", "10 kg"],
+  stewarding: ["5 kg", "10 kg", "25 kg", "200 kg"],
+  housekeeping: ["5 kg", "10 kg", "25 kg", "200 kg"]
+};
+
+function getPackageSizes(product) {
+  return product.sizes || ARS_PACKAGE_SIZES[product.category] || ["25 kg"];
+}
 
 const ARS_PRODUCT_IMAGE = "assets/products/gallon-blue.svg";
 

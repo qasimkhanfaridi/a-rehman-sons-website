@@ -57,10 +57,11 @@ function getCart() {
     const qtyInput = card.querySelector(".qty-input");
     const qty = parseInt(qtyInput?.value || "0", 10);
     if (qty > 0) {
+      const packSelect = card.querySelector(".pack-select");
       cart.push({
         id: card.dataset.id,
         name: card.dataset.name,
-        packaging: card.dataset.packaging,
+        packaging: packSelect?.value || card.dataset.packaging,
         qty
       });
     }
@@ -91,6 +92,28 @@ function validateForm(formData) {
   return true;
 }
 
+function updateCartSummary() {
+  const bar = document.getElementById("cart-summary");
+  if (!bar) return;
+  const cart = getCart();
+  if (cart.length === 0) {
+    bar.classList.remove("cart-summary--visible");
+    return;
+  }
+  const totalUnits = cart.reduce((sum, item) => sum + item.qty, 0);
+  const text = bar.querySelector(".cart-summary__text");
+  if (text) {
+    text.textContent = `${cart.length} product${cart.length > 1 ? "s" : ""} selected · ${totalUnits} unit${totalUnits === 1 ? "" : "s"} — Review Order`;
+  }
+  bar.classList.add("cart-summary--visible");
+}
+
+function initCartSummary() {
+  document.getElementById("cart-summary")?.addEventListener("click", () => {
+    document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
 function initOrderForm() {
   document.getElementById("btn-whatsapp")?.addEventListener("click", () => {
     const formData = getFormData();
@@ -118,85 +141,79 @@ function initOrderForm() {
   });
 }
 
-function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry") {
-  const catColors = {
-    laundry: "#1d4ed8",
-    spotting: "#7c3aed",
-    stewarding: "#0d9488",
-    housekeeping: "#059669"
-  };
-  const catColor = catColors[cat] || "#1d4ed8";
-
+function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "default") {
+  // Label artwork (assets/products/product-label-template.png) has the product
+  // name baked in at ~33%-45% of its own canvas height. We paint over that
+  // band and redraw each product's own name in the same relative spot/style,
+  // scaled to this SVG's larger label panel.
   const words = (pname || "").trim().split(/\s+/);
   let nameSvg = "";
   if (pname.length > 15 && words.length > 1) {
     const mid = Math.ceil(words.length / 2);
     const line1 = words.slice(0, mid).join(" ");
     const line2 = words.slice(mid).join(" ");
-    nameSvg = `<text x="83" y="121" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="6.8" font-weight="800" fill="#0f172a">${line1}</text>
-    <text x="83" y="129" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="6.8" font-weight="800" fill="#0f172a">${line2}</text>`;
+    nameSvg = `<text x="100" y="134.5" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.2" font-weight="800" fill="#003a7e">${line1}</text>
+    <text x="100" y="143" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.2" font-weight="800" fill="#003a7e">${line2}</text>`;
   } else {
-    nameSvg = `<text x="83" y="125" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="7.8" font-weight="800" fill="#0f172a">${pname}</text>`;
+    nameSvg = `<text x="100" y="139" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="800" fill="#003a7e">${pname}</text>`;
   }
 
-  const packUpper = (packaging || "25 KG").toUpperCase();
-
-  return `<svg class="gallon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 210" role="img" aria-label="${pname} commercial container">
+  return `<svg class="gallon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 252" role="img" aria-label="${pname} — ${packaging} commercial container">
     <defs>
-      <linearGradient id="bodyGrad_${cat}" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient id="bodyGrad_${uid}" gradientUnits="userSpaceOnUse" x1="24" y1="0" x2="176" y2="0">
         <stop offset="0%" stop-color="#082f49"/>
         <stop offset="12%" stop-color="#0284c7"/>
         <stop offset="28%" stop-color="#0369a1"/>
         <stop offset="70%" stop-color="#0284c7"/>
         <stop offset="100%" stop-color="#075985"/>
       </linearGradient>
-      <linearGradient id="bodyShine_${cat}" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
-        <stop offset="18%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <linearGradient id="bodyShine_${uid}" gradientUnits="userSpaceOnUse" x1="0" y1="16" x2="0" y2="222">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+        <stop offset="18%" stop-color="#ffffff" stop-opacity="0.05"/>
         <stop offset="100%" stop-color="#000000" stop-opacity="0.22"/>
       </linearGradient>
-      <linearGradient id="capGrad_${cat}" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient id="capGrad_${uid}" gradientUnits="userSpaceOnUse" x1="79" y1="0" x2="121" y2="0">
         <stop offset="0%" stop-color="#991b1b"/>
         <stop offset="35%" stop-color="#ef4444"/>
         <stop offset="70%" stop-color="#dc2626"/>
         <stop offset="100%" stop-color="#7f1d1d"/>
       </linearGradient>
+      <filter id="blurSoft_${uid}" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="7"/>
+      </filter>
     </defs>
-    <ellipse cx="83" cy="199" rx="60" ry="6.5" fill="#0f172a" opacity="0.18" />
+
+    <ellipse cx="100" cy="239" rx="72" ry="8" fill="#0f172a" opacity="0.18" />
+
     <g>
-      <path d="M 32 46 L 32 34 Q 32 30 36 30 L 58 30 Q 62 30 62 34 L 62 46 L 74 46 Q 80 18 100 18 L 126 18 Q 142 18 142 36 L 142 54 Q 146 60 146 70 L 146 180 Q 146 192 134 192 L 32 192 Q 20 192 20 180 L 20 70 Q 20 60 24 54 L 24 46 Z" fill="url(#bodyGrad_${cat})"/>
-      <path d="M 32 46 L 32 34 Q 32 30 36 30 L 58 30 Q 62 30 62 34 L 62 46 L 74 46 Q 80 18 100 18 L 126 18 Q 142 18 142 36 L 142 54 Q 146 60 146 70 L 146 180 Q 146 192 134 192 L 32 192 Q 20 192 20 180 L 20 70 Q 20 60 24 54 L 24 46 Z" fill="url(#bodyShine_${cat})"/>
-      <path d="M 82 38 Q 82 30 92 30 L 122 30 Q 132 30 132 38 L 132 44 Q 132 52 122 52 L 92 52 Q 82 52 82 44 Z" fill="#ffffff"/>
-      <path d="M 90 30 L 124 30 Q 132 30 132 35 L 132 38 Q 124 33 118 33 L 94 33 Q 86 33 86 36 Z" fill="#082f49" opacity="0.45"/>
-      <rect x="29" y="20" width="36" height="15" rx="3.5" fill="url(#capGrad_${cat})"/>
-      <line x1="35" y1="20" x2="35" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="41" y1="20" x2="41" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="47" y1="20" x2="47" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="53" y1="20" x2="53" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <line x1="59" y1="20" x2="59" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
-      <rect x="31" y="33" width="32" height="3" rx="1" fill="#fca5a5" opacity="0.8"/>
-      <rect x="23" y="68" width="4" height="110" rx="2" fill="#ffffff" opacity="0.25"/>
-      <line x1="22" y1="80" x2="25" y2="80" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
-      <line x1="22" y1="105" x2="25" y2="105" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
-      <line x1="22" y1="130" x2="25" y2="130" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
-      <line x1="22" y1="155" x2="25" y2="155" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
-      <line x1="26" y1="64" x2="140" y2="64" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
-      <line x1="26" y1="65" x2="140" y2="65" stroke="#082f49" stroke-width="1" opacity="0.3"/>
-      <line x1="26" y1="184" x2="140" y2="184" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
-      <line x1="26" y1="185" x2="140" y2="185" stroke="#082f49" stroke-width="1" opacity="0.3"/>
-      <rect x="38" y="67" width="90" height="112" rx="5" fill="#082f49" opacity="0.3"/>
-      <rect x="39" y="68" width="88" height="110" rx="4" fill="#ffffff"/>
-      <rect x="39" y="68" width="88" height="110" rx="4" fill="none" stroke="#e2e8f0" stroke-width="1"/>
-      <image href="assets/logo.png" x="48" y="71" width="70" height="36" preserveAspectRatio="xMidYMid meet"/>
-      <rect x="43" y="108" width="80" height="3.5" rx="1.75" fill="${catColor}"/>
+      <!-- main body, flat centered shoulder -->
+      <rect x="30" y="60" width="140" height="162" rx="14" fill="url(#bodyGrad_${uid})"/>
+      <rect x="30" y="60" width="140" height="162" rx="14" fill="url(#bodyShine_${uid})"/>
+      <ellipse cx="140" cy="145" rx="11" ry="68" fill="#ffffff" opacity="0.15" filter="url(#blurSoft_${uid})"/>
+
+      <!-- carry handle: single centered loop arching over the cap -->
+      <path d="M 52 60 L 52 34 Q 52 16 70 16 L 130 16 Q 148 16 148 34 L 148 60 L 134 60 L 134 36 Q 134 30 128 30 L 72 30 Q 66 30 66 36 L 66 60 Z" fill="url(#bodyGrad_${uid})"/>
+      <path d="M 52 60 L 52 34 Q 52 16 70 16 L 130 16 Q 148 16 148 34 L 148 60 L 134 60 L 134 36 Q 134 30 128 30 L 72 30 Q 66 30 66 36 L 66 60 Z" fill="none" stroke="#082f49" stroke-width="0.6" opacity="0.3"/>
+
+      <!-- screw cap, centered inside the handle loop -->
+      <rect x="79" y="38" width="42" height="22" rx="4" fill="url(#capGrad_${uid})"/>
+      <line x1="87" y1="40" x2="87" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+      <line x1="95" y1="40" x2="95" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+      <line x1="105" y1="40" x2="105" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+      <line x1="113" y1="40" x2="113" y2="56" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+      <rect x="77" y="56" width="46" height="4" rx="1.2" fill="#fca5a5" opacity="0.8"/>
+
+      <!-- recessed label panel -->
+      <rect x="42" y="82" width="116" height="134" rx="6" fill="#082f49" opacity="0.3"/>
+      <rect x="44" y="84" width="112" height="130" rx="5" fill="#ffffff"/>
+      <image href="assets/products/product-label-template.png" x="45" y="85" width="110" height="128" preserveAspectRatio="xMidYMid meet"/>
+      <rect x="45" y="127" width="110" height="16" fill="#ffffff"/>
       ${nameSvg}
-      <text x="83" y="140" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="4.5" font-weight="700" fill="#64748b" letter-spacing="0.5">COMMERCIAL HYGIENE</text>
-      <rect x="43" y="147" width="80" height="26" rx="3" fill="#f8fafc" stroke="#f1f5f9" stroke-width="1"/>
-      <text x="49" y="159" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="7" font-weight="800" fill="#0369a1">${packUpper}</text>
-      <text x="49" y="168" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="4.2" font-weight="600" fill="#64748b">CONCENTRATE</text>
-      <rect x="91" y="151" width="28" height="18" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8"/>
-      <text x="105" y="159" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="4.2" font-weight="800" fill="#1e293b">ARS CERT</text>
-      <text x="105" y="165" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="3.2" font-weight="700" fill="#059669">ISO · HALAL</text>
+      <rect x="44" y="84" width="112" height="130" rx="5" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+
+      <!-- packaging size sticker, tucked on the label's top-right corner -->
+      <rect x="120" y="76" width="36" height="16" rx="3" fill="#b45309"/>
+      <text x="138" y="87.5" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="800" fill="#ffffff">${(packaging || "").toUpperCase()}</text>
     </g>
   </svg>`;
 }
@@ -209,10 +226,16 @@ function renderProducts(filter = "all") {
     ? ARS_PRODUCTS
     : ARS_PRODUCTS.filter((p) => p.category === filter);
 
-  grid.innerHTML = items.map((p) => `
-    <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${p.packaging}">
+  grid.innerHTML = items.map((p) => {
+    const sizes = getPackageSizes(p);
+    const options = sizes.map((s) =>
+      `<option value="${s}"${s === p.packaging ? " selected" : ""}>${s}</option>`
+    ).join("");
+
+    return `
+    <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${p.packaging}" data-category="${p.category}">
       <div class="product-card__image">
-        ${renderGallonSvg(p.name, p.packaging, p.category)}
+        ${renderGallonSvg(p.name, p.packaging, p.category, p.id)}
       </div>
       <div class="product-card__head">
         <span class="product-card__cat">${ARS_CATEGORIES[p.category]?.label || p.category}</span>
@@ -220,14 +243,17 @@ function renderProducts(filter = "all") {
       </div>
       <p class="product-card__desc">${p.description}</p>
       <div class="product-card__foot">
-        <span class="product-card__pack">${p.packaging}</span>
+        <label class="pack-label">
+          Size
+          <select class="pack-select" aria-label="Pack size for ${p.name}">${options}</select>
+        </label>
         <label class="qty-label">
           Qty
           <input type="number" class="qty-input" min="0" value="0" aria-label="Quantity for ${p.name}">
         </label>
       </div>
-    </article>
-  `).join("");
+    </article>`;
+  }).join("");
 }
 
 function initFilters() {
@@ -240,8 +266,35 @@ function initFilters() {
   });
 }
 
+function initProductCardEvents() {
+  const grid = document.getElementById("products-grid");
+  if (!grid) return;
+
+  // Changing pack size updates the cart's source-of-truth attribute and
+  // regenerates that card's illustration so its size tag stays in sync.
+  grid.addEventListener("change", (e) => {
+    const select = e.target.closest(".pack-select");
+    if (!select) return;
+    const card = select.closest(".product-card");
+    if (!card) return;
+    card.dataset.packaging = select.value;
+    const product = ARS_PRODUCTS.find((p) => p.id === card.dataset.id);
+    const imgHost = card.querySelector(".product-card__image");
+    if (product && imgHost) {
+      imgHost.innerHTML = renderGallonSvg(product.name, select.value, product.category, product.id);
+    }
+  });
+
+  grid.addEventListener("input", (e) => {
+    if (!e.target.classList.contains("qty-input")) return;
+    if (typeof updateCartSummary === "function") updateCartSummary();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
   initFilters();
+  initProductCardEvents();
   initOrderForm();
+  initCartSummary();
 });
