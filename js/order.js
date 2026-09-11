@@ -335,11 +335,12 @@ function renderProducts(filter = "all") {
 
     return `
     <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${p.packaging}" data-category="${p.category}">
-      <div class="product-card__image">
+      <div class="product-card__image" style="min-height: 400px !important;">
         <img
           src="assets/products/mockups/${p.id}.jpg"
           alt="${p.name} — A. Rehman & Sons Commercial Gallon"
           class="product-mockup-img"
+          style="height: 384px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; display: block !important;"
           loading="lazy"
           onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${p.packaging}', '${p.category}', '${p.id}');"
         >
