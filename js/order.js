@@ -51,22 +51,44 @@ function openEmail(formData, cart) {
   window.location.href = `mailto:${ARS_CONTACT.email}?subject=${subject}&body=${body}`;
 }
 
+function getStoredCart() {
+  try {
+    const raw = localStorage.getItem("ars_cart");
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveStoredCart(cart) {
+  try {
+    localStorage.setItem("ars_cart", JSON.stringify(cart));
+  } catch (e) {}
+}
+
 function getCart() {
-  const cart = [];
-  document.querySelectorAll(".product-card").forEach((card) => {
-    const qtyInput = card.querySelector(".qty-input");
-    const qty = parseInt(qtyInput?.value || "0", 10);
-    if (qty > 0) {
-      const packSelect = card.querySelector(".pack-select");
-      cart.push({
-        id: card.dataset.id,
-        name: card.dataset.name,
-        packaging: packSelect?.value || card.dataset.packaging,
-        qty
-      });
-    }
-  });
-  return cart;
+  // If we are on products page with active cards, read from DOM & save to storage
+  const domCards = document.querySelectorAll(".product-card");
+  if (domCards.length > 0) {
+    const cart = [];
+    domCards.forEach((card) => {
+      const qtyInput = card.querySelector(".qty-input");
+      const qty = parseInt(qtyInput?.value || "0", 10);
+      if (qty > 0) {
+        const packSelect = card.querySelector(".pack-select");
+        cart.push({
+          id: card.dataset.id,
+          name: card.dataset.name,
+          packaging: packSelect?.value || card.dataset.packaging,
+          qty
+        });
+      }
+    });
+    saveStoredCart(cart);
+    return cart;
+  }
+  // Otherwise read persisted cart from localStorage
+  return getStoredCart();
 }
 
 function getFormData() {
@@ -103,15 +125,23 @@ function updateCartSummary() {
   const totalUnits = cart.reduce((sum, item) => sum + item.qty, 0);
   const text = bar.querySelector(".cart-summary__text");
   if (text) {
-    text.textContent = `${cart.length} product${cart.length > 1 ? "s" : ""} selected · ${totalUnits} unit${totalUnits === 1 ? "" : "s"} — Review Order`;
+    text.textContent = `${cart.length} product${cart.length > 1 ? "s" : ""} selected · ${totalUnits} unit${totalUnits === 1 ? "" : "s"} — Review Quote`;
   }
   bar.classList.add("cart-summary--visible");
 }
 
 function initCartSummary() {
-  document.getElementById("cart-summary")?.addEventListener("click", () => {
-    document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const bar = document.getElementById("cart-summary");
+  if (!bar) return;
+  bar.addEventListener("click", () => {
+    // Navigate to order page if not already there
+    if (!window.location.pathname.toLowerCase().endsWith("order.html")) {
+      window.location.href = "order.html";
+    } else {
+      document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
+  updateCartSummary();
 }
 
 function initOrderForm() {
@@ -319,22 +349,52 @@ function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "def
   </svg>`;
 }
 
-function renderProducts(filter = "all") {
+function renderProducts(filter = "all", searchQuery = "") {
   const grid = document.getElementById("products-grid");
   if (!grid) return;
 
-  const items = filter === "all"
+  const q = (searchQuery || "").trim().toLowerCase();
+  const storedCart = getStoredCart();
+
+  let items = filter === "all"
     ? ARS_PRODUCTS
     : ARS_PRODUCTS.filter((p) => p.category === filter);
 
+  if (q) {
+    items = items.filter((p) =>
+      p.name.toLowerCase().includes(q) ||
+      (p.description && p.description.toLowerCase().includes(q)) ||
+      p.category.toLowerCase().includes(q)
+    );
+  }
+
+  const countBadge = document.getElementById("search-results-count");
+  if (countBadge) {
+    countBadge.textContent = `Showing ${items.length} product${items.length === 1 ? "" : "s"}`;
+  }
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--gray-600);">
+        <h3>No chemical products matched "${searchQuery}"</h3>
+        <p>Try searching for detergents, bleach, neutralizer, descaler, or switch category tabs above.</p>
+      </div>
+    `;
+    return;
+  }
+
   grid.innerHTML = items.map((p) => {
+    const existing = storedCart.find((item) => item.id === p.id);
+    const selectedPackaging = existing ? existing.packaging : p.packaging;
+    const qtyValue = existing ? existing.qty : 0;
+
     const sizes = getPackageSizes(p);
     const options = sizes.map((s) =>
-      `<option value="${s}"${s === p.packaging ? " selected" : ""}>${s}</option>`
+      `<option value="${s}"${s === selectedPackaging ? " selected" : ""}>${s}</option>`
     ).join("");
 
     return `
-    <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${p.packaging}" data-category="${p.category}">
+    <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${selectedPackaging}" data-category="${p.category}">
       <div class="product-card__image" style="min-height: 400px !important;">
         <img
           src="assets/products/mockups/${p.id}.jpg"
@@ -342,7 +402,7 @@ function renderProducts(filter = "all") {
           class="product-mockup-img"
           style="height: 384px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; display: block !important;"
           loading="lazy"
-          onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${p.packaging}', '${p.category}', '${p.id}');"
+          onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${selectedPackaging}', '${p.category}', '${p.id}');"
         >
       </div>
       <div class="product-card__head">
@@ -357,20 +417,47 @@ function renderProducts(filter = "all") {
         </label>
         <label class="qty-label">
           Qty
-          <input type="number" class="qty-input" min="0" value="0" aria-label="Quantity for ${p.name}">
+          <input type="number" class="qty-input" min="0" value="${qtyValue}" aria-label="Quantity for ${p.name}">
         </label>
       </div>
     </article>`;
   }).join("");
 }
 
+let activeFilter = "all";
+let activeQuery = "";
+
 function initFilters() {
+  // Check URL query parameters (e.g. products.html?cat=laundry or ?category=stewarding)
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get("cat") || params.get("category");
+  if (catParam && ARS_CATEGORIES[catParam]) {
+    activeFilter = catParam;
+  }
+
   document.querySelectorAll(".filter-btn").forEach((btn) => {
+    if (btn.dataset.filter === activeFilter) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+
     btn.addEventListener("click", () => {
       document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      renderProducts(btn.dataset.filter);
+      activeFilter = btn.dataset.filter;
+      renderProducts(activeFilter, activeQuery);
     });
+  });
+}
+
+function initProductSearch() {
+  const searchInput = document.getElementById("product-search-input");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", (e) => {
+    activeQuery = e.target.value;
+    renderProducts(activeFilter, activeQuery);
   });
 }
 
@@ -378,31 +465,115 @@ function initProductCardEvents() {
   const grid = document.getElementById("products-grid");
   if (!grid) return;
 
-  // Changing pack size updates the cart's source-of-truth attribute and
-  // regenerates that card's illustration so its size tag stays in sync.
   grid.addEventListener("change", (e) => {
     const select = e.target.closest(".pack-select");
     if (!select) return;
     const card = select.closest(".product-card");
     if (!card) return;
     card.dataset.packaging = select.value;
-    const product = ARS_PRODUCTS.find((p) => p.id === card.dataset.id);
-    const imgHost = card.querySelector(".product-card__image");
-    if (product && imgHost) {
-      imgHost.innerHTML = renderGallonSvg(product.name, select.value, product.category, product.id);
-    }
+    getCart(); // triggers save
   });
 
   grid.addEventListener("input", (e) => {
     if (!e.target.classList.contains("qty-input")) return;
+    getCart(); // triggers save
     if (typeof updateCartSummary === "function") updateCartSummary();
   });
 }
 
+// Order review table for order.html
+function renderOrderReviewTable() {
+  const tableContainer = document.getElementById("order-cart-table-container");
+  if (!tableContainer) return;
+
+  const cart = getStoredCart();
+  if (!cart || cart.length === 0) {
+    tableContainer.innerHTML = `
+      <div class="empty-cart-message">
+        <p>No products selected yet in your quotation.</p>
+        <a href="products.html" class="btn btn-primary">Browse Product Catalog</a>
+      </div>
+    `;
+    return;
+  }
+
+  const totalUnits = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  tableContainer.innerHTML = `
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Packaging</th>
+          <th style="width: 100px;">Qty</th>
+          <th style="width: 60px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cart.map((item, idx) => `
+          <tr data-id="${item.id}">
+            <td><strong>${item.name}</strong></td>
+            <td>${item.packaging}</td>
+            <td>
+              <input type="number" class="qty-input order-table-qty" min="1" value="${item.qty}" data-index="${idx}" style="width: 70px; padding: 0.3rem 0.5rem;">
+            </td>
+            <td>
+              <button type="button" class="btn-remove-item" data-index="${idx}" title="Remove item">&times;</button>
+            </td>
+          </tr>
+        `).join("")}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>Total Requested Items: ${cart.length}</strong></td>
+          <td colspan="2"><strong>${totalUnits} Units Total</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+      <a href="products.html" class="btn btn-outline btn-sm">+ Add More Products</a>
+      <button type="button" id="btn-clear-cart" class="btn btn-secondary btn-sm" style="color: #dc2626; border-color: #fca5a5;">Clear All Items</button>
+    </div>
+  `;
+
+  // Attach event listeners for table
+  tableContainer.querySelectorAll(".order-table-qty").forEach((input) => {
+    input.addEventListener("input", (e) => {
+      const idx = parseInt(e.target.dataset.index, 10);
+      const val = parseInt(e.target.value, 10);
+      if (val > 0) {
+        cart[idx].qty = val;
+        saveStoredCart(cart);
+        updateCartSummary();
+      }
+    });
+  });
+
+  tableContainer.querySelectorAll(".btn-remove-item").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const idx = parseInt(e.target.dataset.index, 10);
+      cart.splice(idx, 1);
+      saveStoredCart(cart);
+      renderOrderReviewTable();
+      updateCartSummary();
+    });
+  });
+
+  document.getElementById("btn-clear-cart")?.addEventListener("click", () => {
+    if (confirm("Clear all items from your quote?")) {
+      saveStoredCart([]);
+      renderOrderReviewTable();
+      updateCartSummary();
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  renderProducts();
   initFilters();
+  initProductSearch();
+  renderProducts(activeFilter, activeQuery);
   initProductCardEvents();
   initOrderForm();
   initCartSummary();
+  renderOrderReviewTable();
 });
