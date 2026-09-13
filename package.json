@@ -1,0 +1,8 @@
+{
+  "name": "a-rehman-sons-website",
+  "version": "1.0.0",
+  "description": "A. Rehman & Sons Commercial Chemical Solutions",
+  "scripts": {
+    "build": "node build.js"
+  }
+}
