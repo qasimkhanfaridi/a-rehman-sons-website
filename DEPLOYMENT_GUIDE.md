@@ -8,11 +8,11 @@ This document contains everything you need to know about the architecture, deplo
 
 | Item | Details |
 | :--- | :--- |
-| **Live Production URL** | [https://arschemicals.com](https://arschemicals.com) · [https://main.arschemicals.pages.dev](https://main.arschemicals.pages.dev) |
+| **Live Production URL** | [https://arschemicals.com](https://arschemicals.com) · [https://a-rehman-sons.pages.dev](https://a-rehman-sons.pages.dev) |
 | **GitHub Repository** | [https://github.com/qasimkhanfaridi/a-rehman-sons-website](https://github.com/qasimkhanfaridi/a-rehman-sons-website) |
 | **Git Branch** | `main` |
 | **Hosting Platform** | **Cloudflare Pages** (global CDN — strong performance in Pakistan + export markets) |
-| **Cloudflare Project** | `arschemicals` |
+| **Cloudflare Project** | `a-rehman-sons` |
 | **Local Path on Disk** | `C:\Users\qasim.faridi\source\repos\a-rehman-sons-website` |
 
 ---
@@ -33,14 +33,14 @@ Or run **`deploy.ps1`** in PowerShell.
 **What it does:**
 
 1. Runs `node build.js` → packages the site into `dist/`
-2. Uploads `dist/` to Cloudflare Pages project **`arschemicals`**
+2. Uploads `dist/` to Cloudflare Pages project **`a-rehman-sons`**
 3. Goes live on Cloudflare’s edge (typically **~15 seconds** worldwide, including Pakistan)
 
 ---
 
 ### Option B: Push to GitHub → Cloudflare builds automatically
 
-Connect the repo in **Cloudflare Dashboard → Workers & Pages → arschemicals → Settings → Builds**:
+Connect the repo in **Cloudflare Dashboard → Workers & Pages → a-rehman-sons → Settings → Builds**:
 
 | Setting | Value |
 | :--- | :--- |
@@ -56,7 +56,7 @@ git commit -m "Describe your update"
 git push origin main
 ```
 
-`wrangler.toml` includes the same build command for Workers/Pages CI.
+`wrangler.toml` only declares the Pages output folder (`dist`). Set the **build command** in the Cloudflare dashboard (see Option B), not in `wrangler.toml`.
 
 ---
 
@@ -108,7 +108,7 @@ a-rehman-sons-website/
 ├── build.js                    # Packaging script → /dist
 ├── deploy.ps1                  # 1-click Cloudflare Pages deploy
 ├── package.json                # npm scripts: `build`, `deploy`
-├── wrangler.toml               # Cloudflare build output + CI build command
+├── wrangler.toml               # Pages project name + output directory for CI
 ├── .assetsignore               # Keeps Wrangler from scanning .git pack files
 └── DEPLOYMENT_GUIDE.md         # This file
 ```
@@ -184,7 +184,7 @@ Hosting on **Cloudflare Pages** puts your site on Cloudflare’s network (good f
 
 #### Step 2 — Attach domain to the Pages project
 
-1. **Workers & Pages** → project **`arschemicals`** → **Custom domains**
+1. **Workers & Pages** → project **`a-rehman-sons`** → **Custom domains**
 2. Add **`arschemicals.com`** and optionally **`www.arschemicals.com`**
 3. Cloudflare creates DNS records and provisions **HTTPS** automatically
 
@@ -192,8 +192,8 @@ Hosting on **Cloudflare Pages** puts your site on Cloudflare’s network (good f
 
 | Type | Name | Content | Proxy |
 | :--- | :--- | :--- | :--- |
-| CNAME | `@` or apex | `arschemicals.pages.dev` (or value Cloudflare suggests for Pages) | Proxied (orange cloud) |
-| CNAME | `www` | `arschemicals.pages.dev` | Proxied |
+| CNAME | `@` or apex | `a-rehman-sons.pages.dev` (or value Cloudflare suggests for Pages) | Proxied (orange cloud) |
+| CNAME | `www` | `a-rehman-sons.pages.dev` | Proxied |
 
 *(Exact apex setup depends on Cloudflare’s “CNAME flattening” for your zone — follow the prompts in the Custom domains UI.)*
 
