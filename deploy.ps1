@@ -15,7 +15,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "`n[2/2] Deploying /dist to Cloudflare Pages (Production)..." -ForegroundColor Yellow
-npx wrangler pages deploy dist --project-name=a-rehman-sons --branch=main
+npx wrangler@3 pages deploy dist --project-name=a-rehman-sons --branch=main
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "`n======================================" -ForegroundColor Green
