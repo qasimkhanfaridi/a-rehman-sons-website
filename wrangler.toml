@@ -1,5 +1,0 @@
-name = "a-rehman-sons-website"
-compatibility_date = "2024-09-01"
-
-[assets]
-directory = "./dist"

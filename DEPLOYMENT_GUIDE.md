@@ -8,34 +8,19 @@ This document contains everything you need to know about the architecture, deplo
 
 | Item | Details |
 | :--- | :--- |
-| **Live Production URL** | [https://main.a-rehman-sons.pages.dev](https://main.a-rehman-sons.pages.dev) / [https://a-rehman-sons.pages.dev](https://a-rehman-sons.pages.dev) |
+| **Live Production URL** | [https://arschemicals.com](https://arschemicals.com) |
 | **GitHub Repository** | [https://github.com/qasimkhanfaridi/a-rehman-sons-website](https://github.com/qasimkhanfaridi/a-rehman-sons-website) |
 | **Git Branch** | `main` |
-| **Hosting Platform** | **Cloudflare Pages** (100% Free Forever, Unlimited Bandwidth) |
+| **Hosting Platform** | **GitHub Pages** (GitHub Actions deploy) |
 | **Local Path on Disk** | `C:\Users\qasim.faridi\source\repos\a-rehman-sons-website` |
 
 ---
 
 ## 2. How to Deploy (Step-by-Step)
 
-### Option A: The 1-Command Automated Deploy (Recommended)
-Open PowerShell and run:
+### Deploy by pushing to GitHub (recommended)
 
-```powershell
-cd C:\Users\qasim.faridi\source\repos\a-rehman-sons-website; npm run deploy
-```
-
-**What this automated command does:**
-1. Runs `node build.js` — packages all 8 HTML pages, CSS, JS, and product mockups into `dist/` (bypassing Git history files).
-2. Uploads `dist/` directly to Cloudflare Pages using Wrangler CLI.
-3. Your changes are live worldwide in ~15 seconds.
-
-*(Alternatively, you can right-click and run `deploy.ps1` in PowerShell).*
-
----
-
-### Option B: GitHub Push
-If you prefer pushing changes to GitHub:
+Every push to `main` runs **`.github/workflows/github-pages.yml`**: builds `dist/` and publishes to GitHub Pages.
 
 ```powershell
 cd C:\Users\qasim.faridi\source\repos\a-rehman-sons-website
@@ -44,7 +29,22 @@ git commit -m "Describe your update here"
 git push origin main
 ```
 
-If Cloudflare Git integration is active with Build Command `npm run build` and Output Directory `dist`, Cloudflare will build and deploy automatically upon push.
+Watch progress under **GitHub → Actions → Deploy to GitHub Pages**. The site updates in 1–3 minutes.
+
+**One-time GitHub setup (if deploy ever fails on OIDC):**
+
+1. **Settings → Pages → Build and deployment** → Source: **GitHub Actions**.
+2. **Settings → Actions → General → Workflow permissions** → **Read and write permissions**.
+
+### Optional: verify build before push
+
+```powershell
+cd C:\Users\qasim.faridi\source\repos\a-rehman-sons-website
+.\deploy.ps1
+# then commit and push as above
+```
+
+**What the build does:** `node build.js` copies HTML, CSS, JS, assets, SEO files, and **`CNAME`** into `dist/` (that folder is not committed; CI builds it fresh).
 
 ---
 
@@ -89,9 +89,10 @@ a-rehman-sons-website/
 │   └── A-Rehman-Sons-Catalog.pdf # Official 39-page high-resolution brochure PDF (20.9 MB)
 │
 ├── build.js                    # Cross-platform packaging script for /dist folder
-├── deploy.ps1                  # 1-click PowerShell deployment script
-├── package.json                # npm scripts (`build`, `deploy`, `deploy:vercel`)
-└── .assetsignore               # Protects Cloudflare from scanning Git packfiles
+├── deploy.ps1                  # Local build check before git push
+├── package.json                # npm script: `build`
+├── CNAME                       # Custom domain (copied into dist for GitHub Pages)
+└── .github/workflows/github-pages.yml  # CI deploy to GitHub Pages
 ```
 
 ---
@@ -144,13 +145,16 @@ Change the numbers here to update ordering across all pages.
 ### C. Updating the Catalog PDF
 1. Replace `assets/A-Rehman-Sons-Catalog.pdf` with your new PDF file.
 2. Keep the file name the same (`A-Rehman-Sons-Catalog.pdf`).
-3. Keep the file size under 25 MiB (Cloudflare's individual file limit).
+3. Keep the file size reasonable for Git (GitHub warns above ~100 MB per file; aim under 50 MB).
 
 ---
 
-### D. Connecting a Free Custom Domain (e.g. `arehmansons.com`)
-1. In the **Cloudflare Dashboard**, open your project (`a-rehman-sons`).
-2. Click the **Custom domains** tab.
-3. Click **Set up a custom domain**.
-4. Enter your domain (e.g., `arehmansons.com` or `www.arehmansons.com`).
-5. Cloudflare will automatically configure DNS and generate a **free SSL/HTTPS certificate** that renews automatically forever!
+### D. Custom domain (`arschemicals.com`)
+
+The repo includes **`CNAME`** with `arschemicals.com`. `build.js` copies it into `dist/` for each deploy.
+
+1. **GitHub → Settings → Pages** → confirm custom domain **arschemicals.com** and HTTPS.
+2. At your domain registrar/DNS host, point the domain to GitHub Pages ([GitHub docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)):
+   - **Apex (`arschemicals.com`):** `A` records to GitHub’s IPs, or ALIAS/ANAME if your DNS provider supports it.
+   - **`www`:** `CNAME` to `qasimkhanfaridi.github.io` (or your Pages default URL).
+3. Wait for DNS propagation; GitHub will issue a free HTTPS certificate automatically.

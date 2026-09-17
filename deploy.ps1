@@ -1,28 +1,21 @@
-# Automated 1-Click Deployment to Cloudflare Pages
+# Build locally, then push to GitHub to deploy via GitHub Pages Actions
 Write-Host "======================================" -ForegroundColor Cyan
-Write-Host " Building and Deploying A. Rehman & Sons " -ForegroundColor Cyan
+Write-Host " A. Rehman & Sons — GitHub Pages Deploy " -ForegroundColor Cyan
 Write-Host "======================================" -ForegroundColor Cyan
 
 $RepoDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $RepoDir
 
-Write-Host "`n[1/2] Packaging clean website files into /dist..." -ForegroundColor Yellow
+Write-Host "`n[1/1] Building site into /dist (same as CI)..." -ForegroundColor Yellow
 node build.js
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "Build failed! Please check errors." -ForegroundColor Red
+    Write-Host "Build failed! Fix errors before pushing." -ForegroundColor Red
     exit 1
 }
 
-Write-Host "`n[2/2] Deploying /dist to Cloudflare Pages (Production)..." -ForegroundColor Yellow
-npx wrangler@3 pages deploy dist --project-name=arschemicals --branch=main
-
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "`n======================================" -ForegroundColor Green
-    Write-Host " SUCCESS! Website is live at: " -ForegroundColor Green
-    Write-Host " https://arschemicals.pages.dev " -ForegroundColor Green
-    Write-Host " https://main.arschemicals.pages.dev " -ForegroundColor Green
-    Write-Host "======================================" -ForegroundColor Green
-} else {
-    Write-Host "`nDeployment error encountered." -ForegroundColor Red
-}
+Write-Host "`nBuild OK. To publish, commit and push to main:" -ForegroundColor Green
+Write-Host "  git add ." -ForegroundColor White
+Write-Host "  git commit -m `"Describe your update`"" -ForegroundColor White
+Write-Host "  git push origin main" -ForegroundColor White
+Write-Host "`nLive site: https://arschemicals.com (after GitHub Actions finishes)" -ForegroundColor Green
