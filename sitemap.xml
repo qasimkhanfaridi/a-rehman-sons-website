@@ -4,19 +4,19 @@
 
   <!-- Home Page -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/</loc>
+    <loc>https://arschemicals.com/</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://a-rehman-sons.pages.dev/assets/logo.png</image:loc>
+      <image:loc>https://arschemicals.com/assets/logo.png</image:loc>
       <image:title>A. Rehman &amp; Sons Logo</image:title>
     </image:image>
   </url>
 
   <!-- Products Catalog & Quotation -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/products.html</loc>
+    <loc>https://arschemicals.com/products.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -24,7 +24,7 @@
 
   <!-- International Supplies & Global Exports -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/international.html</loc>
+    <loc>https://arschemicals.com/international.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
@@ -32,7 +32,7 @@
 
   <!-- Order & Quotation Request -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/order.html</loc>
+    <loc>https://arschemicals.com/order.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -40,7 +40,7 @@
 
   <!-- ISO & Halal Certifications -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/certifications.html</loc>
+    <loc>https://arschemicals.com/certifications.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -48,7 +48,7 @@
 
   <!-- Corporate Profile & About Us -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/about.html</loc>
+    <loc>https://arschemicals.com/about.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -56,7 +56,7 @@
 
   <!-- Institutional Clients (Hotels, Hospitals, Laundries) -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/clients.html</loc>
+    <loc>https://arschemicals.com/clients.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -64,7 +64,7 @@
 
   <!-- Contact & Factory Locations -->
   <url>
-    <loc>https://a-rehman-sons.pages.dev/contact.html</loc>
+    <loc>https://arschemicals.com/contact.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>

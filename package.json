@@ -4,7 +4,7 @@
   "description": "A. Rehman & Sons Commercial Chemical Solutions",
   "scripts": {
     "build": "node build.js",
-    "deploy": "node build.js && npx wrangler@3 pages deploy dist --project-name=a-rehman-sons --branch=main",
+    "deploy": "node build.js && npx wrangler@3 pages deploy dist --project-name=arschemicals --branch=main",
     "deploy:vercel": "npx vercel --prod"
   }
 }

@@ -1,6 +1,6 @@
 # ==============================================================================
 # robots.txt — A. Rehman & Sons Commercial Chemical Supplier & Exporter
-# Production Website: https://a-rehman-sons.pages.dev / https://main.a-rehman-sons.pages.dev
+# Production Website: https://arschemicals.com
 # ==============================================================================
 
 # Default Search Engines (Google, Bing, Yahoo, DuckDuckGo, etc.)
@@ -61,5 +61,4 @@ User-agent: CCBot
 Allow: /
 
 # XML Sitemaps
-Sitemap: https://a-rehman-sons.pages.dev/sitemap.xml
-Sitemap: https://main.a-rehman-sons.pages.dev/sitemap.xml
+Sitemap: https://arschemicals.com/sitemap.xml
