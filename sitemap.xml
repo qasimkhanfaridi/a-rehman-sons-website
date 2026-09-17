@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://a-rehman-sons.pages.dev/assets/logo.png</image:loc>
+      <image:title>A. Rehman &amp; Sons Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Products Catalog & Quotation -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/products.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- International Supplies & Global Exports -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/international.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Order & Quotation Request -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/order.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ISO & Halal Certifications -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/certifications.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Corporate Profile & About Us -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/about.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Institutional Clients (Hotels, Hospitals, Laundries) -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/clients.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Contact & Factory Locations -->
+  <url>
+    <loc>https://a-rehman-sons.pages.dev/contact.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>

@@ -34,7 +34,10 @@ const itemsToCopy = [
   'contact.html',
   'css',
   'js',
-  'assets'
+  'assets',
+  'robots.txt',
+  'sitemap.xml',
+  'llms.txt'
 ];
 
 for (const item of itemsToCopy) {

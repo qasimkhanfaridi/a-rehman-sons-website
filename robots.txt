@@ -1,0 +1,65 @@
+# ==============================================================================
+# robots.txt — A. Rehman & Sons Commercial Chemical Supplier & Exporter
+# Production Website: https://a-rehman-sons.pages.dev / https://main.a-rehman-sons.pages.dev
+# ==============================================================================
+
+# Default Search Engines (Google, Bing, Yahoo, DuckDuckGo, etc.)
+User-agent: *
+Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Google Search & Image Crawler
+User-agent: Googlebot
+User-agent: Googlebot-Image
+Allow: /
+
+# Microsoft Bing
+User-agent: Bingbot
+Allow: /
+
+# ==============================================================================
+# AI Search Engines & Large Language Model (LLM) Crawlers
+# Explicitly allowing Generative AI crawlers for AI Overviews & Search Citations
+# ==============================================================================
+
+# OpenAI / ChatGPT Search (ChatGPT-User & GPTBot)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI Search
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Search
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+Allow: /
+
+# Google Gemini / AI Overviews / Vertex AI
+User-agent: Google-Extended
+User-agent: GoogleOther
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Common Crawl (Training Data for Modern AI Systems)
+User-agent: CCBot
+Allow: /
+
+# XML Sitemaps
+Sitemap: https://a-rehman-sons.pages.dev/sitemap.xml
+Sitemap: https://main.a-rehman-sons.pages.dev/sitemap.xml
