@@ -2,33 +2,36 @@
 
 function buildOrderMessage(formData, cart) {
   const lines = [
-    "*NEW ORDER — A. Rehman & Sons*",
+    "*NEW QUOTATION INQUIRY — A. Rehman & Sons*",
+    "Specialist in Laundry, Kitchen & Housekeeping",
     "━━━━━━━━━━━━━━━━━━━━",
     "",
     "*Customer Details*",
-    `Company / Name: ${formData.company || "—"}`,
+    `Company / Hotel: ${formData.company || "—"}`,
     `Contact Person: ${formData.contact || "—"}`,
-    `Phone: ${formData.phone || "—"}`,
+    `Phone / Mobile: ${formData.phone || "—"}`,
     `City: ${formData.city || "—"}`,
-    `Delivery Address: ${formData.address || "—"}`,
+    `Delivery Location: ${formData.address || "—"}`,
     "",
-    "*Products Requested*"
+    "*Chemicals Requested*"
   ];
 
   if (cart.length === 0) {
     lines.push("(No products selected — general inquiry)");
   } else {
     cart.forEach((item, i) => {
-      lines.push(`${i + 1}. ${item.name}`);
-      lines.push(`   Qty: ${item.qty} × ${item.packaging}`);
+      const rateInfo = item.rateFormatted ? ` · ${item.rateFormatted}` : "";
+      const sno = item.sNo ? `[${item.sNo}] ` : "";
+      lines.push(`${i + 1}. ${sno}${item.name}${rateInfo}`);
+      lines.push(`   Quantity: ${item.qty} × ${item.packaging}`);
     });
   }
 
   lines.push("");
-  lines.push(`*Notes:* ${formData.notes || "—"}`);
+  lines.push(`*Notes / Requirements:* ${formData.notes || "—"}`);
   lines.push("");
-  lines.push("Please confirm availability, price, and delivery time.");
-  lines.push("Thank you — A. Rehman & Sons");
+  lines.push("Please confirm availability, wholesale quotation, and delivery schedule.");
+  lines.push("Thank you — A. Rehman & Sons (Rawalpindi / Islamabad)");
 
   return lines.join("\n");
 }
@@ -46,7 +49,7 @@ function openWhatsApp(formData, cart, numberIndex = 0) {
 }
 
 function openEmail(formData, cart) {
-  const subject = encodeURIComponent(`Order Inquiry — ${formData.company || formData.contact || "New Customer"}`);
+  const subject = encodeURIComponent(`Chemical Quotation Inquiry — ${formData.company || formData.contact || "New Client"}`);
   const body = encodeURIComponent(buildEmailBody(formData, cart));
   window.location.href = `mailto:${ARS_CONTACT.email}?subject=${subject}&body=${body}`;
 }
@@ -76,10 +79,14 @@ function getCart() {
       const qty = parseInt(qtyInput?.value || "0", 10);
       if (qty > 0) {
         const packSelect = card.querySelector(".pack-select");
+        const prod = (typeof ARS_PRODUCTS !== "undefined") ? ARS_PRODUCTS.find((p) => p.id === card.dataset.id) : null;
         cart.push({
           id: card.dataset.id,
+          sNo: prod ? prod.sNo : card.dataset.sno,
           name: card.dataset.name,
           packaging: packSelect?.value || card.dataset.packaging,
+          rate: prod ? prod.rate : parseFloat(card.dataset.rate || "0"),
+          rateFormatted: prod ? prod.rateFormatted : card.dataset.rateFormatted,
           qty
         });
       }
@@ -356,13 +363,17 @@ function renderProducts(filter = "all", searchQuery = "") {
   const q = (searchQuery || "").trim().toLowerCase();
   const storedCart = getStoredCart();
 
-  let items = filter === "all"
-    ? ARS_PRODUCTS
-    : ARS_PRODUCTS.filter((p) => p.category === filter);
+  let items = ARS_PRODUCTS;
+  if (filter === "stewarding") {
+    items = ARS_PRODUCTS.filter((p) => p.stewarding || p.category === "kitchen");
+  } else if (filter !== "all") {
+    items = ARS_PRODUCTS.filter((p) => p.category === filter);
+  }
 
   if (q) {
     items = items.filter((p) =>
       p.name.toLowerCase().includes(q) ||
+      (p.sNo && p.sNo.toLowerCase().includes(q)) ||
       (p.description && p.description.toLowerCase().includes(q)) ||
       p.category.toLowerCase().includes(q)
     );
@@ -370,14 +381,14 @@ function renderProducts(filter = "all", searchQuery = "") {
 
   const countBadge = document.getElementById("search-results-count");
   if (countBadge) {
-    countBadge.textContent = `Showing ${items.length} product${items.length === 1 ? "" : "s"}`;
+    countBadge.textContent = `Showing ${items.length} verified quotation product${items.length === 1 ? "" : "s"}`;
   }
 
   if (items.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--gray-600);">
-        <h3>No chemical products matched "${searchQuery}"</h3>
-        <p>Try searching for detergents, bleach, neutralizer, descaler, or switch category tabs above.</p>
+        <h3>No products matched "${searchQuery}"</h3>
+        <p>Try searching for chemicals like Zepol, Zeklor, Descaler, Starch, or switch category tabs above.</p>
       </div>
     `;
     return;
@@ -393,8 +404,14 @@ function renderProducts(filter = "all", searchQuery = "") {
       `<option value="${s}"${s === selectedPackaging ? " selected" : ""}>${s}</option>`
     ).join("");
 
+    const catLabel = ARS_CATEGORIES[p.category]?.label || p.category.toUpperCase();
+
     return `
-    <article class="product-card" data-id="${p.id}" data-name="${p.name}" data-packaging="${selectedPackaging}" data-category="${p.category}">
+    <article class="product-card" data-id="${p.id}" data-sno="${p.sNo || ''}" data-name="${p.name}" data-rate="${p.rate || 0}" data-rate-formatted="${p.rateFormatted || ''}" data-packaging="${selectedPackaging}" data-category="${p.category}">
+      <div class="product-card__header-row">
+        <span class="product-card__sno">S.No ${p.sNo || '—'}</span>
+        <span class="product-card__rate-badge">${p.rateFormatted || 'Rate: On Request'}</span>
+      </div>
       <div class="product-card__image" style="min-height: 400px !important;">
         <img
           src="assets/products/mockups/${p.id}.jpg"
@@ -406,10 +423,13 @@ function renderProducts(filter = "all", searchQuery = "") {
         >
       </div>
       <div class="product-card__head">
-        <span class="product-card__cat">${ARS_CATEGORIES[p.category]?.label || p.category}</span>
+        <span class="product-card__cat">${catLabel}</span>
         <h3>${p.name}</h3>
       </div>
       <p class="product-card__desc">${p.description}</p>
+      <button type="button" class="btn-view-details" data-id="${p.id}">
+        <span>📋</span> View Technical Details
+      </button>
       <div class="product-card__foot">
         <label class="pack-label">
           Size
@@ -424,14 +444,131 @@ function renderProducts(filter = "all", searchQuery = "") {
   }).join("");
 }
 
+function openProductModal(productId) {
+  const p = ARS_PRODUCTS.find((item) => item.id === productId);
+  if (!p) return;
+
+  let modal = document.getElementById("tech-product-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "tech-product-modal";
+    modal.className = "tech-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal || e.target.closest(".tech-modal-close")) {
+        closeProductModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) {
+        closeProductModal();
+      }
+    });
+  }
+
+  const details = p.fullDetails || {};
+  const currentCart = getStoredCart();
+  const inCart = currentCart.find((item) => item.id === p.id);
+
+  modal.innerHTML = `
+    <div class="tech-modal-dialog">
+      <div class="tech-modal-header">
+        <div>
+          <span class="product-card__sno" style="background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.3);">Official Quotation S.No ${p.sNo || "—"}</span>
+          <h2>${p.name}</h2>
+          <p style="margin: 0; color: #93c5fd; font-size: 0.88rem; font-weight: 600;">Specialist Category: ${details.categoryName || p.category.toUpperCase()}</p>
+        </div>
+        <button type="button" class="tech-modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="tech-modal-body">
+        <div class="tech-meta-bar">
+          <div class="tech-meta-item"><strong>Quotation Rate:</strong> <span class="product-card__rate-badge" style="font-size: 0.95rem; margin-left: 0.25rem;">${p.rateFormatted || "Contact for Rate"}</span></div>
+          <div class="tech-meta-item"><strong>Standard Packing:</strong> ${p.packaging}</div>
+          <div class="tech-meta-item"><strong>Working pH:</strong> ${details.ph || "Balanced"}</div>
+        </div>
+
+        <div class="tech-spec-grid">
+          <div class="tech-spec-box">
+            <h4><span>🏢</span> Applications & Recommended Facilities</h4>
+            <p>${details.applications || p.description}</p>
+          </div>
+
+          <div class="tech-spec-box accent">
+            <h4><span>⚖️</span> Recommended Dosage & Dilution Ratio</h4>
+            <p>${details.dosage || "Consult technical representative for automated dosing calibration."}</p>
+          </div>
+
+          <div class="tech-spec-box">
+            <h4><span>🔬</span> Formulation & Chemical Components</h4>
+            <p>${details.activeIngredients || "Commercial high-purity chemical compound."}</p>
+          </div>
+
+          <div class="tech-spec-box warning">
+            <h4><span>⚠️</span> Safety Precautions & Handling</h4>
+            <p>${details.safety || "Industrial grade chemical. Keep out of reach of children. Store in a cool, well-ventilated location."}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tech-modal-footer">
+        <div style="font-size: 0.85rem; color: var(--gray-600);">
+          Available Container Sizes: <strong>${(details.packagingOptions || ["25 kg"]).join(", ")}</strong>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button type="button" class="btn btn-secondary tech-modal-close" style="width: auto; height: auto; border-radius: 4px; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--gray-700); background: #e2e8f0;">Close</button>
+          <button type="button" class="btn btn-primary btn-add-modal-quote" data-id="${p.id}" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
+            + Add to Quote Inquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  modal.querySelector(".btn-add-modal-quote")?.addEventListener("click", () => {
+    const cart = getStoredCart();
+    const existing = cart.find((item) => item.id === p.id);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({
+        id: p.id,
+        sNo: p.sNo,
+        name: p.name,
+        packaging: p.packaging,
+        rate: p.rate,
+        rateFormatted: p.rateFormatted,
+        qty: 1
+      });
+    }
+    saveStoredCart(cart);
+    closeProductModal();
+    renderProducts(activeFilter, activeQuery);
+    if (typeof updateCartSummary === "function") updateCartSummary();
+  });
+}
+
+function closeProductModal() {
+  const modal = document.getElementById("tech-product-modal");
+  if (modal) {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+}
+
 let activeFilter = "all";
 let activeQuery = "";
 
 function initFilters() {
-  // Check URL query parameters (e.g. products.html?cat=laundry or ?category=stewarding)
+  // Check URL query parameters (e.g. products.html?cat=laundry or ?cat=kitchen)
   const params = new URLSearchParams(window.location.search);
   const catParam = params.get("cat") || params.get("category");
-  if (catParam && ARS_CATEGORIES[catParam]) {
+  if (catParam && (ARS_CATEGORIES[catParam] || catParam === "stewarding")) {
     activeFilter = catParam;
   }
 
@@ -479,6 +616,13 @@ function initProductCardEvents() {
     getCart(); // triggers save
     if (typeof updateCartSummary === "function") updateCartSummary();
   });
+
+  grid.addEventListener("click", (e) => {
+    const detailBtn = e.target.closest(".btn-view-details");
+    if (detailBtn) {
+      openProductModal(detailBtn.dataset.id);
+    }
+  });
 }
 
 // Order review table for order.html
@@ -503,16 +647,20 @@ function renderOrderReviewTable() {
     <table class="cart-table">
       <thead>
         <tr>
+          <th>S.No</th>
           <th>Product Name</th>
+          <th>Official Rate</th>
           <th>Packaging</th>
-          <th style="width: 100px;">Qty</th>
-          <th style="width: 60px;">Action</th>
+          <th style="width: 90px;">Qty</th>
+          <th style="width: 50px;">Action</th>
         </tr>
       </thead>
       <tbody>
         ${cart.map((item, idx) => `
           <tr data-id="${item.id}">
+            <td><span class="product-card__sno">${item.sNo || (idx + 1)}</span></td>
             <td><strong>${item.name}</strong></td>
+            <td><span class="product-card__rate-badge">${item.rateFormatted || 'On Request'}</span></td>
             <td>${item.packaging}</td>
             <td>
               <input type="number" class="qty-input order-table-qty" min="1" value="${item.qty}" data-index="${idx}" style="width: 70px; padding: 0.3rem 0.5rem;">
@@ -525,8 +673,8 @@ function renderOrderReviewTable() {
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="2"><strong>Total Requested Items: ${cart.length}</strong></td>
-          <td colspan="2"><strong>${totalUnits} Units Total</strong></td>
+          <td colspan="3"><strong>Total Requested Items: ${cart.length} chemicals</strong></td>
+          <td colspan="3"><strong>${totalUnits} Units Total</strong></td>
         </tr>
       </tfoot>
     </table>

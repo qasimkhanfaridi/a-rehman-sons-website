@@ -29,7 +29,7 @@ const itemsToCopy = [
   'products.html',
   'certifications.html',
   'clients.html',
-  'catalog.html',
+  'international.html',
   'order.html',
   'contact.html',
   'css',
