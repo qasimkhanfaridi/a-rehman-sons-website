@@ -37,8 +37,7 @@ const itemsToCopy = [
   'assets',
   'robots.txt',
   'sitemap.xml',
-  'llms.txt',
-  'CNAME'
+  'llms.txt'
 ];
 
 for (const item of itemsToCopy) {
