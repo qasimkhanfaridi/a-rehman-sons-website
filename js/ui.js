@@ -245,8 +245,73 @@ function renderCertificates() {
   });
 }
 
+/* =========================================================================
+   MOBILE NAV DRAWER
+   ========================================================================= */
+function initMobileNav() {
+  const toggle = document.getElementById("nav-mobile-toggle");
+  const closeBtn = document.getElementById("nav-mobile-close");
+  const nav = document.getElementById("main-nav");
+  if (!toggle || !nav) return;
+
+  function openNav() {
+    document.body.classList.add("nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    // Prevent background scroll
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeNav() {
+    document.body.classList.remove("nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (document.body.classList.contains("nav-open")) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeNav);
+  }
+
+  // Close when clicking the dark overlay (the ::before pseudo-element area outside nav)
+  document.addEventListener("click", (e) => {
+    if (!document.body.classList.contains("nav-open")) return;
+    if (!nav.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+      closeNav();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
+      closeNav();
+    }
+  });
+
+  // Close when a nav link is clicked (user is navigating)
+  nav.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("click", () => {
+      // Small delay so the click registers before nav closes
+      setTimeout(closeNav, 80);
+    });
+  });
+
+  // On resize to desktop: always close mobile nav and unlock scroll
+  const mq = window.matchMedia("(min-width: 769px)");
+  const onResize = (e) => { if (e.matches) closeNav(); };
+  mq.addEventListener("change", onResize);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavigationActiveState();
+  initMobileNav();
   renderClients();
   renderCertificates();
 });
