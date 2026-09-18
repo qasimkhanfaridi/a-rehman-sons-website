@@ -131,6 +131,9 @@ img { max-width: 100%; height: auto; display: block; }
   overflow: visible;
 }
 
+/* Mobile nav header/close row — hidden on desktop, shown inside drawer */
+.nav-mobile-header { display: none; }
+
 .nav a {
   color: var(--gray-800);
   padding: 0.45rem 0.55rem;
@@ -1304,6 +1307,9 @@ section { padding: 4rem 0; }
   body.nav-open .nav {
     display: flex;
   }
+
+  /* Show the mobile drawer header row */
+  .nav-mobile-header { display: flex; }
 
   /* Overlay behind nav when open */
   body.nav-open::before {

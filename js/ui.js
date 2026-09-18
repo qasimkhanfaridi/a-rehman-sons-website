@@ -89,6 +89,11 @@ function isProductsCatalogUrl(url) {
   return file === "products.html" || file === "products";
 }
 
+/** True when the hamburger breakpoint is active */
+function isMobileNav() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
 function initProductsNavDropdown() {
   document.querySelectorAll(".nav-dropdown-wrap").forEach((wrap) => {
     const trigger = wrap.querySelector(".nav-dropdown-trigger");
@@ -99,6 +104,9 @@ function initProductsNavDropdown() {
     trigger.setAttribute("aria-expanded", "false");
 
     trigger.addEventListener("click", (e) => {
+      // On mobile the dropdown is always expanded in the drawer — just navigate
+      if (isMobileNav()) return;
+
       e.preventDefault();
       e.stopPropagation();
       if (wrap.classList.contains("is-open")) {
@@ -114,7 +122,7 @@ function initProductsNavDropdown() {
         if (!href || href.startsWith("#")) return;
 
         const targetUrl = new URL(href, window.location.href);
-        closeNavDropdown(wrap);
+        if (!isMobileNav()) closeNavDropdown(wrap);
 
         if (
           isProductsPageLocation() &&
@@ -130,6 +138,7 @@ function initProductsNavDropdown() {
   });
 
   document.addEventListener("click", (e) => {
+    if (isMobileNav()) return; // Don't auto-close dropdowns in mobile drawer
     if (e.target.closest(".nav-dropdown-wrap") || e.target.closest(".nav-dropdown-menu")) {
       return;
     }
@@ -141,12 +150,14 @@ function initProductsNavDropdown() {
   });
 
   window.addEventListener("scroll", () => {
+    if (isMobileNav()) return;
     document.querySelectorAll(".nav-dropdown-wrap.is-open").forEach((wrap) => {
       positionNavDropdownMenu(wrap);
     });
   }, true);
 
   window.addEventListener("resize", () => {
+    if (isMobileNav()) return;
     document.querySelectorAll(".nav-dropdown-wrap.is-open").forEach((wrap) => {
       positionNavDropdownMenu(wrap);
     });
