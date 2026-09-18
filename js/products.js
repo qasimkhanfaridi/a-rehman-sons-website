@@ -596,3 +596,7 @@ function getPackageSizes(product) {
   }
   return ARS_PACKAGE_SIZES[product.category] || ["5 kg", "25 kg"];
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { ARS_PRODUCTS, ARS_CATEGORIES, ARS_PACKAGE_SIZES, getPackageSizes };
+}

@@ -1,0 +1,473 @@
+const fs = require('fs');
+const path = require('path');
+const { ARS_PRODUCTS, ARS_CATEGORIES } = require('../js/products.js');
+
+const ROOT = path.join(__dirname, '..');
+const PRODUCTS_DIR = path.join(ROOT, 'products');
+
+if (!fs.existsSync(PRODUCTS_DIR)) {
+  fs.mkdirSync(PRODUCTS_DIR, { recursive: true });
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+}
+
+const categoryLabels = {
+  laundry: "Commercial Laundry Chemicals",
+  kitchen: "Kitchen & Stewarding Chemicals",
+  stewarding: "Stewarding & Potwash Chemicals",
+  housekeeping: "Housekeeping & Facility Care Chemicals"
+};
+
+const categoryShort = {
+  laundry: "Laundry",
+  kitchen: "Kitchen",
+  stewarding: "Stewarding",
+  housekeeping: "Housekeeping"
+};
+
+let generatedCount = 0;
+
+for (const product of ARS_PRODUCTS) {
+  const catLabel = categoryLabels[product.category] || "Commercial Chemicals";
+  const catShort = categoryShort[product.category] || "Chemicals";
+  const details = product.fullDetails || {};
+  const mockPath = `assets/products/mockups/${product.id}.jpg`;
+  const hasMockup = fs.existsSync(path.join(ROOT, mockPath));
+  const imgSrc = hasMockup ? `../${mockPath}` : '../assets/logo.png';
+  const canonicalUrl = `https://arschemicals.com/products/${product.id}.html`;
+  const rateStr = `Rs. ${product.rate.toFixed(2)} / Kg`;
+
+  // Related products from same category
+  const related = ARS_PRODUCTS
+    .filter(p => p.id !== product.id && p.category === product.category)
+    .slice(0, 3);
+
+  // Genuine technical FAQs per product
+  const faqs = [
+    {
+      q: `What is the standard commercial dilution ratio for ${product.name}?`,
+      a: `${product.name} is formulated for commercial efficiency. Standard dosage is: ${details.dosage || "Refer to technical data sheet for optimal dilution"}. Adjust concentration based on soil intensity and water hardness.`
+    },
+    {
+      q: `What commercial institutions commonly use ${product.name}?`,
+      a: `${product.name} is widely supplied to 5-star hotels, tertiary hospitals, commercial laundries, and institutional facilities across Rawalpindi, Islamabad, Lahore, Karachi, and nationwide.`
+    },
+    {
+      q: `What packaging sizes are available for ${product.name}?`,
+      a: `Standard commercial supply is in 25 Kg sealed HDPE jerricans. Optional packaging includes 5 Kg cans, 10 Kg containers, and 200 Kg bulk drums for industrial laundries and washhouses.`
+    },
+    {
+      q: `How can I request a sample or quotation for ${product.name}?`,
+      a: `You can add ${product.name} directly to our online Quotation Builder, contact our sales desk at +92 51 5503203, or message our direct procurement team on WhatsApp at +92 321 8502997.`
+    }
+  ];
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Buy ${escapeHtml(product.name)} (${escapeHtml(rateStr)}) commercial ${catShort.toLowerCase()} chemical in Pakistan. Official supplier A. Rehman &amp; Sons, Rawalpindi. Factory-direct wholesale pricing.">
+  <meta name="keywords" content="${escapeHtml(product.name.toLowerCase())}, ${catShort.toLowerCase()} chemicals pakistan, commercial chemical supplier rawalpindi, institutional cleaning supplies islamabad, chemical manufacturer pakistan">
+  <meta name="author" content="A. Rehman &amp; Sons">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="A. Rehman &amp; Sons">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:title" content="${escapeHtml(product.name)} | ${escapeHtml(catLabel)} | ARS Chemicals">
+  <meta property="og:description" content="${escapeHtml(product.description)} Factory direct rate: ${rateStr}.">
+  <meta property="og:image" content="https://arschemicals.com/${mockPath}">
+  <meta property="og:locale" content="en_PK">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(product.name)} | ARS Chemicals Pakistan">
+  <meta name="twitter:description" content="${escapeHtml(product.description)} Official rate: ${rateStr}.">
+  <meta name="twitter:image" content="https://arschemicals.com/${mockPath}">
+
+  <!-- Geo Location Meta Tags -->
+  <meta name="geo.region" content="PK-PB">
+  <meta name="geo.placename" content="Rawalpindi, Islamabad, Pakistan">
+  <meta name="geo.position" content="33.5973;73.0479">
+  <meta name="ICBM" content="33.5973, 73.0479">
+
+  <title>${escapeHtml(product.name)} — ${escapeHtml(catLabel)} Supplier Pakistan | ARS Chemicals</title>
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="../css/styles.css?v=5.2">
+
+  <!-- Schema.org JSON-LD: Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "${escapeHtml(product.name)}",
+    "image": "https://arschemicals.com/${mockPath}",
+    "description": "${escapeHtml(product.description)}",
+    "sku": "ARS-${product.sNo}",
+    "mpn": "${product.id}",
+    "brand": {
+      "@type": "Brand",
+      "name": "A. Rehman & Sons"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "A. Rehman & Sons",
+      "url": "https://arschemicals.com/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "${canonicalUrl}",
+      "priceCurrency": "PKR",
+      "price": "${product.rate.toFixed(2)}",
+      "priceValidUntil": "2027-12-31",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "A. Rehman & Sons"
+      }
+    }
+  }
+  </script>
+
+  <!-- Schema.org JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://arschemicals.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Chemical Products",
+        "item": "https://arschemicals.com/products.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "${escapeHtml(catLabel)}",
+        "item": "https://arschemicals.com/products.html?cat=${product.category}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "${escapeHtml(product.name)}",
+        "item": "${canonicalUrl}"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      ${faqs.map(f => `{
+        "@type": "Question",
+        "name": "${escapeHtml(f.q)}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "${escapeHtml(f.a)}"
+        }
+      }`).join(',\n      ')}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <span>Est. 1988 · Rawalpindi, Pakistan · Purpose-Built Manufacturing &amp; Warehouse</span>
+      <span>
+        Tel: 051-5503203 &nbsp;|&nbsp;
+        WhatsApp: 0321-8502997 &nbsp;|&nbsp;
+        <a href="mailto:ar_sons@hotmail.com">ar_sons@hotmail.com</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.png" alt="A. Rehman &amp; Sons ARS Logo" class="brand-logo" width="72" height="72">
+        <div class="brand-text">
+          <span class="brand-title">A. REHMAN &amp; SONS</span>
+          <p>Chemical &amp; General Order Supplier</p>
+        </div>
+      </a>
+      <nav class="nav" id="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <div class="nav-dropdown-wrap">
+          <a href="../products.html" class="nav-dropdown-trigger active">Products</a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../products.html" role="menuitem">All Products (29)</a>
+            <a href="../products.html?cat=laundry" role="menuitem">Laundry (16)</a>
+            <a href="../products.html?cat=kitchen" role="menuitem">Kitchen (7)</a>
+            <a href="../products.html?cat=stewarding" role="menuitem">Stewarding (7)</a>
+            <a href="../products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
+          </div>
+        </div>
+        <a href="../certifications.html">Certs</a>
+        <a href="../clients.html">Clients</a>
+        <a href="../international.html">Export</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../order.html" class="nav-cta">Quote</a>
+      </nav>
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">
+        <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Banner -->
+  <section class="page-banner" style="background: linear-gradient(135deg, #001a33 0%, #003366 100%); padding: 1.75rem 0 1.5rem;">
+    <div class="container page-banner-inner">
+      <div class="breadcrumb" style="font-size: 0.85rem; color: rgba(255,255,255,0.75); margin-bottom: 0.5rem;">
+        <a href="../index.html" style="color: #93c5fd; text-decoration: none;">Home</a> <span>/</span> 
+        <a href="../products.html" style="color: #93c5fd; text-decoration: none;">Products</a> <span>/</span> 
+        <a href="../products.html?cat=${product.category}" style="color: #93c5fd; text-decoration: none;">${escapeHtml(catShort)}</a> <span>/</span> 
+        <strong style="color: #fff;">${escapeHtml(product.name)}</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Detail Showcase -->
+  <main class="section" style="padding: 3rem 0;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: start; margin-bottom: 3.5rem;">
+        
+        <!-- Product Photo / Mockup -->
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; text-align: center; position: relative;">
+          <span style="position: absolute; top: 1rem; left: 1rem; background: var(--navy); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.75rem; border-radius: 9999px;">
+            S.No ${product.sNo}
+          </span>
+          <img src="${imgSrc}" alt="${escapeHtml(product.name)} commercial chemical canister" style="max-height: 420px; width: auto; margin: 0 auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.15));" width="380" height="420">
+          <div style="margin-top: 1.25rem; font-size: 0.8rem; color: var(--gray-600); display: flex; align-items: center; justify-content: center; gap: 1rem;">
+            <span>🛡️ ISO 9001:2015</span>
+            <span>✅ Halal Certified</span>
+            <span>🧪 Commercial Grade</span>
+          </div>
+        </div>
+
+        <!-- Product Information & Order CTA -->
+        <div>
+          <span style="display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.82rem; padding: 0.25rem 0.75rem; border-radius: 6px; margin-bottom: 0.75rem; text-transform: uppercase;">
+            ${escapeHtml(catLabel)}
+          </span>
+          <h1 style="font-size: 2.2rem; color: var(--navy); margin-bottom: 0.75rem; line-height: 1.2;">
+            ${escapeHtml(product.name)}
+          </h1>
+          <p style="font-size: 1.15rem; color: var(--gray-800); line-height: 1.6; margin-bottom: 1.25rem;">
+            ${escapeHtml(product.description)}
+          </p>
+
+          <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;">
+            <div style="font-size: 0.85rem; color: #0369a1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Official Wholesale Factory Rate</div>
+            <div style="font-size: 2rem; font-weight: 800; color: var(--navy); margin: 0.25rem 0;">
+              ${escapeHtml(rateStr)}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--gray-600);">
+              Standard Packaging: <strong>${product.packaging}</strong> · Free delivery across Rawalpindi &amp; Islamabad · Nationwide freight dispatched daily.
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div style="display: flex; flex-wrap: wrap; gap: 0.85rem; margin-bottom: 2rem;">
+            <a href="../order.html?add=${product.id}" class="btn btn-primary" style="padding: 0.9rem 1.5rem; font-size: 1.05rem; font-weight: 700;">
+              📋 Add to Quotation Builder
+            </a>
+            <a href="https://wa.me/923218502997?text=Hello%20ARS,%20I%20would%20like%20to%20inquire%20about%20commercial%20procurement%20of%20${encodeURIComponent(product.name)}" target="_blank" rel="noopener" class="btn" style="background: #25d366; color: #fff; padding: 0.9rem 1.5rem; font-size: 1.05rem; font-weight: 700; border: none;">
+              💬 Inquire via WhatsApp
+            </a>
+            <a href="tel:0515503203" class="btn btn-outline" style="padding: 0.9rem 1.25rem;">
+              📞 Call: 051-5503203
+            </a>
+          </div>
+
+          <!-- Quick Spec Badges -->
+          <div style="border-top: 1px solid var(--border); padding-top: 1.25rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-600); font-weight: 600; display: block;">Dosage / Dilution</span>
+              <strong style="color: var(--navy); font-size: 0.9rem;">${escapeHtml(details.dosage || "Refer to Tech Sheet")}</strong>
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-600); font-weight: 600; display: block;">pH Value</span>
+              <strong style="color: var(--navy); font-size: 0.9rem;">${escapeHtml(details.ph || "Industrial Formulated")}</strong>
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-600); font-weight: 600; display: block;">Active Formula</span>
+              <strong style="color: var(--navy); font-size: 0.9rem;">${escapeHtml((details.activeIngredients || "Proprietary Complex").slice(0, 45))}...</strong>
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-600); font-weight: 600; display: block;">Packaging Options</span>
+              <strong style="color: var(--navy); font-size: 0.9rem;">${(details.packagingOptions || ["5 kg", "25 kg"]).join(", ")}</strong>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Technical Specifications & Applications -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-bottom: 3.5rem;">
+        
+        <!-- Applications Card -->
+        <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.35rem; color: var(--navy); margin-bottom: 1rem;">
+            🧪 Commercial Applications
+          </h2>
+          <p style="color: var(--gray-800); line-height: 1.6; margin-bottom: 1.25rem;">
+            ${escapeHtml(details.applications || product.description)}
+          </p>
+          <h3 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.75rem;">Suitable For:</h3>
+          <ul style="padding-left: 1.25rem; color: var(--gray-800); line-height: 1.8;">
+            <li><strong>5-Star Hotels &amp; Resorts:</strong> Guest linen, kitchen rotisseries, and banquet tableware</li>
+            <li><strong>Hospitals &amp; Healthcare:</strong> Medical ward linen, surgical scrubs, and sanitized surfaces</li>
+            <li><strong>Commercial Laundries:</strong> High-capacity washer-extractors and continuous batch tunnels</li>
+            <li><strong>Industrial Kitchens:</strong> Heavy grease hood baffles, dishwashers, and food-prep areas</li>
+          </ul>
+        </div>
+
+        <!-- Technical Data & Safety Card -->
+        <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.35rem; color: var(--navy); margin-bottom: 1rem;">
+            🛡️ Safety &amp; Handling Guidelines
+          </h2>
+          <p style="color: var(--gray-800); line-height: 1.6; margin-bottom: 1.25rem;">
+            ${escapeHtml(details.safety || "Follow standard commercial chemical safety protocols. Wear gloves and protective eyewear when handling concentrates.")}
+          </p>
+          <h3 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.75rem;">Storage &amp; Transport:</h3>
+          <ul style="padding-left: 1.25rem; color: var(--gray-800); line-height: 1.8;">
+            <li>Store in original UN-approved heavy-duty HDPE jerrican containers.</li>
+            <li>Keep in a cool, well-ventilated dry warehouse away from direct sunlight.</li>
+            <li>Keep container tightly sealed when not in active commercial dosing.</li>
+            <li>Material Safety Data Sheet (MSDS / SDS) available on technical request.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- FAQ Section -->
+      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.6rem; color: var(--navy); margin-bottom: 1.5rem; text-align: center;">
+          Frequently Asked Questions About ${escapeHtml(product.name)}
+        </h2>
+        <div style="display: grid; gap: 1.25rem; max-width: 850px; margin: 0 auto;">
+          ${faqs.map(f => `
+          <div style="background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem;">
+            <h3 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem;">${escapeHtml(f.q)}</h3>
+            <p style="color: var(--gray-600); line-height: 1.6; margin: 0;">${escapeHtml(f.a)}</p>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Related Products from same category -->
+      ${related.length > 0 ? `
+      <div>
+        <h2 style="font-size: 1.5rem; color: var(--navy); margin-bottom: 1.5rem;">
+          Related ${escapeHtml(catShort)} Formulations
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          ${related.map(r => `
+          <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span style="font-size: 0.75rem; color: var(--blue); font-weight: 700; text-transform: uppercase;">S.No ${r.sNo}</span>
+              <h3 style="font-size: 1.15rem; color: var(--navy); margin: 0.25rem 0 0.5rem;">${escapeHtml(r.name)}</h3>
+              <p style="font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 1rem;">${escapeHtml(r.description)}</p>
+            </div>
+            <div>
+              <div style="font-weight: 800; color: var(--navy); font-size: 1.1rem; margin-bottom: 0.75rem;">${escapeHtml(r.rateFormatted)}</div>
+              <div style="display: flex; gap: 0.5rem;">
+                <a href="${r.id}.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.5rem; font-size: 0.85rem;">View Specs</a>
+                <a href="../order.html?add=${r.id}" class="btn btn-primary" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">+ Quote</a>
+              </div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>A. REHMAN &amp; SONS</h3>
+        <p>Commercial Chemical &amp; General Order Supplier since 1988. ISO 9001:2015, ISO 45001:2018, Halal Certified &amp; HACCP Compliant.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray-500);">
+          Factory: Plot # 152, Street # 1, Millat Colony, Rawalpindi, Pakistan.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Chemical Divisions</h4>
+        <ul>
+          <li><a href="../products.html?cat=laundry">Commercial Laundry Chemicals (16)</a></li>
+          <li><a href="../products.html?cat=kitchen">Kitchen Stewarding Detergents (7)</a></li>
+          <li><a href="../products.html?cat=housekeeping">Housekeeping &amp; Floor Care (6)</a></li>
+          <li><a href="../international.html">Global Bulk Sea-Freight Export</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Procurement &amp; Orders</h4>
+        <ul>
+          <li><a href="../order.html">Online Quotation Builder</a></li>
+          <li><a href="../certifications.html">Quality Accreditations</a></li>
+          <li><a href="../clients.html">Institutional Clientele</a></li>
+          <li><a href="../contact.html">Contact Rawalpindi Sales Desk</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Direct Procurement Contact</h4>
+        <p>Tel: 051-5503203<br>WhatsApp: 0321-8502997<br>Email: ar_sons@hotmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>&copy; 1988–2026 A. Rehman &amp; Sons · All Rights Reserved.</span>
+        <span>Rawalpindi, Pakistan · Est. 1988 · ISO 9001 · ISO 45001 · HACCP · Halal</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/923218502997?text=Hello%20ARS,%20I%20am%20inquiring%20about%20${encodeURIComponent(product.name)}" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Order on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Scripts -->
+  <script src="../js/ui.js?v=5.2"></script>
+</body>
+</html>`;
+
+  const destPath = path.join(PRODUCTS_DIR, `${product.id}.html`);
+  fs.writeFileSync(destPath, html, 'utf-8');
+  generatedCount++;
+}
+
+console.log(`Successfully generated ${generatedCount} static product SEO pages in ${PRODUCTS_DIR}`);

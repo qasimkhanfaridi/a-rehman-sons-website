@@ -424,7 +424,7 @@ function renderProducts(filter = "all", searchQuery = "") {
       </button>
       <div class="product-card__head">
         <span class="product-card__cat">${catLabel}</span>
-        <h3>${p.name}</h3>
+        <h3><a href="products/${p.id}.html" style="color: inherit; text-decoration: none;">${p.name}</a></h3>
       </div>
       <p class="product-card__desc">${p.description}</p>
       <div class="product-card__foot">
@@ -513,8 +513,9 @@ function openProductModal(productId) {
         <div style="font-size: 0.85rem; color: var(--gray-600);">
           Available Container Sizes: <strong>${(details.packagingOptions || ["25 kg"]).join(", ")}</strong>
         </div>
-        <div style="display: flex; gap: 0.5rem; align-items: center;">
-          <button type="button" class="btn btn-secondary tech-modal-close" style="width: auto; height: auto; border-radius: 4px; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--gray-700); background: #e2e8f0;">Close</button>
+        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+          <a href="products/${p.id}.html" class="btn btn-outline" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">Full Tech Page &rarr;</a>
+          <button type="button" class="btn btn-secondary tech-modal-close" style="width: auto; height: auto; border-radius: 4px; padding: 0.5rem 0.85rem; font-size: 0.85rem; color: var(--gray-700); background: #e2e8f0;">Close</button>
           <button type="button" class="btn btn-primary btn-add-modal-quote" data-id="${p.id}" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
             + Add to Quote Inquiry
           </button>
@@ -760,10 +761,37 @@ function renderOrderReviewTable() {
   });
 }
 
+function initUrlAddProduct() {
+  const params = new URLSearchParams(window.location.search);
+  const addId = params.get("add");
+  if (!addId) return;
+
+  const product = ARS_PRODUCTS.find((p) => p.id === addId);
+  if (!product) return;
+
+  const cart = getStoredCart();
+  const existing = cart.find((item) => item.id === addId);
+  if (existing) {
+    existing.qty = Math.max(existing.qty, 1);
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      packaging: product.packaging || "25 kg",
+      qty: 1,
+      rate: product.rate || 0
+    });
+  }
+  saveStoredCart(cart);
+  updateCartSummary();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initFilters();
   initProductCategoryFromNavigation();
   initProductSearch();
+  initUrlAddProduct();
   renderProducts(activeFilter, activeQuery);
   initProductCardEvents();
   initOrderForm();

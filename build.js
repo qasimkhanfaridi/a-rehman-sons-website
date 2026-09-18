@@ -32,6 +32,7 @@ const itemsToCopy = [
   'international.html',
   'order.html',
   'contact.html',
+  'products',
   'css',
   'js',
   'assets',
