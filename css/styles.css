@@ -102,12 +102,14 @@ img { max-width: 100%; height: auto; display: block; }
   object-fit: contain;
 }
 
-.brand-text h1 {
+.brand-text h1,
+.brand-text .brand-title {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.01em;
   line-height: 1.2;
+  display: block;
 }
 
 .brand-text p {
@@ -1297,7 +1299,8 @@ section { padding: 4rem 0; }
     width: auto;
     flex-shrink: 0;
   }
-  .brand-text h1 {
+  .brand-text h1,
+  .brand-text .brand-title {
     font-size: 0.92rem;
     line-height: 1.15;
     white-space: nowrap;
@@ -1628,7 +1631,8 @@ section { padding: 4rem 0; }
   #certificates-grid { grid-template-columns: 1fr; }
 
   .brand-logo { height: 36px; }
-  .brand-text h1 { font-size: 0.82rem; }
+  .brand-text h1,
+  .brand-text .brand-title { font-size: 0.82rem; }
 
   .hero { padding: 2rem 0 1.75rem; }
   .hero h2 { font-size: 1.4rem; }

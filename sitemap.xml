@@ -5,7 +5,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://arschemicals.com/</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -17,7 +17,7 @@
   <!-- Products Catalog & Quotation -->
   <url>
     <loc>https://arschemicals.com/products.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- International Supplies & Global Exports -->
   <url>
     <loc>https://arschemicals.com/international.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Order & Quotation Request -->
   <url>
     <loc>https://arschemicals.com/order.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- ISO & Halal Certifications -->
   <url>
     <loc>https://arschemicals.com/certifications.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -49,7 +49,7 @@
   <!-- Corporate Profile & About Us -->
   <url>
     <loc>https://arschemicals.com/about.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Institutional Clients (Hotels, Hospitals, Laundries) -->
   <url>
     <loc>https://arschemicals.com/clients.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Contact & Factory Locations -->
   <url>
     <loc>https://arschemicals.com/contact.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
