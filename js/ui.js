@@ -1,17 +1,17 @@
 /**
  * Shared UI functionality for A. Rehman & Sons multi-page website
- * Handles navigation active states, mobile menu toggle, lightboxes, and dynamic content.
+ * Handles navigation active states, product dropdown, lightboxes, and dynamic content.
  */
 
-// Highlight current page in navigation
 function initNavigationActiveState() {
   const path = window.location.pathname.toLowerCase();
   const filename = path.substring(path.lastIndexOf("/") + 1) || "index.html";
-  
+  const onProducts = filename === "products.html";
+
   document.querySelectorAll(".nav a").forEach((link) => {
     const href = (link.getAttribute("href") || "").toLowerCase();
     link.classList.remove("active");
-    
+
     if (filename === "index.html" || filename === "") {
       if (href === "index.html" || href === "./" || href === "#" || href === "") {
         link.classList.add("active");
@@ -21,17 +21,138 @@ function initNavigationActiveState() {
     }
   });
 
-  // Mobile menu toggle
-  const navToggle = document.getElementById("nav-toggle");
-  const mainNav = document.getElementById("main-nav");
-  if (navToggle && mainNav) {
-    navToggle.addEventListener("click", () => {
-      mainNav.classList.toggle("open");
-    });
+  if (onProducts) {
+    const trigger = document.querySelector(".nav-dropdown-trigger");
+    if (trigger) trigger.classList.add("active");
+  }
+
+  initProductsNavDropdown();
+}
+
+function getNavDropdownMenu(wrap) {
+  return wrap.querySelector(".nav-dropdown-menu");
+}
+
+function positionNavDropdownMenu(wrap) {
+  const trigger = wrap.querySelector(".nav-dropdown-trigger");
+  const menu = getNavDropdownMenu(wrap);
+  if (!trigger || !menu || !wrap.classList.contains("is-open")) return;
+
+  const rect = trigger.getBoundingClientRect();
+  menu.style.display = "block";
+  menu.style.position = "fixed";
+  menu.style.top = `${Math.round(rect.bottom + 6)}px`;
+  menu.style.left = `${Math.round(rect.left)}px`;
+  menu.style.minWidth = `${Math.max(Math.round(rect.width), 220)}px`;
+  menu.style.zIndex = "10001";
+}
+
+function closeNavDropdown(wrap) {
+  const trigger = wrap.querySelector(".nav-dropdown-trigger");
+  const menu = getNavDropdownMenu(wrap);
+  wrap.classList.remove("is-open");
+  if (trigger) trigger.setAttribute("aria-expanded", "false");
+  if (menu) {
+    menu.style.display = "";
+    menu.style.position = "";
+    menu.style.top = "";
+    menu.style.left = "";
+    menu.style.minWidth = "";
+    menu.style.zIndex = "";
   }
 }
 
-// Lightbox modal for viewing high-res certificates and catalog pages
+function closeAllNavDropdowns() {
+  document.querySelectorAll(".nav-dropdown-wrap.is-open").forEach((wrap) => {
+    closeNavDropdown(wrap);
+  });
+}
+
+function openNavDropdown(wrap) {
+  closeAllNavDropdowns();
+  const trigger = wrap.querySelector(".nav-dropdown-trigger");
+  const menu = getNavDropdownMenu(wrap);
+  if (!trigger || !menu) return;
+
+  wrap.classList.add("is-open");
+  trigger.setAttribute("aria-expanded", "true");
+  positionNavDropdownMenu(wrap);
+}
+
+function isProductsPageLocation(loc = window.location) {
+  const file = (loc.pathname.split("/").pop() || "index.html").toLowerCase();
+  return file === "products.html" || file === "products";
+}
+
+function isProductsCatalogUrl(url) {
+  const file = (url.pathname.split("/").pop() || "").toLowerCase();
+  return file === "products.html" || file === "products";
+}
+
+function initProductsNavDropdown() {
+  document.querySelectorAll(".nav-dropdown-wrap").forEach((wrap) => {
+    const trigger = wrap.querySelector(".nav-dropdown-trigger");
+    const menu = getNavDropdownMenu(wrap);
+    if (!trigger || !menu) return;
+
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (wrap.classList.contains("is-open")) {
+        closeNavDropdown(wrap);
+      } else {
+        openNavDropdown(wrap);
+      }
+    });
+
+    menu.querySelectorAll("a[href]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#")) return;
+
+        const targetUrl = new URL(href, window.location.href);
+        closeNavDropdown(wrap);
+
+        if (
+          isProductsPageLocation() &&
+          isProductsCatalogUrl(targetUrl) &&
+          typeof window.applyProductCategoryFilter === "function"
+        ) {
+          e.preventDefault();
+          const cat = targetUrl.searchParams.get("cat") || targetUrl.searchParams.get("category");
+          window.applyProductCategoryFilter(cat || "all");
+        }
+      });
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".nav-dropdown-wrap") || e.target.closest(".nav-dropdown-menu")) {
+      return;
+    }
+    closeAllNavDropdowns();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAllNavDropdowns();
+  });
+
+  window.addEventListener("scroll", () => {
+    document.querySelectorAll(".nav-dropdown-wrap.is-open").forEach((wrap) => {
+      positionNavDropdownMenu(wrap);
+    });
+  }, true);
+
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".nav-dropdown-wrap.is-open").forEach((wrap) => {
+      positionNavDropdownMenu(wrap);
+    });
+  });
+}
+
 function openLightbox(imgSrc, title = "Document View") {
   let modal = document.getElementById("global-lightbox");
   if (!modal) {
@@ -113,7 +234,6 @@ function renderCertificates() {
     `;
   }).join("");
 
-  // Attach click to zoom
   grid.querySelectorAll(".certificate-card").forEach((card) => {
     card.addEventListener("click", () => {
       const img = card.querySelector("img");
@@ -130,4 +250,3 @@ document.addEventListener("DOMContentLoaded", () => {
   renderClients();
   renderCertificates();
 });
-

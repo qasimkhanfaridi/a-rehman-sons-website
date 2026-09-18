@@ -6,7 +6,7 @@
   <meta name="description" content="Review your selected chemical products and submit your commercial quotation via WhatsApp or Email.">
   <title>A. Rehman &amp; Sons | Request a Commercial Quote | Order Builder</title>
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=3.0">
+  <link rel="stylesheet" href="css/styles.css?v=3.9">
 </head>
 <body>
 
@@ -32,16 +32,23 @@
           <p>Chemical &amp; General Order Supplier</p>
         </div>
       </a>
-      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Menu">☰</button>
       <nav class="nav" id="main-nav">
         <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="certifications.html">Certifications</a>
+        <a href="about.html">About</a>
+                <div class="nav-dropdown-wrap">
+          <a href="products.html" class="nav-dropdown-trigger">Products</a>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="products.html" role="menuitem">All Products (29)</a>
+            <a href="products.html?cat=laundry" role="menuitem">Laundry (16)</a>
+            <a href="products.html?cat=kitchen" role="menuitem">Kitchen (7)</a>
+            <a href="products.html?cat=stewarding" role="menuitem">Stewarding (7)</a>
+            <a href="products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
+          </div>        </div>
+        <a href="certifications.html">Certs</a>
         <a href="clients.html">Clients</a>
-        <a href="international.html">International Supplies</a>
+        <a href="international.html">Export</a>
         <a href="contact.html">Contact</a>
-        <a href="order.html" class="nav-cta active">Request Quote</a>
+        <a href="order.html" class="nav-cta active">Quote</a>
       </nav>
     </div>
   </header>
@@ -135,11 +142,11 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
-            <img src="assets/logo.png" alt="ARS Logo" height="48" style="background:#fff; border-radius:4px; padding:2px;">
+          <div class="footer-brand-head">
+            <img src="assets/logo.png" alt="ARS Logo" class="footer-logo" width="48" height="48">
             <div>
-              <strong style="color:#fff; font-size:1.1rem; display:block;">A. REHMAN &amp; SONS</strong>
-              <span style="color:rgba(255,255,255,0.7); font-size:0.75rem;">Chemical &amp; General Order Supplier</span>
+              <strong class="footer-brand-title">A. REHMAN &amp; SONS</strong>
+              <span class="footer-brand-tag">Chemical &amp; General Order Supplier</span>
             </div>
           </div>
           <p>Commercial laundry, stewarding and housekeeping chemical solutions. Purpose-built manufacturing in Rawalpindi, Pakistan. Established 1988.</p>
@@ -188,9 +195,9 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/products.js?v=3.0"></script>
+  <script src="js/products.js?v=3.4"></script>
   <script src="js/clients.js?v=3.0"></script>
-  <script src="js/ui.js?v=3.0"></script>
-  <script src="js/order.js?v=3.0"></script>
+  <script src="js/ui.js?v=4.1"></script>
+  <script src="js/order.js?v=3.4"></script>
 </body>
 </html>

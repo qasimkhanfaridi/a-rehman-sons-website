@@ -20,9 +20,8 @@ function buildOrderMessage(formData, cart) {
     lines.push("(No products selected — general inquiry)");
   } else {
     cart.forEach((item, i) => {
-      const rateInfo = item.rateFormatted ? ` · ${item.rateFormatted}` : "";
       const sno = item.sNo ? `[${item.sNo}] ` : "";
-      lines.push(`${i + 1}. ${sno}${item.name}${rateInfo}`);
+      lines.push(`${i + 1}. ${sno}${item.name}`);
       lines.push(`   Quantity: ${item.qty} × ${item.packaging}`);
     });
   }
@@ -407,29 +406,27 @@ function renderProducts(filter = "all", searchQuery = "") {
     const catLabel = ARS_CATEGORIES[p.category]?.label || p.category.toUpperCase();
 
     return `
-    <article class="product-card" data-id="${p.id}" data-sno="${p.sNo || ''}" data-name="${p.name}" data-rate="${p.rate || 0}" data-rate-formatted="${p.rateFormatted || ''}" data-packaging="${selectedPackaging}" data-category="${p.category}">
+    <article class="product-card" data-id="${p.id}" data-sno="${p.sNo || ''}" data-name="${p.name}" data-packaging="${selectedPackaging}" data-category="${p.category}">
       <div class="product-card__header-row">
         <span class="product-card__sno">S.No ${p.sNo || '—'}</span>
-        <span class="product-card__rate-badge">${p.rateFormatted || 'Rate: On Request'}</span>
       </div>
-      <div class="product-card__image" style="min-height: 400px !important;">
-        <img
-          src="assets/products/mockups/${p.id}.jpg"
-          alt="${p.name} — A. Rehman & Sons Commercial Gallon"
-          class="product-mockup-img"
-          style="height: 384px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; display: block !important;"
-          loading="lazy"
-          onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${selectedPackaging}', '${p.category}', '${p.id}');"
-        >
-      </div>
+      <button type="button" class="product-card__image-btn btn-open-product-details" data-id="${p.id}" aria-label="View details for ${p.name}">
+        <span class="product-card__image">
+          <img
+            src="assets/products/mockups/${p.id}.jpg?v=5.0"
+            alt="${p.name} — A. Rehman & Sons Commercial Gallon"
+            class="product-mockup-img"
+            loading="lazy"
+            onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${selectedPackaging}', '${p.category}', '${p.id}');"
+          >
+          <span class="product-card__image-hint">Details</span>
+        </span>
+      </button>
       <div class="product-card__head">
         <span class="product-card__cat">${catLabel}</span>
         <h3>${p.name}</h3>
       </div>
       <p class="product-card__desc">${p.description}</p>
-      <button type="button" class="btn-view-details" data-id="${p.id}">
-        <span>📋</span> View Technical Details
-      </button>
       <div class="product-card__foot">
         <label class="pack-label">
           Size
@@ -478,7 +475,7 @@ function openProductModal(productId) {
     <div class="tech-modal-dialog">
       <div class="tech-modal-header">
         <div>
-          <span class="product-card__sno" style="background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.3);">Official Quotation S.No ${p.sNo || "—"}</span>
+          <span class="product-card__sno" style="background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.3);">S.No ${p.sNo || "—"}</span>
           <h2>${p.name}</h2>
           <p style="margin: 0; color: #93c5fd; font-size: 0.88rem; font-weight: 600;">Specialist Category: ${details.categoryName || p.category.toUpperCase()}</p>
         </div>
@@ -486,7 +483,6 @@ function openProductModal(productId) {
       </div>
       <div class="tech-modal-body">
         <div class="tech-meta-bar">
-          <div class="tech-meta-item"><strong>Quotation Rate:</strong> <span class="product-card__rate-badge" style="font-size: 0.95rem; margin-left: 0.25rem;">${p.rateFormatted || "Contact for Rate"}</span></div>
           <div class="tech-meta-item"><strong>Standard Packing:</strong> ${p.packaging}</div>
           <div class="tech-meta-item"><strong>Working pH:</strong> ${details.ph || "Balanced"}</div>
         </div>
@@ -564,28 +560,76 @@ function closeProductModal() {
 let activeFilter = "all";
 let activeQuery = "";
 
-function initFilters() {
-  // Check URL query parameters (e.g. products.html?cat=laundry or ?cat=kitchen)
+const PRODUCT_CATEGORY_KEYS = new Set(["all", "laundry", "kitchen", "stewarding", "housekeeping"]);
+
+function normalizeProductCategory(cat) {
+  if (cat == null || cat === "") return "all";
+  const key = String(cat).trim().toLowerCase();
+  if (key === "all") return "all";
+  if (PRODUCT_CATEGORY_KEYS.has(key) && key !== "all") return key;
+  return null;
+}
+
+function readCategoryFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const catParam = params.get("cat") || params.get("category");
-  if (catParam && (ARS_CATEGORIES[catParam] || catParam === "stewarding")) {
-    activeFilter = catParam;
+  const raw = params.get("cat") || params.get("category");
+  return normalizeProductCategory(raw) || "all";
+}
+
+function syncCategoryInUrl(filter) {
+  const url = new URL(window.location.href);
+  if (filter === "all") {
+    url.searchParams.delete("cat");
+    url.searchParams.delete("category");
+  } else {
+    url.searchParams.set("cat", filter);
   }
+  window.history.replaceState(null, "", url);
+}
+
+function setActiveFilter(filter, { updateUrl = true } = {}) {
+  const normalized = normalizeProductCategory(filter) || "all";
+  activeFilter = normalized;
+  document.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.filter === activeFilter);
+  });
+  if (updateUrl) syncCategoryInUrl(activeFilter);
+  renderProducts(activeFilter, activeQuery);
+}
+
+function applyProductCategoryFilter(cat) {
+  setActiveFilter(normalizeProductCategory(cat) || "all");
+}
+
+function initFilters() {
+  activeFilter = readCategoryFromUrl();
 
   document.querySelectorAll(".filter-btn").forEach((btn) => {
-    if (btn.dataset.filter === activeFilter) {
-      btn.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-
+    btn.classList.toggle("active", btn.dataset.filter === activeFilter);
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeFilter = btn.dataset.filter;
-      renderProducts(activeFilter, activeQuery);
+      if (btn.dataset.filter === activeFilter) return;
+      setActiveFilter(btn.dataset.filter);
     });
   });
+}
+
+function initProductCategoryFromNavigation() {
+  if (!document.getElementById("products-grid")) return;
+
+  window.addEventListener("pageshow", () => {
+    const fromUrl = readCategoryFromUrl();
+    if (fromUrl !== activeFilter) {
+      setActiveFilter(fromUrl, { updateUrl: false });
+    }
+  });
+
+  window.addEventListener("popstate", () => {
+    setActiveFilter(readCategoryFromUrl(), { updateUrl: false });
+  });
+}
+
+if (typeof window !== "undefined") {
+  window.applyProductCategoryFilter = applyProductCategoryFilter;
 }
 
 function initProductSearch() {
@@ -618,9 +662,9 @@ function initProductCardEvents() {
   });
 
   grid.addEventListener("click", (e) => {
-    const detailBtn = e.target.closest(".btn-view-details");
-    if (detailBtn) {
-      openProductModal(detailBtn.dataset.id);
+    const openBtn = e.target.closest(".btn-open-product-details");
+    if (openBtn) {
+      openProductModal(openBtn.dataset.id);
     }
   });
 }
@@ -644,28 +688,27 @@ function renderOrderReviewTable() {
   const totalUnits = cart.reduce((sum, item) => sum + item.qty, 0);
 
   tableContainer.innerHTML = `
-    <table class="cart-table">
+    <div class="cart-table-scroll">
+    <table class="cart-table cart-table--quote">
       <thead>
         <tr>
           <th>S.No</th>
           <th>Product Name</th>
-          <th>Official Rate</th>
           <th>Packaging</th>
-          <th style="width: 90px;">Qty</th>
-          <th style="width: 50px;">Action</th>
+          <th>Qty</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
         ${cart.map((item, idx) => `
           <tr data-id="${item.id}">
-            <td><span class="product-card__sno">${item.sNo || (idx + 1)}</span></td>
-            <td><strong>${item.name}</strong></td>
-            <td><span class="product-card__rate-badge">${item.rateFormatted || 'On Request'}</span></td>
-            <td>${item.packaging}</td>
-            <td>
-              <input type="number" class="qty-input order-table-qty" min="1" value="${item.qty}" data-index="${idx}" style="width: 70px; padding: 0.3rem 0.5rem;">
+            <td data-label="S.No"><span class="product-card__sno">${item.sNo || (idx + 1)}</span></td>
+            <td data-label="Product"><strong>${item.name}</strong></td>
+            <td data-label="Packaging">${item.packaging}</td>
+            <td data-label="Quantity">
+              <input type="number" class="qty-input order-table-qty" min="1" value="${item.qty}" data-index="${idx}">
             </td>
-            <td>
+            <td data-label="Remove">
               <button type="button" class="btn-remove-item" data-index="${idx}" title="Remove item">&times;</button>
             </td>
           </tr>
@@ -673,11 +716,12 @@ function renderOrderReviewTable() {
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="3"><strong>Total Requested Items: ${cart.length} chemicals</strong></td>
-          <td colspan="3"><strong>${totalUnits} Units Total</strong></td>
+          <td colspan="2"><strong>${cart.length} product${cart.length === 1 ? "" : "s"} in quote</strong></td>
+          <td colspan="3"><strong>${totalUnits} units total</strong></td>
         </tr>
       </tfoot>
     </table>
+    </div>
     <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <a href="products.html" class="btn btn-outline btn-sm">+ Add More Products</a>
       <button type="button" id="btn-clear-cart" class="btn btn-secondary btn-sm" style="color: #dc2626; border-color: #fca5a5;">Clear All Items</button>
@@ -718,6 +762,7 @@ function renderOrderReviewTable() {
 
 document.addEventListener("DOMContentLoaded", () => {
   initFilters();
+  initProductCategoryFromNavigation();
   initProductSearch();
   renderProducts(activeFilter, activeQuery);
   initProductCardEvents();
