@@ -134,6 +134,17 @@ img { max-width: 100%; height: auto; display: block; }
 /* Mobile nav header/close row — hidden on desktop, shown inside drawer */
 .nav-mobile-header { display: none; }
 
+/* Dark overlay behind mobile nav drawer — injected into body by JS, NOT a pseudo-element */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10050; /* below .nav (10100) but above all page content */
+  background: rgba(0, 0, 0, 0.50);
+  cursor: pointer;
+}
+.nav-overlay.is-visible { display: block; }
+
 .nav a {
   color: var(--gray-800);
   padding: 0.45rem 0.55rem;
@@ -1293,7 +1304,7 @@ section { padding: 4rem 0; }
     display: none;
     position: fixed;
     inset: 0;
-    z-index: 2000;
+    z-index: 10100; /* above header isolation stacking context (1100) */
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -1311,14 +1322,7 @@ section { padding: 4rem 0; }
   /* Show the mobile drawer header row */
   .nav-mobile-header { display: flex; }
 
-  /* Overlay behind nav when open */
-  body.nav-open::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 1999;
-  }
+  /* Overlay: injected as a real <div> via JS (see initMobileNav) — avoids z-index stacking context bug */
 
   /* Mobile nav header (close button row) */
   .nav-mobile-header {

@@ -258,6 +258,14 @@ function renderCertificates() {
 
 /* =========================================================================
    MOBILE NAV DRAWER
+   =========================================================================
+   WHY a real div instead of body::before:
+   The .site-header has isolation:isolate + z-index:1100 which creates a
+   stacking context. The .nav inside it (z-index:10100) is relative to
+   THAT stacking context — so it only paints at ~1100 in root context.
+   A body::before at z-index:1999 in root context would paint ABOVE the
+   nav, making links unclickable. Injecting a real div directly into body
+   places the overlay correctly in the root stacking context.
    ========================================================================= */
 function initMobileNav() {
   const toggle = document.getElementById("nav-mobile-toggle");
@@ -265,59 +273,67 @@ function initMobileNav() {
   const nav = document.getElementById("main-nav");
   if (!toggle || !nav) return;
 
+  // Inject overlay div directly into body (NOT inside header)
+  let overlay = document.getElementById("nav-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "nav-overlay";
+    overlay.className = "nav-overlay";
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.appendChild(overlay);
+  }
+
   function openNav() {
     document.body.classList.add("nav-open");
     toggle.setAttribute("aria-expanded", "true");
-    // Prevent background scroll
+    overlay.classList.add("is-visible");
     document.body.style.overflow = "hidden";
+    // Move focus into drawer for accessibility
+    const firstLink = nav.querySelector("a, button");
+    if (firstLink) setTimeout(() => firstLink.focus(), 50);
   }
 
   function closeNav() {
     document.body.classList.remove("nav-open");
     toggle.setAttribute("aria-expanded", "false");
+    overlay.classList.remove("is-visible");
     document.body.style.overflow = "";
+    toggle.focus();
   }
 
+  // Hamburger toggle
   toggle.addEventListener("click", (e) => {
     e.stopPropagation();
-    if (document.body.classList.contains("nav-open")) {
-      closeNav();
-    } else {
-      openNav();
-    }
+    document.body.classList.contains("nav-open") ? closeNav() : openNav();
   });
 
+  // X close button inside drawer
   if (closeBtn) {
-    closeBtn.addEventListener("click", closeNav);
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeNav();
+    });
   }
 
-  // Close when clicking the dark overlay (the ::before pseudo-element area outside nav)
-  document.addEventListener("click", (e) => {
-    if (!document.body.classList.contains("nav-open")) return;
-    if (!nav.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
-      closeNav();
-    }
-  });
+  // Click on dark overlay closes nav
+  overlay.addEventListener("click", closeNav);
 
-  // Close on Escape key
+  // Escape key closes nav
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
       closeNav();
     }
   });
 
-  // Close when a nav link is clicked (user is navigating)
+  // Clicking a nav link closes the drawer (with small delay so navigation fires)
   nav.querySelectorAll("a[href]").forEach((link) => {
-    link.addEventListener("click", () => {
-      // Small delay so the click registers before nav closes
-      setTimeout(closeNav, 80);
-    });
+    link.addEventListener("click", () => setTimeout(closeNav, 80));
   });
 
-  // On resize to desktop: always close mobile nav and unlock scroll
-  const mq = window.matchMedia("(min-width: 769px)");
-  const onResize = (e) => { if (e.matches) closeNav(); };
-  mq.addEventListener("change", onResize);
+  // Auto-close when viewport grows past mobile breakpoint
+  window.matchMedia("(min-width: 769px)").addEventListener("change", (e) => {
+    if (e.matches) closeNav();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
