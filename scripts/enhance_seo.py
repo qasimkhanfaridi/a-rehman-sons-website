@@ -167,7 +167,7 @@ SEO_DATA = {
     },
     "order.html": {
         "title": "Request Commercial Chemical Quotation | A. Rehman & Sons (ARS)",
-        "description": "Build your official commercial chemical quotation online for laundry, kitchen, and housekeeping chemicals. Factory direct rates from Rs. 80.00/Kg across Pakistan.",
+        "description": "Build your official commercial chemical quotation online for laundry, kitchen, and housekeeping chemicals. Competitive factory-direct wholesale pricing and prompt quotation across Pakistan.",
         "canonical": "https://arschemicals.com/order.html",
         "og_title": "Request Commercial Chemical Quotation | A. Rehman & Sons (ARS)",
         "og_description": "Build your custom wholesale chemical quotation online. Instant calculation for 29 commercial laundry, kitchen, and housekeeping formulations.",
@@ -184,7 +184,7 @@ SEO_DATA = {
       "name": "A. Rehman & Sons",
       "url": "https://arschemicals.com/",
       "telephone": "+92-51-5503203",
-      "priceRange": "Rs. 80 - Rs. 4000"
+      "priceRange": "$$"
     }
   }
   </script>"""

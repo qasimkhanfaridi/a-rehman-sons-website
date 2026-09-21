@@ -41,7 +41,6 @@ for (const product of ARS_PRODUCTS) {
   const hasMockup = fs.existsSync(path.join(ROOT, mockPath));
   const imgSrc = hasMockup ? `../${mockPath}` : '../assets/logo.png';
   const canonicalUrl = `https://arschemicals.com/products/${product.id}.html`;
-  const rateStr = `Rs. ${product.rate.toFixed(2)} / Kg`;
 
   // Related products from same category
   const related = ARS_PRODUCTS
@@ -73,7 +72,7 @@ for (const product of ARS_PRODUCTS) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Buy ${escapeHtml(product.name)} (${escapeHtml(rateStr)}) commercial ${catShort.toLowerCase()} chemical in Pakistan. Official supplier A. Rehman &amp; Sons, Rawalpindi. Factory-direct wholesale pricing.">
+  <meta name="description" content="Buy ${escapeHtml(product.name)} commercial ${catShort.toLowerCase()} chemical in Pakistan. Official supplier A. Rehman &amp; Sons, Rawalpindi. Factory-direct wholesale pricing upon quotation.">
   <meta name="keywords" content="${escapeHtml(product.name.toLowerCase())}, ${catShort.toLowerCase()} chemicals pakistan, commercial chemical supplier rawalpindi, institutional cleaning supplies islamabad, chemical manufacturer pakistan">
   <meta name="author" content="A. Rehman &amp; Sons">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -84,14 +83,14 @@ for (const product of ARS_PRODUCTS) {
   <meta property="og:site_name" content="A. Rehman &amp; Sons">
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:title" content="${escapeHtml(product.name)} | ${escapeHtml(catLabel)} | ARS Chemicals">
-  <meta property="og:description" content="${escapeHtml(product.description)} Factory direct rate: ${rateStr}.">
+  <meta property="og:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
   <meta property="og:image" content="https://arschemicals.com/${mockPath}">
   <meta property="og:locale" content="en_PK">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(product.name)} | ARS Chemicals Pakistan">
-  <meta name="twitter:description" content="${escapeHtml(product.description)} Official rate: ${rateStr}.">
+  <meta name="twitter:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
   <meta name="twitter:image" content="https://arschemicals.com/${mockPath}">
 
   <!-- Geo Location Meta Tags -->
@@ -127,8 +126,6 @@ for (const product of ARS_PRODUCTS) {
       "@type": "Offer",
       "url": "${canonicalUrl}",
       "priceCurrency": "PKR",
-      "price": "${product.rate.toFixed(2)}",
-      "priceValidUntil": "2027-12-31",
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "https://schema.org/InStock",
       "seller": {
@@ -228,7 +225,7 @@ for (const product of ARS_PRODUCTS) {
             <a href="../products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
           </div>
         </div>
-        <a href="../certifications.html">Certs</a>
+        <a href="../certifications.html">Certifications</a>
         <a href="../clients.html">Clients</a>
         <a href="../international.html">Export</a>
         <a href="../contact.html">Contact</a>
@@ -288,9 +285,9 @@ for (const product of ARS_PRODUCTS) {
           </p>
 
           <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;">
-            <div style="font-size: 0.85rem; color: #0369a1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Official Wholesale Factory Rate</div>
-            <div style="font-size: 2rem; font-weight: 800; color: var(--navy); margin: 0.25rem 0;">
-              ${escapeHtml(rateStr)}
+            <div style="font-size: 0.85rem; color: #0369a1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Commercial Supply &amp; Quotation</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin: 0.25rem 0;">
+              Wholesale Pricing Upon Quotation
             </div>
             <div style="font-size: 0.85rem; color: var(--gray-600);">
               Standard Packaging: <strong>${product.packaging}</strong> · Free delivery across Rawalpindi &amp; Islamabad · Nationwide freight dispatched daily.
@@ -401,7 +398,7 @@ for (const product of ARS_PRODUCTS) {
               <p style="font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 1rem;">${escapeHtml(r.description)}</p>
             </div>
             <div>
-              <div style="font-weight: 800; color: var(--navy); font-size: 1.1rem; margin-bottom: 0.75rem;">${escapeHtml(r.rateFormatted)}</div>
+              <div style="font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 0.75rem;">Packaging: ${escapeHtml(r.packaging)} · Wholesale Quote</div>
               <div style="display: flex; gap: 0.5rem;">
                 <a href="${r.id}.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.5rem; font-size: 0.85rem;">View Specs</a>
                 <a href="../order.html?add=${r.id}" class="btn btn-primary" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">+ Quote</a>
