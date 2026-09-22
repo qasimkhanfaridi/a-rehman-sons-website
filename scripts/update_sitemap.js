@@ -8,8 +8,7 @@ const sitemap_entries = [
     pri: "1.0",
     freq: "weekly",
     imgs: [
-      { loc: "https://arschemicals.com/assets/logo.png", title: "A. Rehman & Sons Logo" },
-      { loc: "https://arschemicals.com/assets/hero-chemical-facility.jpg", title: "ARS Chemical Manufacturing Facility" }
+      { loc: "https://arschemicals.com/assets/logo.png", title: "A. Rehman & Sons Logo" }
     ]
   },
   {

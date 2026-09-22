@@ -265,12 +265,7 @@ button.nav-dropdown-trigger {
 
 /* Hero — corporate B2B */
 .hero {
-  background-color: #0b1220;
-  background-image:
-    linear-gradient(105deg, rgba(11, 18, 32, 0.88) 0%, rgba(15, 23, 42, 0.72) 46%, rgba(3, 105, 161, 0.45) 100%),
-    url("../assets/backgrounds/hero-chemical-facility.jpg");
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(135deg, #001733 0%, #002b5c 55%, #081b36 100%);
   color: var(--white);
   padding: 5.25rem 0 4.5rem;
   position: relative;
@@ -281,28 +276,21 @@ button.nav-dropdown-trigger {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../assets/backgrounds/hero-chemical-facility.jpg");
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.08);
-  animation: heroKen 22s ease-in-out infinite alternate;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(2, 132, 199, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(60, 42, 130, 0.20) 0%, transparent 50%);
+  pointer-events: none;
   z-index: 0;
-  opacity: 0.35;
-}
-
-@keyframes heroKen {
-  from { transform: scale(1.04) translateY(0); }
-  to { transform: scale(1.12) translateY(-12px); }
 }
 
 .hero::after {
   content: "";
   position: absolute;
-  right: -10%;
+  right: -5%;
   top: -20%;
-  width: 55%;
+  width: 50%;
   height: 140%;
-  background: radial-gradient(ellipse, rgba(0,163,161,0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(0, 168, 236, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
