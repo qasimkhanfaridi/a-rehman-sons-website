@@ -1,177 +1,223 @@
 /**
- * Build 5 kg product mockups (1024×1024) from the client reference layout:
- * same compact white jerrycan + blue label design — not scaled-down 25 kg cans.
+ * Generate 5 kg photorealistic product mockups (1024x1024) for all 29 products.
+ * Features:
+ * - Sealed, realistic ribbed cap on the canister neck.
+ * - Perfectly aligned label covering the canister's recessed panel.
+ * - Official A. Rehman & Sons (ARS) branding, logo, and Rawalpindi manufacturing credentials.
+ * - Accurate contact info (Tel: 051-5503203, WhatsApp: 0321-8502997).
+ * - Spotless studio reflection.
  */
-const fs = require("fs");
-const path = require("path");
-const sharp = require("sharp");
 
-const ROOT = path.join(__dirname, "..");
-const REF = path.join(ROOT, "assets", "products", "mockups", "5kg", "reference-5kg-zepol-sc100.png");
-const OUT_DIR = path.join(ROOT, "assets", "products", "mockups", "5kg");
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp');
+const { ARS_PRODUCTS } = require('../js/products.js');
 
-const SIZE = 1024;
+const ROOT = path.join(__dirname, '..');
+const BASE_IMG = path.join(ROOT, 'assets', 'products', 'mockups', '5kg', 'base_5kg_capped_perfect.png');
+const LOGO_IMG = path.join(ROOT, 'assets', 'logo.png');
+const OUT_DIR = path.join(ROOT, 'assets', 'products', 'mockups', '5kg');
 
-/** Full front label on 1024 canvas (tuned to reference-5kg-zepol-sc100.png) */
-const LABEL = { x: 296, y: 246, w: 432, h: 502 };
+const LABEL = { x: 268, y: 368, w: 424, h: 436 };
 
-function escapeXml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+function escapeXml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-function wrapLines(text, maxChars) {
+function wrapText(text, maxChars = 52) {
+  if (!text) return [];
   const words = text.split(/\s+/).filter(Boolean);
   const lines = [];
-  let line = "";
+  let cur = '';
   for (const w of words) {
-    const next = line ? `${line} ${w}` : w;
-    if (next.length > maxChars && line) {
-      lines.push(line);
-      line = w;
+    if ((cur + ' ' + w).trim().length > maxChars) {
+      if (cur) lines.push(cur.trim());
+      cur = w;
     } else {
-      line = next;
+      cur = (cur + ' ' + w).trim();
     }
   }
-  if (line) lines.push(line);
-  return lines.slice(0, 3);
+  if (cur) lines.push(cur.trim());
+  return lines;
 }
 
-function featureBullets(description) {
-  const d = (description || "").toLowerCase();
-  if (d.includes("bleach") || d.includes("chlorine") || d.includes("hypochlorite")) {
-    return ["Whitening & Sanitizing", "Institutional Strength", "Concentrated"];
-  }
-  if (d.includes("powder") || d.includes("flakes") || d.includes("bag")) {
-    return ["Industrial Grade", "High Purity Formula", "5 kg Pack"];
-  }
-  if (d.includes("acid") || d.includes("descaler") || d.includes("corrosive")) {
-    return ["Scale & Mineral Removal", "Professional Strength", "Concentrated"];
-  }
-  if (d.includes("detergent") || d.includes("laundry") || d.includes("wash")) {
-    return ["Deep Cleaning Formula", "Commercial Laundry", "Concentrated"];
-  }
-  if (d.includes("glass") || d.includes("mirror")) {
-    return ["Streak-Free Finish", "Fast Evaporation", "Professional Use"];
-  }
-  return ["Deep Cleaning Formula", "Effective Performance", "Concentrated"];
-}
+const CATEGORY_TAGLINES = {
+  laundry: "Commercial Laundry Detergents & Bleaches",
+  kitchen: "Commercial Kitchen & Dishwashing Solutions",
+  stewarding: "Specialized Stewarding & Destaining Formulations",
+  housekeeping: "Institutional Housekeeping & Facility Care"
+};
 
-function subtitleLines(description) {
-  const clean = (description || "").replace(/\s+/g, " ").trim();
-  return wrapLines(clean, 34).map((line) => (line.length > 36 ? `${line.slice(0, 33)}…` : line));
-}
+const CATEGORY_BULLETS = {
+  laundry: ["✓ High Dilution Efficiency", "✓ Institutional Linen Care", "✓ 100% Commercial Grade"],
+  kitchen: ["✓ Heavy Grease Stripping", "✓ Food-Grade Formulation", "✓ Fast-Acting Degreaser"],
+  stewarding: ["✓ Deep Tannin & Stain Lifter", "✓ Melamine & Urn Safe", "✓ High Dilution Yield"],
+  housekeeping: ["✓ Hospital-Grade Sanitation", "✓ High-Yield Concentration", "✓ Multi-Surface Efficacy"]
+};
 
-function buildLabelOverlaySvg(product) {
-  const name = escapeXml(product.name);
-  const subtitles = subtitleLines(product.description);
-  const bullets = featureBullets(product.description);
-  const infoLines = wrapLines(product.description, 38);
-  const { x, y, w, h } = LABEL;
-  const pad = 14;
-  const innerX = x + pad;
-  const innerW = w - pad * 2;
+function buildSvg(product) {
+  const details = product.fullDetails || {};
+  const catTagline = CATEGORY_TAGLINES[product.category] || "Commercial Chemical Formulations";
+  const bullets = CATEGORY_BULLETS[product.category] || CATEGORY_BULLETS.laundry;
 
-  const nameSize = product.name.length > 14 ? 32 : product.name.length > 10 ? 38 : 44;
-  const subSize = 12.5;
-  const brandY = y + 36;
+  const dosage = (details.dosage || '3–8 ml per Kg of dry laundry load').slice(0, 48);
+  const ph = (details.ph || '11.0 – 12.0 (Alkaline)').slice(0, 36);
+  const active = (details.activeIngredients || 'High active non-ionic surfactants').slice(0, 44);
 
-  const infoY = y + 168;
-  const infoText = infoLines
-    .map((line, i) => `<tspan x="${innerX + 4}" dy="${i === 0 ? 0 : 14}">${escapeXml(line)}</tspan>`)
-    .join("");
+  const descLines = wrapText(product.description, 50).slice(0, 2);
+  const nameSize = product.name.length > 20 ? 21 : product.name.length > 14 ? 25 : 30;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
-    <filter id="labelShadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.12"/>
+    <linearGradient id="labelBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c386e"/>
+      <stop offset="100%" stop-color="#061c38"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
     </filter>
   </defs>
-  <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#0b3d78" filter="url(#labelShadow)"/>
-  <g transform="translate(${x + w / 2}, ${y + 18})">
-    <path d="M -22 -10 L 0 -24 L 22 -10 L 16 14 L -16 14 Z" fill="#166534" stroke="#ffffff" stroke-width="1.2"/>
-    <text y="6" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="900">R&amp;S</text>
+
+  <!-- Main Label Card -->
+  <rect x="${LABEL.x}" y="${LABEL.y}" width="${LABEL.w}" height="${LABEL.h}" rx="6" fill="url(#labelBg)" filter="url(#cardShadow)"/>
+  <rect x="${LABEL.x + 1}" y="${LABEL.y + 1}" width="${LABEL.w - 2}" height="${LABEL.h - 2}" rx="5" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.45"/>
+
+  <!-- Top Brand Header Bar -->
+  <g transform="translate(${LABEL.x + 12}, ${LABEL.y + 12})">
+    <text x="56" y="16" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="14.5" font-weight="900" letter-spacing="0.5">A. REHMAN &amp; SONS</text>
+    <text x="56" y="30" fill="#7dd3fc" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1.2">COMMERCIAL CHEMICALS</text>
+    <text x="56" y="42" fill="#bae6fd" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="500">Rawalpindi, Pakistan · Est. 1988 · ISO 9001</text>
+    
+    <!-- 5 KG Badge -->
+    <rect x="${LABEL.w - 24 - 60}" y="6" width="60" height="23" rx="4" fill="#0284c7"/>
+    <text x="${LABEL.w - 24 - 30}" y="22" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="11.5" font-weight="800">5 KG</text>
   </g>
-  <text x="${x + w / 2}" y="${brandY}" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="700">Rehman and Son&apos;s</text>
-  <text x="${x + w / 2}" y="${brandY + 14}" text-anchor="middle" fill="#bfdbfe" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="2">CHEMICALS</text>
-  <text x="${x + w / 2}" y="${y + 108}" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="${nameSize}" font-weight="800" letter-spacing="1">${name}</text>
-  <text x="${x + w / 2}" y="${y + 128}" text-anchor="middle" fill="#dbeafe" font-family="'Segoe UI', Arial, sans-serif" font-size="${subSize}" font-weight="600">
-    ${subtitles.map((line, i) => `<tspan x="${x + w / 2}" dy="${i === 0 ? 0 : 13}">${escapeXml(line)}</tspan>`).join("")}
-  </text>
-  <g fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="10.5" font-weight="600">
-    <text x="${innerX}" y="${y + 152}">✓ ${escapeXml(bullets[0])}</text>
-    <text x="${innerX + innerW / 2}" y="${y + 152}">✓ ${escapeXml(bullets[1])}</text>
-    <text x="${innerX}" y="${y + 166}">✓ ${escapeXml(bullets[2])}</text>
+
+  <!-- Divider line -->
+  <line x1="${LABEL.x + 12}" y1="${LABEL.y + 68}" x2="${LABEL.x + LABEL.w - 12}" y2="${LABEL.y + 68}" stroke="#1e4976" stroke-width="1.2"/>
+
+  <!-- Product Name Area -->
+  <g transform="translate(${LABEL.x + LABEL.w / 2}, ${LABEL.y + 102})">
+    <text text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="${nameSize}" font-weight="900" letter-spacing="0.8">${escapeXml(product.name)}</text>
+    <text y="19" text-anchor="middle" fill="#93c5fd" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="700">${escapeXml(catTagline)}</text>
+    ${descLines.map((line, idx) => `<text y="${33 + idx * 12}" text-anchor="middle" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="8">${escapeXml(line)}</text>`).join('')}
   </g>
-  <text x="${innerX}" y="${infoY}" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="9.5" font-weight="600">Typical Chemical Product Information</text>
-  <text fill="#bfdbfe" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5">${infoText}</text>
-  <rect x="${x + w - pad - 118}" y="${infoY - 4}" width="112" height="118" fill="none" stroke="#93c5fd" stroke-width="1.2" rx="4"/>
-  <text x="${x + w - pad - 62}" y="${infoY + 10}" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="800">WARNING</text>
-  <rect x="${x + w - pad - 108}" y="${infoY + 22}" width="28" height="28" fill="#fff" stroke="#dc2626" stroke-width="2"/>
-  <text x="${x + w - pad - 94}" y="${infoY + 42}" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="900">!</text>
-  <rect x="${x + w - pad - 72}" y="${infoY + 22}" width="28" height="28" fill="#fff" stroke="#dc2626" stroke-width="2"/>
-  <text x="${x + w - pad - 58}" y="${infoY + 42}" text-anchor="middle" fill="#dc2626" font-size="14" font-weight="900">☣</text>
-  <text x="${x + w - pad - 62}" y="${infoY + 68}" text-anchor="middle" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5">Causes skin irritation.</text>
-  <text x="${x + w - pad - 62}" y="${infoY + 80}" text-anchor="middle" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5">Keep out of reach of children.</text>
-  <text x="${x + w / 2}" y="${y + h - 28}" text-anchor="middle" fill="#dbeafe" font-family="'Segoe UI', Arial, sans-serif" font-size="8">Manufactured by Rehman and Son&apos;s (Pvt.) Ltd., Karachi, Pakistan</text>
-  <text x="${x + w / 2}" y="${y + h - 14}" text-anchor="middle" fill="#dbeafe" font-family="'Segoe UI', Arial, sans-serif" font-size="8">Customer Support Number: 833 357 7559</text>
-  <text x="${x + w - pad - 4}" y="${y + 28}" text-anchor="end" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="800">5 KG</text>
+
+  <!-- Bullets Row -->
+  <g transform="translate(${LABEL.x + 16}, ${LABEL.y + 158})" fill="#f8fafc" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="600">
+    <text x="0" y="0">${escapeXml(bullets[0])}</text>
+    <text x="136" y="0">${escapeXml(bullets[1])}</text>
+    <text x="264" y="0">${escapeXml(bullets[2])}</text>
+  </g>
+
+  <!-- Info & Safety Twin Boxes -->
+  <g transform="translate(${LABEL.x + 12}, ${LABEL.y + 176})">
+    <!-- Left Box: Tech specs -->
+    <rect x="0" y="0" width="224" height="136" rx="5" fill="#082040" stroke="#1e4b7a" stroke-width="1"/>
+    <rect x="0" y="0" width="224" height="22" rx="5" fill="#0d315b"/>
+    <text x="10" y="15" fill="#7dd3fc" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="700">TECHNICAL SPECIFICATIONS</text>
+    
+    <text x="10" y="38" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600">Dosage / Dilution:</text>
+    <text x="10" y="51" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5">${escapeXml(dosage)}</text>
+    
+    <text x="10" y="69" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600">Working pH Value:</text>
+    <text x="10" y="82" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5">${escapeXml(ph)}</text>
+    
+    <text x="10" y="100" fill="#e0f2fe" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600">Active Compound:</text>
+    <text x="10" y="113" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5">${escapeXml(active)}</text>
+
+    <!-- Right Box: GHS Warning -->
+    <rect x="234" y="0" width="166" height="136" rx="5" fill="#082040" stroke="#1e4b7a" stroke-width="1"/>
+    <rect x="234" y="0" width="166" height="22" rx="5" fill="#1e293b"/>
+    <text x="244" y="15" fill="#f87171" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="800">SAFETY PRECAUTIONS</text>
+    
+    <!-- Red Diamond 1: Exclamation -->
+    <g transform="translate(254, 30)">
+      <polygon points="18,0 36,18 18,36 0,18" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="18" y="24" text-anchor="middle" fill="#000000" font-family="sans-serif" font-size="19" font-weight="900">!</text>
+    </g>
+    <!-- Red Diamond 2: Corrosive -->
+    <g transform="translate(304, 30)">
+      <polygon points="18,0 36,18 18,36 0,18" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+      <circle cx="18" cy="18" r="7" fill="#dc2626"/>
+    </g>
+
+    <text x="242" y="88" fill="#fca5a5" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Commercial Formulation</text>
+    <text x="242" y="100" fill="#e2e8f0" font-family="'Segoe UI', Arial, sans-serif" font-size="7">Causes eye &amp; skin irritation.</text>
+    <text x="242" y="112" fill="#e2e8f0" font-family="'Segoe UI', Arial, sans-serif" font-size="7">Keep locked away from children.</text>
+    <text x="242" y="124" fill="#e2e8f0" font-family="'Segoe UI', Arial, sans-serif" font-size="7">Wear gloves &amp; eye protection.</text>
+  </g>
+
+  <!-- Bottom Manufacturer Footer Bar -->
+  <g transform="translate(${LABEL.x + 10}, ${LABEL.y + 328})">
+    <rect x="0" y="0" width="${LABEL.w - 20}" height="96" rx="6" fill="#031224" stroke="#0f3560" stroke-width="1"/>
+    
+    <text x="${(LABEL.w - 20) / 2}" y="20" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="800">Manufactured by A. Rehman &amp; Sons · Rawalpindi, Pakistan</text>
+    <text x="${(LABEL.w - 20) / 2}" y="36" text-anchor="middle" fill="#93c5fd" font-family="'Segoe UI', Arial, sans-serif" font-size="8.2" font-weight="600">Plot # 152, Street # 1, Millat Colony · G.P.O. Box No. 1020, Rawalpindi</text>
+    <text x="${(LABEL.w - 20) / 2}" y="52" text-anchor="middle" fill="#38bdf8" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="700">Tel: 051-5503203 · WhatsApp: 0321-8502997 · 0333-2158113</text>
+    <text x="${(LABEL.w - 20) / 2}" y="67" text-anchor="middle" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif" font-size="8">Email: ar_sons@hotmail.com · ISO 9001:2015 · Halal Certified · HACCP Compliant</text>
+    <text x="${(LABEL.w - 20) / 2}" y="81" text-anchor="middle" fill="#94a3b8" font-family="'Segoe UI', Arial, sans-serif" font-size="7.2">Verified Commercial Formulation · Purpose-Built Rawalpindi Manufacturing</text>
+  </g>
 </svg>`;
 }
 
-function loadProducts() {
-  const src = fs.readFileSync(path.join(ROOT, "js", "products.js"), "utf8");
-  const block = src.match(/const ARS_PRODUCTS = (\[[\s\S]*?\n\];)/);
-  if (!block) throw new Error("Could not parse ARS_PRODUCTS");
-  return Function(`"use strict"; return ${block[1].replace(/;\s*$/, "")}`)();
-}
-
-async function baseFromReference() {
-  return sharp(REF)
-    .resize(SIZE, SIZE, {
-      fit: "contain",
-      background: { r: 255, g: 255, b: 255, alpha: 1 },
-    })
-    .png()
-    .toBuffer();
-}
-
-async function renderProduct(baseBuffer, product, useReferenceAsIs) {
-  if (useReferenceAsIs) {
-    return sharp(baseBuffer).jpeg({ quality: 92, mozjpeg: true }).toBuffer();
-  }
-  const overlaySvg = Buffer.from(buildLabelOverlaySvg(product));
-  const overlayPng = await sharp(overlaySvg).png().toBuffer();
-  return sharp(baseBuffer)
-    .composite([{ input: overlayPng, top: 0, left: 0 }])
-    .jpeg({ quality: 92, mozjpeg: true })
-    .toBuffer();
-}
-
 async function main() {
-  if (!fs.existsSync(REF)) {
-    console.error("Missing reference image:", REF);
+  if (!fs.existsSync(BASE_IMG)) {
+    console.error("Missing base capped image:", BASE_IMG);
     process.exit(1);
   }
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const products = loadProducts();
-  const baseBuffer = await baseFromReference();
+  const baseBuffer = await sharp(BASE_IMG).toBuffer();
+  const logoBuffer = await sharp(LOGO_IMG)
+    .resize(48, 48, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png()
+    .toBuffer();
 
-  for (const product of products) {
+  let count = 0;
+  for (const product of ARS_PRODUCTS) {
+    const svg = buildSvg(product);
+    const overlayBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    const finalBuf = await sharp(baseBuffer)
+      .composite([
+        { input: overlayBuffer, top: 0, left: 0 },
+        { input: logoBuffer, top: LABEL.y + 14, left: LABEL.x + 14 }
+      ])
+      .jpeg({ quality: 94, mozjpeg: true })
+      .toBuffer();
+
     const outPath = path.join(OUT_DIR, `${product.id}.jpg`);
-    const isRef = product.id === "zepol-sc-100";
-    const buf = await renderProduct(baseBuffer, product, isRef);
-    fs.writeFileSync(outPath, buf);
-    console.log(isRef ? `OK ${product.id} (client reference)` : `OK ${product.id} (5kg label layout)`);
+    fs.writeFileSync(outPath, finalBuf);
+    count++;
+    console.log(`[${count}/${ARS_PRODUCTS.length}] Generated 5kg mockup for ${product.id}`);
   }
+
+  // Also update reference-5kg-zepol-sc100.png with the official capped SC100
+  const sc100 = ARS_PRODUCTS.find(x => x.id === 'zepol-sc-100');
+  if (sc100) {
+    const sc100Svg = buildSvg(sc100);
+    const overlay = await sharp(Buffer.from(sc100Svg)).png().toBuffer();
+    await sharp(baseBuffer)
+      .composite([
+        { input: overlay, top: 0, left: 0 },
+        { input: logoBuffer, top: LABEL.y + 14, left: LABEL.x + 14 }
+      ])
+      .png()
+      .toFile(path.join(OUT_DIR, 'reference-5kg-zepol-sc100.png'));
+    console.log("Updated reference-5kg-zepol-sc100.png with capped bottle & official ARS credentials");
+  }
+
+  console.log(`\nSuccessfully created all ${count} 5kg product mockups with sealed cap & official ARS credentials!`);
 }
 
-main().catch((err) => {
-  console.error(err);
+main().catch(err => {
+  console.error("Error generating 5kg mockups:", err);
   process.exit(1);
 });
