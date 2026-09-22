@@ -120,8 +120,15 @@ for (const product of ARS_PRODUCTS) {
   <meta name="geo.position" content="33.5973;73.0479">
   <meta name="ICBM" content="33.5973, 73.0479">
 
-  <title>${escapeHtml(product.name)} — ${escapeHtml(catLabel)} Supplier Pakistan | ARS Chemicals</title>
-  <link rel="icon" href="../assets/logo.png" type="image/png">
+  <!-- Favicon & Touch Icons (Google Search & Multi-Device Optimized) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#002b5c">
   <link rel="stylesheet" href="../css/styles.css?v=6.0">
 
   <!-- Inlined Product Gallery CSS for Zero Cache Delay -->

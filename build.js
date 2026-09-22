@@ -38,7 +38,15 @@ const itemsToCopy = [
   'assets',
   'robots.txt',
   'sitemap.xml',
-  'llms.txt'
+  'llms.txt',
+  'favicon.ico',
+  'favicon.svg',
+  'favicon-48x48.png',
+  'favicon-96x96.png',
+  'favicon-192x192.png',
+  'favicon-512x512.png',
+  'apple-touch-icon.png',
+  'site.webmanifest'
 ];
 
 for (const item of itemsToCopy) {
