@@ -44,7 +44,7 @@ const ARS_PRODUCTS = [
       dosage: "Soak 10–15 minutes in solution of 15–20 grams per Liter of warm water (50°C–60°C).",
       ph: "10.5 - 11.5 (Mildly alkaline destaining oxidizer).",
       activeIngredients: "Stabilized Chlorine Destaining Agents, Alkaline Builders, Chelating Sequesterants.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Do not mix with acid solutions. Store in a cool dry area away from direct sunlight."
     }
   },
@@ -64,7 +64,7 @@ const ARS_PRODUCTS = [
       dosage: "Dilute 50 ml to 100 ml per Liter of warm water. Circulate for 20–30 minutes, then drain and rinse thoroughly.",
       ph: "1.0 - 2.0 (Strong organic/inorganic acid compound).",
       activeIngredients: "Inhibited Phosphoric & Sulfamic Acid Blend, Metal Corrosion Inhibitors, Wetting Agents.",
-      packagingOptions: ["5 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Corrosive. Wear rubber gloves and goggles during application. Do not use on galvanized surfaces or aluminum."
     }
   },
@@ -84,7 +84,7 @@ const ARS_PRODUCTS = [
       dosage: "Use neat (undiluted) on warm surfaces (50°C–60°C). Allow 10–15 minutes contact time, scrub and wipe clean with damp cloth.",
       ph: "13.0 - 14.0 (High alkaline caustic stripper).",
       activeIngredients: "Sodium Hydroxide, Penetrating Surfactants, Thickening Polymers for vertical surface clinging.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Highly alkaline. Always wear gloves, face shield, and protective apron. Rinse surfaces with potable water before cooking."
     }
   },
@@ -124,7 +124,7 @@ const ARS_PRODUCTS = [
       dosage: "2–4 grams per Liter in automated dishwashers; 100 ml daily dosing into kitchen grease traps.",
       ph: "7.5 - 8.5 (Enzyme-stabilized neutral formula).",
       activeIngredients: "Protease, Amylase and Lipase Enzymes, Non-ionic Biodegradable Surfactants, Bio-catalysts.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Store below 35°C to preserve enzyme activity. Safe for plumbing, septic tanks, and municipal sewer systems."
     }
   },
@@ -167,7 +167,7 @@ const ARS_PRODUCTS = [
       dosage: "3 ml to 6 ml per kg of dry linen depending on soil level.",
       ph: "8.5 - 9.5.",
       activeIngredients: "Protease Enzymes, Optical Brightening Agents, Soil Anti-Redeposition Polymers.",
-      packagingOptions: ["25 kg", "50 kg", "200 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Industrial laundry chemical. Avoid breathing mist; store sealed in cool area."
     }
   },
@@ -186,7 +186,7 @@ const ARS_PRODUCTS = [
       dosage: "4 ml to 8 ml per kg of dry linen.",
       ph: "11.5 - 12.5 (High alkaline built detergent).",
       activeIngredients: "Synthetic Non-ionic Surfactants, Silicates, Sequestering Agents, Optical Enhancers.",
-      packagingOptions: ["25 kg", "50 kg", "200 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Alkaline liquid. Use automatic liquid dosing or wear rubber gloves for manual dispensing."
     }
   },
@@ -205,7 +205,7 @@ const ARS_PRODUCTS = [
       dosage: "3 ml to 6 ml per kg of dry linen at 55°C–65°C. Bleach cycle 8–10 minutes.",
       ph: "11.0 - 12.0.",
       activeIngredients: "Stabilized Sodium Hypochlorite (12–15% available chlorine), Alkaline Stabilizers.",
-      packagingOptions: ["25 kg", "50 kg", "200 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Use ONLY on white bleach-safe fabrics. Never mix directly with acids (liberates toxic chlorine gas)."
     }
   },
@@ -224,7 +224,7 @@ const ARS_PRODUCTS = [
       dosage: "2 ml to 5 ml per kg of dry linen at 60°C–80°C.",
       ph: "3.5 - 4.5 (Stabilized acidic peroxide release).",
       activeIngredients: "High Concentration Hydrogen Peroxide (35–50%), Organic Peroxide Stabilizers.",
-      packagingOptions: ["25 kg", "50 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Strong oxidizing agent. Store in vented containers away from direct heat and organic materials."
     }
   },
@@ -243,7 +243,7 @@ const ARS_PRODUCTS = [
       dosage: "1.5 ml to 3 ml per kg dry linen in final rinse.",
       ph: "1.5 - 2.5.",
       activeIngredients: "Synergistic Acid Neutralizers, Reducing Anti-Chlor Agents, Iron Inhibitors.",
-      packagingOptions: ["25 kg", "50 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Acidic chemical. Dispense through laundry injection systems or handle with rubber gloves."
     }
   },
@@ -262,7 +262,7 @@ const ARS_PRODUCTS = [
       dosage: "2 ml to 4 ml per kg dry linen in final rinse with D-SOUR ZX.",
       ph: "3.0 - 4.5.",
       activeIngredients: "Quaternary Cationic Softening Surfactants, Antistatic Compounds, Encapsulated Perfume.",
-      packagingOptions: ["25 kg", "50 kg", "200 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Do not pour directly onto dry fabrics. Add to water during final rinse."
     }
   },
@@ -281,7 +281,7 @@ const ARS_PRODUCTS = [
       dosage: "3 to 6 grams per kg dry linen added to the breakwash / main wash.",
       ph: "11.0 - 12.0 in aqueous solution.",
       activeIngredients: "Pure Sodium Carbonate (Na2CO3) 99.2% Min.",
-      packagingOptions: ["25 kg Bag", "50 kg Bag"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Store in dry moisture-free conditions to prevent caking. Wear dust mask when dispensing dry powder."
     }
   },
@@ -300,7 +300,7 @@ const ARS_PRODUCTS = [
       dosage: "0.2 to 0.5 grams per kg dry linen dissolved in water during final rinse.",
       ph: "Neutral in solution.",
       activeIngredients: "Ultramarine Blue Pigment, Optical Brightening Agents (OBA), Dispersing Agents.",
-      packagingOptions: ["5 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Premix with water before adding to machine to prevent localized fabric spotting."
     }
   },
@@ -319,7 +319,7 @@ const ARS_PRODUCTS = [
       dosage: "1 ml to 3 ml per kg dry linen in wash bath, or dilute 1:5 for manual spotting table application.",
       ph: "7.0 - 8.0.",
       activeIngredients: "Ethoxylated Fatty Alcohols, Solvent Emulsifiers, Anti-Redeposition Complexes.",
-      packagingOptions: ["5 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Flammable when concentrated. Keep away from ignition sources; seal tightly."
     }
   },
@@ -338,7 +338,7 @@ const ARS_PRODUCTS = [
       dosage: "Apply 2–3 drops directly to moistened rust stain. Allow 1–2 minutes until stain disappears, then flush immediately with water.",
       ph: "1.0 - 2.0 (High active acid rust complexer).",
       activeIngredients: "Oxalic Acid & Fluoride Complex Inhibitors, Penetrating Surfactants.",
-      packagingOptions: ["1 Liter Bottle", "5 kg Can"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "POISON / TOXIC. Wear chemical gloves. Never allow to dry on fabric; always flush with fresh water."
     }
   },
@@ -357,7 +357,7 @@ const ARS_PRODUCTS = [
       dosage: "1 to 3 grams per Liter of wash water depending on water test hardness.",
       ph: "9.0 - 10.0.",
       activeIngredients: "Tetrasodium EDTA, Polycarboxylates, Phosphonates.",
-      packagingOptions: ["25 kg", "50 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Non-corrosive when diluted. Store dry and sealed."
     }
   },
@@ -376,7 +376,7 @@ const ARS_PRODUCTS = [
       dosage: "5 to 10 grams per kg linen in dedicated starching cycle at 40°C–45°C.",
       ph: "6.0 - 7.0.",
       activeIngredients: "Refined Maize / Wheat Modified Food Grade Industrial Starch.",
-      packagingOptions: ["25 kg Bag", "50 kg Bag"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Natural and biodegradable. Store in rodent-free, completely dry storage."
     }
   },
@@ -395,7 +395,7 @@ const ARS_PRODUCTS = [
       dosage: "1 to 2.5 grams per kg dry linen dissolved in water.",
       ph: "Alkaline in solution.",
       activeIngredients: "Calcium Hypochlorite Ca(ClO)2 with 65–70% active chlorine release.",
-      packagingOptions: ["25 kg Drum", "45 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Strong oxidizer. Keep away from heat, oil, and flammable items. Store tightly sealed in cool dry place."
     }
   },
@@ -414,7 +414,7 @@ const ARS_PRODUCTS = [
       dosage: "2 to 5 grams per kg linen. Requires warm wash bath (>65°C) for saponification.",
       ph: "13.0 - 14.0 in solution.",
       activeIngredients: "Sodium Hydroxide (NaOH) 99.0% Min (Flakes / Pearls).",
-      packagingOptions: ["25 kg Bag", "50 kg Bag"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "DANGER / CORROSIVE. Causes severe burns. Always add caustic to cold water gradually, never add water to caustic."
     }
   },
@@ -433,7 +433,7 @@ const ARS_PRODUCTS = [
       dosage: "1 to 2.5 grams per kg linen in final rinse.",
       ph: "2.0 - 3.0 in 1% solution.",
       activeIngredients: "Pure Anhydrous Citric Acid (C6H8O7) 99.5% Min.",
-      packagingOptions: ["25 kg Bag"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Mild organic acid, food contact safe. Non-toxic, biodegradable."
     }
   },
@@ -452,7 +452,7 @@ const ARS_PRODUCTS = [
       dosage: "6 to 12 grams per kg dry linen depending on soil level and temperature (40°C–80°C).",
       ph: "10.0 - 11.0.",
       activeIngredients: "Sodium Percarbonate, Dense Alkyl Builders, Surfactant Granules, Enzymes.",
-      packagingOptions: ["25 kg Bag", "50 kg Drum"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Keep container sealed to prevent moisture absorption and loss of oxygen bleach activity."
     }
   },
@@ -475,7 +475,7 @@ const ARS_PRODUCTS = [
       dosage: "1:20 to 1:30 with warm water for rotary brush carpet machines; 1:10 for manual stain scrubbing.",
       ph: "7.5 - 8.5 (Neutral fiber safe).",
       activeIngredients: "High-Foaming Anionic Surfactants, Polymer Soil Encapsulators, Fiber Conditioning Fragrance.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Safe on wool and synthetic blends. Test in inconspicuous corner for colorfastness before full application."
     }
   },
@@ -513,7 +513,7 @@ const ARS_PRODUCTS = [
       dosage: "Use neat via manual or automatic infrared soap dispensers. Dispenses 1.0–1.5 ml per pump.",
       ph: "6.0 - 6.5 (Balanced to natural skin mantle).",
       activeIngredients: "Sodium Laureth Sulfate, Cocamidopropyl Betaine, Glycerine, Chloroxylenol Antibacterial Agent, Pearlizing Agents.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Dermatologically tested. Hypoallergenic and non-drying even with frequent handwashing."
     }
   },
@@ -532,7 +532,7 @@ const ARS_PRODUCTS = [
       dosage: "Use neat on toilet bowls and urinals with bowl brush; dilute 50 ml per 5 Liters of water for bathroom floor scrubbing.",
       ph: "1.5 - 2.5 (Disinfecting acid formula).",
       activeIngredients: "Organic Acid Blend, Quaternary Ammonium Compounds, Thickened Clinging Surfactant.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Do not use on natural marble or terrazzo. Wear protective rubber gloves during application."
     }
   },
@@ -570,7 +570,7 @@ const ARS_PRODUCTS = [
       dosage: "Use neat via trigger spray bottle. Mist lightly on surface and wipe immediately with microfiber cloth or squeegee.",
       ph: "7.0 - 8.0 (Neutral & safe on treated glass).",
       activeIngredients: "Isopropyl Alcohol, Deionized Water, Glycol Ether Solvent, Anti-Static Dust Repellent.",
-      packagingOptions: ["5 kg", "10 kg", "25 kg"],
+      packagingOptions: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
       safety: "Keep away from sparks and open flames. Store in cool, well-ventilated location."
     }
   }

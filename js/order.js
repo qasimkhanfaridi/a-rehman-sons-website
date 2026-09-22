@@ -501,6 +501,19 @@ function openProductModal(productId) {
         <button type="button" class="tech-modal-close" aria-label="Close modal">&times;</button>
       </div>
       <div class="tech-modal-body">
+        <div style="display: flex; gap: 1.25rem; align-items: center; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
+          <img id="modal-product-img" src="assets/products/mockups/5kg/${p.id}.jpg" alt="${p.name}" style="width: 90px; height: 90px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));" onerror="this.src='assets/products/mockups/${p.id}.jpg'">
+          <div style="flex: 1;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.04em;">Standard Sizes Available (4 Formats)</div>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem;">
+              <span style="background: #ffffff; border: 1px solid #bae6fd; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #0369a1;">🧴 5 kg (Safety Red Cap)</span>
+              <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #334155;">🛢️ 10 kg</span>
+              <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #334155;">📦 25 kg</span>
+              <span style="background: #ffffff; border: 1px solid #c7d2fe; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #3730a3;">🏭 200 kg Drum</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tech-meta-bar">
           <div class="tech-meta-item"><strong>Standard Packing:</strong> ${p.packaging}</div>
           <div class="tech-meta-item"><strong>Working pH:</strong> ${details.ph || "Balanced"}</div>
