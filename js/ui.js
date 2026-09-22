@@ -162,7 +162,261 @@ function initProductsNavDropdown() {
   });
 }
 
+/* =========================================================================
+   CERTIFICATES & LIGHTBOX MODAL
+   ========================================================================= */
+
+const CERT_DATA_FALLBACK = [
+  {
+    id: "iso-9001",
+    name: "ISO 9001:2015",
+    fullName: "ISO 9001:2015 Quality Management System",
+    standard: "Quality Management System (QMS)",
+    scope: "Chemical formulation, automated batch blending, laboratory titration & supply chain traceability.",
+    desc: "Rigorous consistency in raw material sourcing, automated batching, laboratory titration, and packaging reliability.",
+    issuer: "Global Certification Services",
+    image: "assets/certificates/iso-9001.png",
+    badge: "Quality Certified",
+    docNumber: "PK-QMS-1988-09"
+  },
+  {
+    id: "iso-45001",
+    name: "ISO 45001:2018",
+    fullName: "ISO 45001:2018 Occupational Health & Safety",
+    standard: "Occupational Health & Safety (OH&S)",
+    scope: "Workplace safety, chemical handling protocols, spill containment & worker protective standards.",
+    desc: "Validates safe handling practices, proper labeling compliance, spill containment protocols, and workforce health standards.",
+    issuer: "Global Certification Services",
+    image: "assets/certificates/iso-45001.png",
+    badge: "Safety Certified",
+    docNumber: "PK-OHS-2018-45"
+  },
+  {
+    id: "haccp",
+    name: "HACCP Compliance",
+    fullName: "HACCP Food Safety Critical Control Point",
+    standard: "Food Safety Critical Control (HACCP)",
+    scope: "Safe application of stewarding & kitchen hygiene chemicals ensuring zero toxic chemical residue.",
+    desc: "Essential for hotels, restaurant kitchens, and flight catering. Certifies zero toxic residues on tableware.",
+    issuer: "HACCP Quality System",
+    image: "assets/certificates/haccp.png",
+    badge: "Food Safety Compliant",
+    docNumber: "PK-HACCP-FS-22"
+  },
+  {
+    id: "halal",
+    name: "HALAL Certification",
+    fullName: "HALAL Certified Chemical Manufacturing",
+    standard: "Punjab Halal Development Agency",
+    scope: "Formulations verified 100% free from prohibited animal derivatives, alcohol impurities & non-halal agents.",
+    desc: "Confirms ingredients, emulsifiers, and surfactants are strictly suitable for Halal-compliant hospitality.",
+    issuer: "Punjab Halal Development Agency",
+    image: "assets/certificates/halal.png",
+    badge: "Halal Certified",
+    docNumber: "PHDA-HC-2024-88"
+  }
+];
+
+function getCertificatesList() {
+  if (typeof ARS_CERTIFICATES !== "undefined" && Array.isArray(ARS_CERTIFICATES) && ARS_CERTIFICATES.length > 0) {
+    return ARS_CERTIFICATES;
+  }
+  return CERT_DATA_FALLBACK;
+}
+
+let activeCertIndex = 0;
+let certModalEl = null;
+
+function createCertificateModal() {
+  if (certModalEl) return certModalEl;
+
+  const modal = document.createElement("div");
+  modal.id = "certificate-modal";
+  modal.className = "cert-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-label", "Official Certificate Viewer");
+  modal.innerHTML = `
+    <div class="cert-modal__backdrop" id="cert-modal-backdrop"></div>
+    <div class="cert-modal__container">
+      <div class="cert-modal__card">
+        <div class="cert-modal__header">
+          <div class="cert-modal__head-text">
+            <span class="cert-modal__badge" id="cert-modal-badge">Audited &amp; Certified</span>
+            <h3 class="cert-modal__title" id="cert-modal-title">ISO 9001:2015</h3>
+            <p class="cert-modal__sub" id="cert-modal-sub">Quality Management System</p>
+          </div>
+          <div class="cert-modal__actions">
+            <button type="button" class="cert-modal__action-btn" id="cert-modal-zoom-btn" title="Toggle Zoom In/Out" aria-label="Toggle zoom">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              <span>Zoom</span>
+            </button>
+            <a href="#" target="_blank" rel="noopener" class="cert-modal__action-btn" id="cert-modal-open-tab" title="Open high-resolution file in new tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Full File</span>
+            </a>
+            <button type="button" class="cert-modal__close-btn" id="cert-modal-close" aria-label="Close Certificate Viewer">&times;</button>
+          </div>
+        </div>
+
+        <div class="cert-modal__body" id="cert-modal-body">
+          <button type="button" class="cert-modal__nav-btn cert-modal__nav-btn--prev" id="cert-modal-prev" aria-label="Previous certificate" title="Previous (Left Arrow)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="22" height="22"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          
+          <div class="cert-modal__img-wrapper" id="cert-modal-img-wrapper" title="Click to toggle zoom">
+            <img id="cert-modal-img" src="" alt="Official Scanned Certificate" loading="eager">
+          </div>
+
+          <button type="button" class="cert-modal__nav-btn cert-modal__nav-btn--next" id="cert-modal-next" aria-label="Next certificate" title="Next (Right Arrow)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="22" height="22"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <div class="cert-modal__footer">
+          <div class="cert-modal__footer-left">
+            <span class="cert-modal__counter" id="cert-modal-counter">Certificate 1 of 4</span>
+            <span class="cert-modal__scope" id="cert-modal-scope"></span>
+          </div>
+          <div class="cert-modal__nav-dots" id="cert-modal-dots"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  certModalEl = modal;
+
+  // Bind close events
+  const closeBtn = modal.querySelector("#cert-modal-close");
+  const backdrop = modal.querySelector("#cert-modal-backdrop");
+  if (closeBtn) closeBtn.addEventListener("click", closeCertificateModal);
+  if (backdrop) backdrop.addEventListener("click", closeCertificateModal);
+
+  // Bind nav arrows
+  const prevBtn = modal.querySelector("#cert-modal-prev");
+  const nextBtn = modal.querySelector("#cert-modal-next");
+  if (prevBtn) prevBtn.addEventListener("click", () => navigateCertificates(-1));
+  if (nextBtn) nextBtn.addEventListener("click", () => navigateCertificates(1));
+
+  // Bind zoom toggle
+  const zoomBtn = modal.querySelector("#cert-modal-zoom-btn");
+  const imgWrapper = modal.querySelector("#cert-modal-img-wrapper");
+  function toggleZoom() {
+    imgWrapper.classList.toggle("is-zoomed");
+    const isZoomed = imgWrapper.classList.contains("is-zoomed");
+    zoomBtn.querySelector("span").textContent = isZoomed ? "Reset" : "Zoom";
+  }
+  if (zoomBtn) zoomBtn.addEventListener("click", toggleZoom);
+  if (imgWrapper) imgWrapper.addEventListener("click", toggleZoom);
+
+  // Global keydown listeners for modal navigation
+  document.addEventListener("keydown", (e) => {
+    if (!certModalEl || !certModalEl.classList.contains("is-open")) return;
+    if (e.key === "Escape") {
+      closeCertificateModal();
+    } else if (e.key === "ArrowLeft") {
+      navigateCertificates(-1);
+    } else if (e.key === "ArrowRight") {
+      navigateCertificates(1);
+    }
+  });
+
+  return certModalEl;
+}
+
+function openCertificateModal(identifier) {
+  const certs = getCertificatesList();
+  if (!certs || certs.length === 0) return;
+
+  createCertificateModal();
+
+  let index = 0;
+  if (typeof identifier === "number") {
+    index = Math.max(0, Math.min(certs.length - 1, identifier));
+  } else if (typeof identifier === "string") {
+    const foundIndex = certs.findIndex((c) => c.id === identifier || c.name.toLowerCase().includes(identifier.toLowerCase()));
+    if (foundIndex !== -1) index = foundIndex;
+  }
+
+  activeCertIndex = index;
+  updateCertificateModalContent();
+
+  certModalEl.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+}
+
+window.openCertificateModal = openCertificateModal;
+
+function closeCertificateModal() {
+  if (!certModalEl) return;
+  certModalEl.classList.remove("is-open");
+  const imgWrapper = certModalEl.querySelector("#cert-modal-img-wrapper");
+  if (imgWrapper) imgWrapper.classList.remove("is-zoomed");
+  const zoomBtn = certModalEl.querySelector("#cert-modal-zoom-btn span");
+  if (zoomBtn) zoomBtn.textContent = "Zoom";
+  document.body.style.overflow = "";
+}
+
+window.closeCertificateModal = closeCertificateModal;
+
+function navigateCertificates(delta) {
+  const certs = getCertificatesList();
+  activeCertIndex = (activeCertIndex + delta + certs.length) % certs.length;
+  updateCertificateModalContent();
+}
+
+function updateCertificateModalContent() {
+  if (!certModalEl) return;
+  const certs = getCertificatesList();
+  const cert = certs[activeCertIndex];
+  if (!cert) return;
+
+  const titleEl = certModalEl.querySelector("#cert-modal-title");
+  const badgeEl = certModalEl.querySelector("#cert-modal-badge");
+  const subEl = certModalEl.querySelector("#cert-modal-sub");
+  const imgEl = certModalEl.querySelector("#cert-modal-img");
+  const openTabEl = certModalEl.querySelector("#cert-modal-open-tab");
+  const counterEl = certModalEl.querySelector("#cert-modal-counter");
+  const scopeEl = certModalEl.querySelector("#cert-modal-scope");
+  const dotsEl = certModalEl.querySelector("#cert-modal-dots");
+  const imgWrapper = certModalEl.querySelector("#cert-modal-img-wrapper");
+
+  if (imgWrapper) imgWrapper.classList.remove("is-zoomed");
+  const zoomBtn = certModalEl.querySelector("#cert-modal-zoom-btn span");
+  if (zoomBtn) zoomBtn.textContent = "Zoom";
+
+  if (titleEl) titleEl.textContent = cert.fullName || cert.name;
+  if (badgeEl) badgeEl.textContent = cert.badge || "Audited & Certified";
+  if (subEl) subEl.textContent = `${cert.standard || cert.desc} · Issued by ${cert.issuer || "Audited Authority"}`;
+  if (counterEl) counterEl.textContent = `Certificate ${activeCertIndex + 1} of ${certs.length}`;
+  if (scopeEl) scopeEl.textContent = cert.desc || cert.scope || "";
+
+  if (imgEl) {
+    imgEl.src = cert.image;
+    imgEl.alt = `${cert.name} Official Certificate Scan`;
+  }
+
+  if (openTabEl) {
+    openTabEl.href = cert.image;
+  }
+
+  if (dotsEl) {
+    dotsEl.innerHTML = certs.map((_, idx) => `
+      <button type="button" class="cert-modal__dot ${idx === activeCertIndex ? "is-active" : ""}" aria-label="Go to certificate ${idx + 1}" onclick="openCertificateModal(${idx})"></button>
+    `).join("");
+  }
+}
+
+// Keep generic openLightbox function for any other images
 function openLightbox(imgSrc, title = "Document View") {
+  const certs = getCertificatesList();
+  const matchedCert = certs.find((c) => imgSrc.includes(c.id) || (c.image && imgSrc.includes(c.image)));
+  if (matchedCert) {
+    openCertificateModal(matchedCert.id);
+    return;
+  }
+
   let modal = document.getElementById("global-lightbox");
   if (!modal) {
     modal = document.createElement("div");
@@ -183,13 +437,18 @@ function openLightbox(imgSrc, title = "Document View") {
 
     modal.querySelector(".lightbox-close").addEventListener("click", () => {
       modal.classList.remove("open");
+      document.body.style.overflow = "";
     });
     modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("open");
+      if (e.target === modal) {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("open")) {
         modal.classList.remove("open");
+        document.body.style.overflow = "";
       }
     });
   }
@@ -199,6 +458,7 @@ function openLightbox(imgSrc, title = "Document View") {
   img.src = imgSrc;
   img.alt = title;
   modal.classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function renderClients() {
@@ -219,40 +479,86 @@ function renderClients() {
 }
 
 function renderCertificates() {
+  const certs = getCertificatesList();
   const grid = document.getElementById("certificates-grid");
-  if (!grid || typeof ARS_CERTIFICATES === "undefined") return;
 
-  grid.innerHTML = ARS_CERTIFICATES.map((cert) => {
-    const src = cert.image;
-    const fallback = cert.fallback || "assets/certificates/placeholder.svg";
-    return `
-      <div class="certificate-card" id="cert-${cert.id}" style="cursor: pointer;" title="Click to view full certificate">
-        <div class="certificate-card__frame">
-          <img
-            src="${src}"
-            alt="${cert.name} certificate"
-            loading="lazy"
-            onerror="this.onerror=null;this.src='${fallback}'"
-          >
-        </div>
-        <div class="certificate-card__info">
-          <strong>${cert.name}</strong>
-          <span>${cert.desc}</span>
-        </div>
-      </div>
-    `;
-  }).join("");
+  if (grid) {
+    // If the grid is empty, populate it with rich certificate cards
+    if (grid.children.length === 0) {
+      grid.innerHTML = certs.map((cert, index) => {
+        const src = cert.image;
+        const fallback = cert.fallback || "assets/certificates/placeholder.svg";
+        return `
+          <div class="certificate-card" id="cert-${cert.id}" data-cert-index="${index}" data-cert-id="${cert.id}" tabindex="0" role="button" aria-label="View ${cert.name} certificate in full detail">
+            <div class="certificate-card__badge">${cert.badge || "Certified"}</div>
+            <div class="certificate-card__frame">
+              <img
+                src="${src}"
+                alt="${cert.name} certificate"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='${fallback}'"
+              >
+              <div class="certificate-card__overlay">
+                <span class="certificate-card__overlay-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </span>
+                <span class="certificate-card__overlay-text">Click to Inspect Document</span>
+              </div>
+            </div>
+            <div class="certificate-card__info">
+              <strong>${cert.name}</strong>
+              <span>${cert.standard || cert.desc}</span>
+              <div class="certificate-card__action">
+                <span class="certificate-card__btn">Inspect Certificate &rarr;</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
 
-  grid.querySelectorAll(".certificate-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      const img = card.querySelector("img");
-      const name = card.querySelector("strong")?.textContent || "Certificate";
-      if (img && img.src) {
-        openLightbox(img.src, name + " — Official Certificate");
-      }
+    // Attach click and keyboard listeners to all certificate cards
+    grid.querySelectorAll(".certificate-card").forEach((card, index) => {
+      const targetId = card.getAttribute("data-cert-id") || certs[index]?.id || index;
+      card.addEventListener("click", () => {
+        openCertificateModal(targetId);
+      });
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openCertificateModal(targetId);
+        }
+      });
     });
+  }
+
+  // Also bind click handlers to the 4 narrative cards on certifications.html
+  const narrativeCards = document.querySelectorAll(".about-card");
+  narrativeCards.forEach((card) => {
+    const heading = card.querySelector("h3")?.textContent || "";
+    let matchedId = null;
+    if (heading.includes("9001")) matchedId = "iso-9001";
+    else if (heading.includes("45001")) matchedId = "iso-45001";
+    else if (heading.includes("HACCP")) matchedId = "haccp";
+    else if (heading.includes("HALAL") || heading.includes("Halal")) matchedId = "halal";
+
+    if (matchedId) {
+      card.style.cursor = "pointer";
+      card.setAttribute("title", "Click to view official scanned certificate");
+      card.addEventListener("click", () => {
+        openCertificateModal(matchedId);
+      });
+      // Append a subtle inspection button if not present
+      if (!card.querySelector(".narrative-cert-btn")) {
+        const btn = document.createElement("div");
+        btn.className = "narrative-cert-btn";
+        btn.innerHTML = `<span class="btn btn-outline btn-sm" style="margin-top:0.75rem; display:inline-flex; align-items:center; gap:0.4rem;">View Scanned Document &rarr;</span>`;
+        card.appendChild(btn);
+      }
+    }
   });
 }
+
 
 /* =========================================================================
    MOBILE NAV DRAWER

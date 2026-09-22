@@ -78,3 +78,55 @@ const ARS_CLIENT_LOGOS = [
     "logo": "assets/clients/giga-mall.svg"
   }
 ];
+
+const ARS_CERTIFICATES = [
+  {
+    id: "iso-9001",
+    name: "ISO 9001:2015",
+    fullName: "ISO 9001:2015 Quality Management System",
+    standard: "Quality Management System (QMS)",
+    scope: "Chemical formulation, automated batch blending, laboratory titration & supply chain traceability.",
+    desc: "Rigorous consistency in raw material sourcing, batch titration, laboratory QC & supply chain tracking.",
+    issuer: "Global Certification Services",
+    image: "assets/certificates/iso-9001.png",
+    badge: "Quality Certified",
+    docNumber: "PK-QMS-1988-09"
+  },
+  {
+    id: "iso-45001",
+    name: "ISO 45001:2018",
+    fullName: "ISO 45001:2018 Occupational Health & Safety",
+    standard: "Occupational Health & Safety (OH&S)",
+    scope: "Workplace safety, chemical handling protocols, spill containment & worker protective standards.",
+    desc: "Validates safe handling practices, proper labeling compliance, spill containment protocols & workforce health.",
+    issuer: "Global Certification Services",
+    image: "assets/certificates/iso-45001.png",
+    badge: "Safety Certified",
+    docNumber: "PK-OHS-2018-45"
+  },
+  {
+    id: "haccp",
+    name: "HACCP Compliance",
+    fullName: "HACCP Food Safety Critical Control Point",
+    standard: "Food Safety Critical Control (HACCP)",
+    scope: "Safe application of stewarding & kitchen hygiene chemicals ensuring zero toxic chemical residue.",
+    desc: "Certifies that kitchen stewarding chemicals leave zero toxic residues on food-contact surfaces.",
+    issuer: "HACCP Quality System",
+    image: "assets/certificates/haccp.png",
+    badge: "Food Safety Compliant",
+    docNumber: "PK-HACCP-FS-22"
+  },
+  {
+    id: "halal",
+    name: "HALAL Certification",
+    fullName: "HALAL Certified Chemical Manufacturing",
+    standard: "Punjab Halal Development Agency",
+    scope: "Formulations verified 100% free from prohibited animal derivatives, alcohol impurities & non-halal agents.",
+    desc: "Confirms ingredients, emulsifiers and surfactants are strictly halal compliant for hospitality.",
+    issuer: "Punjab Halal Development Agency",
+    image: "assets/certificates/halal.png",
+    badge: "Halal Certified",
+    docNumber: "PHDA-HC-2024-88"
+  }
+];
+

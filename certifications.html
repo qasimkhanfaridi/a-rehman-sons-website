@@ -40,7 +40,7 @@
   <meta name="theme-color" content="#002b5c">
 
   <title>Quality Certifications | ISO 9001, ISO 45001, HACCP & Halal | ARS Chemicals</title>
-  <link rel="stylesheet" href="css/styles.css?v=6.0">
+  <link rel="stylesheet" href="css/styles.css?v=6.5">
 
   <!-- Schema.org JSON-LD: Certifications ItemPage -->
   <script type="application/ld+json">
@@ -153,33 +153,153 @@
       </div>
 
       <!-- Certificates Grid -->
-      <div class="cert-grid" id="certificates-grid"></div>
+      <div class="cert-grid" id="certificates-grid">
+        <!-- Certificate 1: ISO 9001:2015 -->
+        <div class="certificate-card" id="cert-iso-9001" data-cert-id="iso-9001" data-cert-index="0" tabindex="0" role="button" aria-label="View ISO 9001:2015 Quality Management System Certificate in full detail" onclick="openCertificateModal('iso-9001')">
+          <div class="certificate-card__badge">ISO 9001:2015</div>
+          <div class="certificate-card__frame">
+            <img src="assets/certificates/iso-9001.png" alt="ISO 9001:2015 Quality Management System Certificate" loading="eager" width="718" height="1024">
+            <div class="certificate-card__overlay">
+              <span class="certificate-card__overlay-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </span>
+              <span class="certificate-card__overlay-text">Click to Inspect Document</span>
+            </div>
+          </div>
+          <div class="certificate-card__info">
+            <strong>ISO 9001:2015</strong>
+            <span>Quality Management System (QMS) · Global Certification Services</span>
+            <div class="certificate-card__action">
+              <span class="certificate-card__btn">Inspect Certificate &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate 2: ISO 45001:2018 -->
+        <div class="certificate-card" id="cert-iso-45001" data-cert-id="iso-45001" data-cert-index="1" tabindex="0" role="button" aria-label="View ISO 45001:2018 Occupational Health and Safety Certificate in full detail" onclick="openCertificateModal('iso-45001')">
+          <div class="certificate-card__badge">ISO 45001:2018</div>
+          <div class="certificate-card__frame">
+            <img src="assets/certificates/iso-45001.png" alt="ISO 45001:2018 Occupational Health and Safety Certificate" loading="eager" width="718" height="1024">
+            <div class="certificate-card__overlay">
+              <span class="certificate-card__overlay-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </span>
+              <span class="certificate-card__overlay-text">Click to Inspect Document</span>
+            </div>
+          </div>
+          <div class="certificate-card__info">
+            <strong>ISO 45001:2018</strong>
+            <span>Occupational Health &amp; Safety · Global Certification Services</span>
+            <div class="certificate-card__action">
+              <span class="certificate-card__btn">Inspect Certificate &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate 3: HACCP Compliance -->
+        <div class="certificate-card" id="cert-haccp" data-cert-id="haccp" data-cert-index="2" tabindex="0" role="button" aria-label="View HACCP Food Safety Compliance Certificate in full detail" onclick="openCertificateModal('haccp')">
+          <div class="certificate-card__badge">HACCP Food Safety</div>
+          <div class="certificate-card__frame">
+            <img src="assets/certificates/haccp.png" alt="HACCP Food Safety Compliance Certificate" loading="eager" width="718" height="1024">
+            <div class="certificate-card__overlay">
+              <span class="certificate-card__overlay-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </span>
+              <span class="certificate-card__overlay-text">Click to Inspect Document</span>
+            </div>
+          </div>
+          <div class="certificate-card__info">
+            <strong>HACCP Compliance</strong>
+            <span>Food Safety Critical Control Point · Hospitality Stewarding</span>
+            <div class="certificate-card__action">
+              <span class="certificate-card__btn">Inspect Certificate &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate 4: HALAL Certification -->
+        <div class="certificate-card" id="cert-halal" data-cert-id="halal" data-cert-index="3" tabindex="0" role="button" aria-label="View Halal Certification in full detail" onclick="openCertificateModal('halal')">
+          <div class="certificate-card__badge">Halal Certified</div>
+          <div class="certificate-card__frame">
+            <img src="assets/certificates/halal.png" alt="Halal Certification Document" loading="eager" width="718" height="1024">
+            <div class="certificate-card__overlay">
+              <span class="certificate-card__overlay-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </span>
+              <span class="certificate-card__overlay-text">Click to Inspect Document</span>
+            </div>
+          </div>
+          <div class="certificate-card__info">
+            <strong>HALAL Certification</strong>
+            <span>Punjab Halal Development Agency · Free of Prohibited Derivatives</span>
+            <div class="certificate-card__action">
+              <span class="certificate-card__btn">Inspect Certificate &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Detailed compliance narrative -->
-      <div style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-        <div class="about-card">
-          <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem;">Quality Management System (ISO 9001:2015)</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Ensures rigorous consistency in raw material sourcing, automated formulation batching, laboratory titration, and packaging reliability across all chemical product lines.
-          </p>
+      <div style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 2rem;">
+        <div class="about-card" data-cert-id="iso-9001" role="button" tabindex="0" onclick="openCertificateModal('iso-9001')" title="Click to view ISO 9001:2015 Certificate" style="cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom: 0.75rem;">
+              <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0; line-height: 1.3;">Quality Management System (ISO 9001:2015)</h3>
+              <span class="cert-badge" style="font-size:0.7rem; padding:0.2rem 0.55rem; flex-shrink:0;">Audited</span>
+            </div>
+            <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              Ensures rigorous consistency in raw material sourcing, automated formulation batching, laboratory titration, and packaging reliability across all chemical product lines.
+            </p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm narrative-cert-btn" style="width: fit-content;" onclick="event.stopPropagation(); openCertificateModal('iso-9001');">
+            Inspect Document &rarr;
+          </button>
         </div>
-        <div class="about-card">
-          <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem;">Occupational Health &amp; Safety (ISO 45001:2018)</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Validates safe handling practices, proper labeling compliance, spill containment protocols, and workforce health standards throughout our Rawalpindi plant.
-          </p>
+
+        <div class="about-card" data-cert-id="iso-45001" role="button" tabindex="0" onclick="openCertificateModal('iso-45001')" title="Click to view ISO 45001:2018 Certificate" style="cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom: 0.75rem;">
+              <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0; line-height: 1.3;">Occupational Health &amp; Safety (ISO 45001:2018)</h3>
+              <span class="cert-badge" style="font-size:0.7rem; padding:0.2rem 0.55rem; flex-shrink:0;">Audited</span>
+            </div>
+            <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              Validates safe handling practices, proper labeling compliance, spill containment protocols, and workforce health standards throughout our Rawalpindi plant.
+            </p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm narrative-cert-btn" style="width: fit-content;" onclick="event.stopPropagation(); openCertificateModal('iso-45001');">
+            Inspect Document &rarr;
+          </button>
         </div>
-        <div class="about-card">
-          <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem;">Food Safety Critical Control (HACCP)</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Essential for hotels, restaurant kitchens, and flight catering. Certifies that stewarding chemicals leave zero toxic residues on food preparation surfaces or tableware.
-          </p>
+
+        <div class="about-card" data-cert-id="haccp" role="button" tabindex="0" onclick="openCertificateModal('haccp')" title="Click to view HACCP Certificate" style="cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom: 0.75rem;">
+              <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0; line-height: 1.3;">Food Safety Critical Control (HACCP)</h3>
+              <span class="cert-badge" style="font-size:0.7rem; padding:0.2rem 0.55rem; flex-shrink:0;">Food-Safe</span>
+            </div>
+            <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              Essential for hotels, restaurant kitchens, and flight catering. Certifies that stewarding chemicals leave zero toxic residues on food preparation surfaces or tableware.
+            </p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm narrative-cert-btn" style="width: fit-content;" onclick="event.stopPropagation(); openCertificateModal('haccp');">
+            Inspect Document &rarr;
+          </button>
         </div>
-        <div class="about-card">
-          <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem;">HALAL Certification</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Confirms all ingredients, emulsifiers, surfactants, and conditioning agents are free from non-Halal derivatives and strictly suitable for use in Halal-compliant hospitality establishments.
-          </p>
+
+        <div class="about-card" data-cert-id="halal" role="button" tabindex="0" onclick="openCertificateModal('halal')" title="Click to view Halal Certificate" style="cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom: 0.75rem;">
+              <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 0; line-height: 1.3;">HALAL Certification</h3>
+              <span class="cert-badge" style="font-size:0.7rem; padding:0.2rem 0.55rem; flex-shrink:0;">Halal</span>
+            </div>
+            <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              Confirms all ingredients, emulsifiers, surfactants, and conditioning agents are free from non-Halal derivatives and strictly suitable for use in Halal-compliant hospitality establishments.
+            </p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm narrative-cert-btn" style="width: fit-content;" onclick="event.stopPropagation(); openCertificateModal('halal');">
+            Inspect Document &rarr;
+          </button>
         </div>
       </div>
     </div>
@@ -243,9 +363,9 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/products.js?v=3.5"></script>
-  <script src="js/clients.js?v=3.0"></script>
-  <script src="js/ui.js?v=5.5"></script>
-  <script src="js/order.js?v=4.1"></script>
+  <script src="js/products.js?v=3.6"></script>
+  <script src="js/clients.js?v=3.2"></script>
+  <script src="js/ui.js?v=6.5"></script>
+  <script src="js/order.js?v=4.2"></script>
 </body>
 </html>
