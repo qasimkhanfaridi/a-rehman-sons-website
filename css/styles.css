@@ -2972,12 +2972,48 @@ a.industry-card:hover,
   display: flex;
   flex-direction: column;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+  position: relative;
 }
 
 .pillar-card:hover {
   transform: translateY(-8px);
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.16), 0 8px 16px -4px rgba(2, 132, 199, 0.1);
+}
+
+/* Pillar Card 1: QC & R&D (Cyan/Sapphire Theme) */
+.pillar-card--qc {
+  border-top: 5px solid #0284c7;
+}
+.pillar-card--qc:hover {
   border-color: #38bdf8;
-  box-shadow: 0 24px 48px -12px rgba(2, 132, 199, 0.22), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 24px 48px -12px rgba(2, 132, 199, 0.28);
+}
+.pillar-card--qc .pillar-card__num {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Pillar Card 2: Wash Program (Emerald/Teal Theme) */
+.pillar-card--wash {
+  border-top: 5px solid #059669;
+}
+.pillar-card--wash:hover {
+  border-color: #34d399;
+  box-shadow: 0 24px 48px -12px rgba(5, 150, 105, 0.28);
+}
+.pillar-card--wash .pillar-card__num {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Pillar Card 3: Bulk Packaging (Indigo/Navy Theme) */
+.pillar-card--bulk {
+  border-top: 5px solid #4f46e5;
+}
+.pillar-card--bulk:hover {
+  border-color: #818cf8;
+  box-shadow: 0 24px 48px -12px rgba(79, 70, 229, 0.28);
+}
+.pillar-card--bulk .pillar-card__num {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .pillar-card__banner {
@@ -3001,16 +3037,30 @@ a.industry-card:hover,
 .pillar-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 18, 32, 0.15) 0%, rgba(15, 23, 42, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.2) 0%, rgba(15, 23, 42, 0.88) 100%);
+}
+
+.pillar-card__num {
+  position: absolute;
+  top: 0.5rem;
+  right: 1.25rem;
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: var(--font-heading, sans-serif);
+  line-height: 1;
+  z-index: 2;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .pillar-card__badge {
   position: absolute;
   top: 1rem;
   left: 1.25rem;
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #38bdf8;
   font-size: 0.75rem;
   font-weight: 700;
@@ -3023,6 +3073,12 @@ a.industry-card:hover,
   gap: 0.45rem;
   z-index: 3;
 }
+.pillar-card--wash .pillar-card__badge {
+  color: #34d399;
+}
+.pillar-card--bulk .pillar-card__badge {
+  color: #a5b4fc;
+}
 
 .pillar-card__banner-title {
   position: absolute;
@@ -3030,7 +3086,7 @@ a.industry-card:hover,
   left: 1.25rem;
   right: 1.25rem;
   color: #ffffff;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 800;
   font-family: var(--font-heading, sans-serif);
   line-height: 1.2;
@@ -3046,18 +3102,40 @@ a.industry-card:hover,
   flex: 1 1 auto;
 }
 
-.pillar-card__lead {
-  color: #1e293b;
-  font-size: 1rem;
-  line-height: 1.68;
-  font-weight: 500;
+/* User Text Highlight Box */
+.pillar-card__quote-box {
+  background: #f8fafc;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.15rem;
   margin-bottom: 1.35rem;
 }
+.pillar-card--qc .pillar-card__quote-box {
+  background: #f0f9ff;
+  border-left-color: #0284c7;
+}
+.pillar-card--wash .pillar-card__quote-box {
+  background: #ecfdf5;
+  border-left-color: #059669;
+}
+.pillar-card--bulk .pillar-card__quote-box {
+  background: #eef2ff;
+  border-left-color: #4f46e5;
+}
 
+.pillar-card__lead {
+  color: #0f172a;
+  font-size: 0.98rem;
+  line-height: 1.68;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Feature Checkpoints */
 .pillar-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1.35rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
@@ -3079,6 +3157,12 @@ a.industry-card:hover,
   flex-shrink: 0;
   margin-top: 2px;
 }
+.pillar-card--wash .pillar-features svg {
+  color: #059669;
+}
+.pillar-card--bulk .pillar-features svg {
+  color: #4f46e5;
+}
 
 .pillar-card__foot {
   margin-top: auto;
@@ -3087,9 +3171,6 @@ a.industry-card:hover,
 }
 
 .pillar-stat-pill {
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
-  color: #0369a1;
   padding: 0.65rem 1rem;
   border-radius: 10px;
   font-size: 0.82rem;
@@ -3099,6 +3180,21 @@ a.industry-card:hover,
   justify-content: center;
   gap: 0.5rem;
   text-align: center;
+}
+.pillar-card--qc .pillar-stat-pill {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+.pillar-card--wash .pillar-stat-pill {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+.pillar-card--bulk .pillar-stat-pill {
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #3730a3;
 }
 
 /* ==========================================================================

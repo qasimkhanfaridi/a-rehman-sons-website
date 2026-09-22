@@ -30,8 +30,72 @@
   <meta name="ICBM" content="33.5973, 73.0479">
 
   <title>About A. Rehman & Sons | Commercial Chemical Manufacturer Since 1988</title>
-  <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=5.4">
+  <link rel="stylesheet" href="css/styles.css?v=6.0">
+
+  <style>
+    /* Dedicated Technical Pillars Styling */
+    .pillar-card {
+      background: #ffffff;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+      position: relative;
+    }
+    .pillar-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.16), 0 8px 16px -4px rgba(2, 132, 199, 0.1);
+    }
+    .pillar-card--qc { border-top: 5px solid #0284c7; }
+    .pillar-card--qc:hover { border-color: #38bdf8; box-shadow: 0 24px 48px -12px rgba(2, 132, 199, 0.28); }
+    .pillar-card--wash { border-top: 5px solid #059669; }
+    .pillar-card--wash:hover { border-color: #34d399; box-shadow: 0 24px 48px -12px rgba(5, 150, 105, 0.28); }
+    .pillar-card--bulk { border-top: 5px solid #4f46e5; }
+    .pillar-card--bulk:hover { border-color: #818cf8; box-shadow: 0 24px 48px -12px rgba(79, 70, 229, 0.28); }
+    .pillar-card__banner { position: relative; height: 220px; overflow: hidden; background-color: #0b1220; }
+    .pillar-card__banner img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .pillar-card:hover .pillar-card__banner img { transform: scale(1.08); }
+    .pillar-card__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11, 18, 32, 0.2) 0%, rgba(15, 23, 42, 0.88) 100%); }
+    .pillar-card__num {
+      position: absolute; top: 0.5rem; right: 1.25rem; font-size: 3.5rem; font-weight: 900;
+      font-family: "Plus Jakarta Sans", sans-serif; line-height: 1; z-index: 2; color: rgba(255, 255, 255, 0.35);
+      user-select: none; pointer-events: none; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    .pillar-card__badge {
+      position: absolute; top: 1rem; left: 1.25rem; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25); color: #38bdf8; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; padding: 0.35rem 0.85rem; border-radius: 9999px;
+      display: inline-flex; align-items: center; gap: 0.45rem; z-index: 3;
+    }
+    .pillar-card--wash .pillar-card__badge { color: #34d399; }
+    .pillar-card--bulk .pillar-card__badge { color: #a5b4fc; }
+    .pillar-card__banner-title {
+      position: absolute; bottom: 1rem; left: 1.25rem; right: 1.25rem; color: #ffffff; font-size: 1.4rem;
+      font-weight: 800; font-family: "Plus Jakarta Sans", sans-serif; line-height: 1.2; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+      margin: 0; z-index: 3;
+    }
+    .pillar-card__body { padding: 1.75rem 1.6rem 1.5rem; display: flex; flex-direction: column; flex: 1 1 auto; }
+    .pillar-card__quote-box {
+      background: #f8fafc; border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0; padding: 1.1rem 1.25rem; margin-bottom: 1.35rem;
+    }
+    .pillar-card--qc .pillar-card__quote-box { background: #f0f9ff; border-left-color: #0284c7; }
+    .pillar-card--wash .pillar-card__quote-box { background: #ecfdf5; border-left-color: #059669; }
+    .pillar-card--bulk .pillar-card__quote-box { background: #eef2ff; border-left-color: #4f46e5; }
+    .pillar-card__lead { color: #0f172a; font-size: 1rem; line-height: 1.68; font-weight: 600; margin: 0; }
+    .pillar-features { list-style: none; padding: 0; margin: 0 0 1.35rem 0; display: flex; flex-direction: column; gap: 0.65rem; }
+    .pillar-features li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.88rem; color: #475569; line-height: 1.45; }
+    .pillar-features svg { width: 17px; height: 17px; color: var(--blue-light); flex-shrink: 0; margin-top: 2px; }
+    .pillar-card--wash .pillar-features svg { color: #059669; }
+    .pillar-card--bulk .pillar-features svg { color: #4f46e5; }
+    .pillar-card__foot { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid #f1f5f9; }
+    .pillar-stat-pill { padding: 0.65rem 1rem; border-radius: 10px; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-align: center; }
+    .pillar-card--qc .pillar-stat-pill { background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1; }
+    .pillar-card--wash .pillar-stat-pill { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+    .pillar-card--bulk .pillar-stat-pill { background: #eef2ff; border: 1px solid #c7d2fe; color: #3730a3; }
+  </style>
 
   <!-- Schema.org JSON-LD: AboutPage -->
   <script type="application/ld+json">
@@ -166,10 +230,11 @@
 
       <div class="pillars-grid">
         <!-- Pillar 1: QC & R&D laboratories -->
-        <article class="pillar-card">
+        <article class="pillar-card pillar-card--qc">
           <div class="pillar-card__banner">
             <img src="assets/backgrounds/industry-rd-lab.jpg" alt="ARS QC &amp; R&amp;D Laboratories in Rawalpindi" loading="lazy">
             <div class="pillar-card__overlay"></div>
+            <span class="pillar-card__num">01</span>
             <span class="pillar-card__badge">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 9.3V2M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
               Analytical Quality Control
@@ -177,9 +242,11 @@
             <h3 class="pillar-card__banner-title">QC &amp; R&amp;D laboratories</h3>
           </div>
           <div class="pillar-card__body">
-            <p class="pillar-card__lead">
-              Every batch is checked for active concentration, pH, viscosity, and stability. R&amp;D continues to develop caustic-free biological formulas and cold-water detergents.
-            </p>
+            <div class="pillar-card__quote-box">
+              <p class="pillar-card__lead">
+                Every batch is checked for active concentration, pH, viscosity, and stability. R&amp;D continues to develop caustic-free biological formulas and cold-water detergents.
+              </p>
+            </div>
             <ul class="pillar-features">
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -207,10 +274,11 @@
         </article>
 
         <!-- Pillar 2: Wash-program technology -->
-        <article class="pillar-card">
+        <article class="pillar-card pillar-card--wash">
           <div class="pillar-card__banner">
             <img src="assets/backgrounds/industry-wash-program.jpg" alt="Commercial Laundry Wash-Program Technology" loading="lazy">
             <div class="pillar-card__overlay"></div>
+            <span class="pillar-card__num">02</span>
             <span class="pillar-card__badge">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
               Textile &amp; Thermal Engineering
@@ -218,9 +286,11 @@
             <h3 class="pillar-card__banner-title">Wash-program technology</h3>
           </div>
           <div class="pillar-card__body">
-            <p class="pillar-card__lead">
-              Formulations are designed for 40°C to 90°C cycles — protecting linen fibre life, lifting whiteness, and lowering hotel laundry energy costs.
-            </p>
+            <div class="pillar-card__quote-box">
+              <p class="pillar-card__lead">
+                Formulations are designed for 40°C to 90°C cycles — protecting linen fibre life, lifting whiteness, and lowering hotel laundry energy costs.
+              </p>
+            </div>
             <ul class="pillar-features">
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -248,10 +318,11 @@
         </article>
 
         <!-- Pillar 3: Bulk supply & packaging -->
-        <article class="pillar-card">
+        <article class="pillar-card pillar-card--bulk">
           <div class="pillar-card__banner">
             <img src="assets/backgrounds/industry-warehouse.jpg" alt="Bulk Supply &amp; Industrial Packaging Logistics" loading="lazy">
             <div class="pillar-card__overlay"></div>
+            <span class="pillar-card__num">03</span>
             <span class="pillar-card__badge">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
               Industrial Packaging Fleet
@@ -259,9 +330,11 @@
             <h3 class="pillar-card__banner-title">Bulk supply &amp; packaging</h3>
           </div>
           <div class="pillar-card__body">
-            <p class="pillar-card__lead">
-              Standard packs start at 5 kg, then 10 kg, 25 kg HDPE jerrycans and 200 kg drums, with Rawalpindi warehouse stock for nationwide and export dispatch.
-            </p>
+            <div class="pillar-card__quote-box">
+              <p class="pillar-card__lead">
+                Standard packs start at 5 kg, then 10 kg, 25 kg HDPE jerrycans and 200 kg drums, with Rawalpindi warehouse stock for nationwide and export dispatch.
+              </p>
+            </div>
             <ul class="pillar-features">
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
