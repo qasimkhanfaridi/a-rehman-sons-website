@@ -91,21 +91,20 @@ function buildSvg(product) {
     
     <!-- Purple Pill Header -->
     <rect x="0" y="0" width="194" height="22" rx="6" fill="#372b7b"/>
-    <text x="97" y="15" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.4">👁 FIRST AID &amp; DOSAGE:</text>
+    <text x="97" y="15" text-anchor="middle" fill="#ffffff" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.4">👁 FIRST AID MEASURES:</text>
     
     <!-- Left Box Content -->
-    <text x="8" y="37" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Commercial Application / Dosage:</text>
-    <text x="8" y="49" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(dosage)}</text>
+    <text x="8" y="37" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Eye &amp; Skin Contact:</text>
+    <text x="8" y="48" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">Flush with water 15 min; seek medical attention.</text>
+
+    <text x="8" y="64" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Commercial Application &amp; Dosage:</text>
+    <text x="8" y="76" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(dosage)}</text>
     
-    <text x="8" y="65" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">In Case of Eye Contact:</text>
-    <text x="8" y="77" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">Flush with water at least 15 min; seek</text>
-    <text x="8" y="87" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">medical attention if irritation persists.</text>
+    <text x="8" y="93" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Working pH Value &amp; Purity:</text>
+    <text x="8" y="105" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(ph)}</text>
     
-    <text x="8" y="103" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Working pH Value &amp; Purity:</text>
-    <text x="8" y="115" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(ph)}</text>
-    
-    <text x="8" y="131" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Active Compound:</text>
-    <text x="8" y="143" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(active)}</text>
+    <text x="8" y="122" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700">Active Compound:</text>
+    <text x="8" y="134" fill="#1e3a8a" font-family="'Segoe UI', Arial, sans-serif" font-size="7">${escapeXml(active)}</text>
 
     <!-- RIGHT BOX: Special Precautions & GHS Hazard Symbols -->
     <rect x="206" y="0" width="194" height="152" rx="6" fill="#eef6fc" stroke="#bae6fd" stroke-width="1"/>

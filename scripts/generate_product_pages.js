@@ -44,11 +44,14 @@ for (const product of ARS_PRODUCTS) {
   const has5kg = fs.existsSync(path.join(ROOT, mock5kgRel));
   const img5kg = has5kg ? `../${mock5kgRel}` : `../assets/products/mockups/${product.id}.jpg`;
 
+  const mock10kgRel = `assets/products/mockups/10kg/${product.id}.jpg`;
+  const has10kg = fs.existsSync(path.join(ROOT, mock10kgRel));
+  const img10kg = has10kg ? `../${mock10kgRel}` : `../assets/products/packaging/canister-10kg.jpg`;
+
   const mock25kgRel = `assets/products/mockups/${product.id}.jpg`;
   const has25kg = fs.existsSync(path.join(ROOT, mock25kgRel));
   const img25kg = has25kg ? `../${mock25kgRel}` : img5kg;
 
-  const img10kg = `../assets/products/packaging/canister-10kg.jpg`;
   const img200kg = `../assets/products/packaging/drum-200kg.jpg`;
 
   let imgInUse = `../assets/backgrounds/industry-wash-program.jpg`;
@@ -200,6 +203,7 @@ for (const product of ARS_PRODUCTS) {
     "name": "${escapeHtml(product.name)}",
     "image": [
       "https://arschemicals.com/${mock5kgRel}",
+      "https://arschemicals.com/${mock10kgRel}",
       "https://arschemicals.com/${mock25kgRel}",
       "https://arschemicals.com/assets/products/packaging/drum-200kg.jpg"
     ],

@@ -96,6 +96,7 @@ xmlLines.push('  <!-- Individual Commercial Chemical Product Pages (29 Formulati
 
 for (const p of ARS_PRODUCTS) {
   const img5kg = `https://arschemicals.com/assets/products/mockups/5kg/${p.id}.jpg`;
+  const img10kg = `https://arschemicals.com/assets/products/mockups/10kg/${p.id}.jpg`;
   const img25kg = `https://arschemicals.com/assets/products/mockups/${p.id}.jpg`;
 
   xmlLines.push('  <url>');
@@ -106,6 +107,10 @@ for (const p of ARS_PRODUCTS) {
   xmlLines.push('    <image:image>');
   xmlLines.push(`      <image:loc>${img5kg}</image:loc>`);
   xmlLines.push(`      <image:title>${p.name} 5 kg Canister with Red Safety Cap</image:title>`);
+  xmlLines.push('    </image:image>');
+  xmlLines.push('    <image:image>');
+  xmlLines.push(`      <image:loc>${img10kg}</image:loc>`);
+  xmlLines.push(`      <image:title>${p.name} 10 kg Stackable Commercial Canister</image:title>`);
   xmlLines.push('    </image:image>');
   xmlLines.push('    <image:image>');
   xmlLines.push(`      <image:loc>${img25kg}</image:loc>`);
