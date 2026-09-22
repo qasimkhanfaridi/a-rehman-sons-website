@@ -59,7 +59,7 @@ for (const product of ARS_PRODUCTS) {
     },
     {
       q: `What packaging sizes are available for ${product.name}?`,
-      a: `Standard commercial supply is in 25 Kg sealed HDPE jerricans. Optional packaging includes 5 Kg cans, 10 Kg containers, and 200 Kg bulk drums for industrial laundries and washhouses.`
+      a: `All formulations are available in standard commercial packaging of 5 Kg cans, 10 Kg containers, 25 Kg sealed HDPE jerricans, and 200 Kg bulk drums for commercial and industrial facilities.`
     },
     {
       q: `How can I request a sample or quotation for ${product.name}?`,
@@ -290,7 +290,7 @@ for (const product of ARS_PRODUCTS) {
               Wholesale Pricing Upon Quotation
             </div>
             <div style="font-size: 0.85rem; color: var(--gray-600);">
-              Standard Packaging: <strong>${product.packaging}</strong> · Free delivery across Rawalpindi &amp; Islamabad · Nationwide freight dispatched daily.
+              Available Container Sizes: <strong>5 kg, 10 kg, 25 kg, 200 kg Drum</strong> · Free delivery across Rawalpindi &amp; Islamabad · Nationwide freight dispatched daily.
             </div>
           </div>
 
@@ -323,7 +323,7 @@ for (const product of ARS_PRODUCTS) {
             </div>
             <div>
               <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--gray-600); font-weight: 600; display: block;">Packaging Options</span>
-              <strong style="color: var(--navy); font-size: 0.9rem;">${(details.packagingOptions || ["5 kg", "25 kg"]).join(", ")}</strong>
+              <strong style="color: var(--navy); font-size: 0.9rem;">5 kg, 10 kg, 25 kg, 200 kg Drum</strong>
             </div>
           </div>
 
@@ -398,7 +398,7 @@ for (const product of ARS_PRODUCTS) {
               <p style="font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 1rem;">${escapeHtml(r.description)}</p>
             </div>
             <div>
-              <div style="font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 0.75rem;">Packaging: ${escapeHtml(r.packaging)} · Wholesale Quote</div>
+              <div style="font-weight: 700; color: var(--navy); font-size: 0.92rem; margin-bottom: 0.75rem;">Sizes: 5 kg, 10 kg, 25 kg, 200 kg · Wholesale Quote</div>
               <div style="display: flex; gap: 0.5rem;">
                 <a href="${r.id}.html" class="btn btn-outline" style="flex: 1; text-align: center; padding: 0.5rem; font-size: 0.85rem;">View Specs</a>
                 <a href="../order.html?add=${r.id}" class="btn btn-primary" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">+ Quote</a>

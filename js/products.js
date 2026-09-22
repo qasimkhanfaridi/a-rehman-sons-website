@@ -584,39 +584,27 @@ const ARS_CATEGORIES = {
   housekeeping: { label: "Housekeeping (6)", count: 6 }
 };
 
+const ARS_STANDARD_SIZES = ["5 kg", "10 kg", "25 kg", "200 kg Drum"];
+
 const ARS_PACKAGE_SIZES = {
-  kitchen: ["5 kg", "10 kg", "25 kg", "200 kg Drum"],
-  laundry: ["5 kg", "10 kg", "25 kg", "50 kg", "200 kg Drum"],
-  housekeeping: ["5 kg", "10 kg", "25 kg", "200 kg Drum"]
+  kitchen: ARS_STANDARD_SIZES,
+  laundry: ARS_STANDARD_SIZES,
+  stewarding: ARS_STANDARD_SIZES,
+  housekeeping: ARS_STANDARD_SIZES
 };
 
 function isFiveKgPack(value) {
   return /^5\s*kg/i.test(String(value || "").trim());
 }
 
-function ensureFiveKgOption(sizes) {
-  const list = Array.isArray(sizes) ? sizes.slice() : [];
-  if (!list.some(isFiveKgPack)) {
-    list.unshift("5 kg");
-  }
-  return list;
-}
-
 function getPackageSizes(product) {
-  let sizes;
-  if (product.fullDetails && product.fullDetails.packagingOptions) {
-    sizes = product.fullDetails.packagingOptions.slice();
-  } else {
-    sizes = (ARS_PACKAGE_SIZES[product.category] || ["5 kg", "25 kg"]).slice();
-  }
-  return ensureFiveKgOption(sizes);
+  return ["5 kg", "10 kg", "25 kg", "200 kg Drum"];
 }
 
 function getDefaultPackaging(product) {
-  const sizes = getPackageSizes(product);
-  return sizes.find(isFiveKgPack) || sizes[0] || "5 kg";
+  return "5 kg";
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { ARS_PRODUCTS, ARS_CATEGORIES, ARS_PACKAGE_SIZES, getPackageSizes, getDefaultPackaging, isFiveKgPack };
+  module.exports = { ARS_PRODUCTS, ARS_CATEGORIES, ARS_PACKAGE_SIZES, ARS_STANDARD_SIZES, getPackageSizes, getDefaultPackaging, isFiveKgPack };
 }
