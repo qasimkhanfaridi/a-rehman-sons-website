@@ -4,9 +4,11 @@
   "description": "A. Rehman & Sons Commercial Chemical Solutions",
   "scripts": {
     "build": "node build.js",
-    "deploy": "node build.js && npx wrangler@3 pages deploy dist --project-name=a-rehman-sons --branch=main --commit-dirty=true"
+    "deploy": "node build.js && npx wrangler@3 pages deploy dist --project-name=a-rehman-sons --branch=main --commit-dirty=true",
+    "generate:5kg-mockups": "node scripts/generate_5kg_mockups.js"
   },
   "devDependencies": {
+    "sharp": "^0.35.4",
     "wrangler": "3.114.17"
   }
 }

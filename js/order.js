@@ -177,7 +177,7 @@ function initOrderForm() {
   });
 }
 
-function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "default") {
+function renderGallonSvg(pname, packaging = "5 kg", cat = "laundry", uid = "default") {
   const cleanName = (pname || "").trim();
   const words = cleanName.split(/\s+/);
   let nameSvg = "";
@@ -343,7 +343,7 @@ function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "def
       <!-- PACKAGING BADGE -->
       <g transform="translate(142, 196)">
         <rect x="0" y="0" width="44" height="14" rx="3" fill="#002b5c"/>
-        <text x="22" y="9.5" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.8" font-weight="800" fill="#ffffff">${(packaging || "25 KG").toUpperCase()}</text>
+        <text x="22" y="9.5" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.8" font-weight="800" fill="#ffffff">${(packaging || "5 KG").toUpperCase()}</text>
         <text x="22" y="20" text-anchor="middle" font-size="3.8" font-weight="700" fill="#64748b">COMMERCIAL GRADE</text>
       </g>
 
@@ -353,6 +353,22 @@ function renderGallonSvg(pname, packaging = "25 kg", cat = "laundry", uid = "def
       <text x="120" y="249" text-anchor="middle" font-size="3.4" font-weight="500" fill="#cbd5e1">Email: ar_sons@hotmail.com · G.P.O. Box 1020</text>
     </g>
   </svg>`;
+}
+
+function getProductMockupSrc(id, pack) {
+  const fiveKg = typeof isFiveKgPack === "function" ? isFiveKgPack(pack) : /^5\s*kg/i.test(pack || "");
+  if (fiveKg) return `assets/products/mockups/5kg/${id}.jpg?v=5.6`;
+  return `assets/products/mockups/${id}.jpg?v=5.0`;
+}
+
+function applyPackVisual(card, pack) {
+  if (!card) return;
+  const badge = card.querySelector(".product-card__pack-badge");
+  if (badge) badge.textContent = pack || "5 kg";
+  const img = card.querySelector(".product-mockup-img");
+  if (img && card.dataset.id) {
+    img.src = getProductMockupSrc(card.dataset.id, pack);
+  }
 }
 
 function renderProducts(filter = "all", searchQuery = "") {
@@ -395,7 +411,8 @@ function renderProducts(filter = "all", searchQuery = "") {
 
   grid.innerHTML = items.map((p) => {
     const existing = storedCart.find((item) => item.id === p.id);
-    const selectedPackaging = existing ? existing.packaging : p.packaging;
+    const defaultPack = typeof getDefaultPackaging === "function" ? getDefaultPackaging(p) : "5 kg";
+    const selectedPackaging = existing ? existing.packaging : defaultPack;
     const qtyValue = existing ? existing.qty : 0;
 
     const sizes = getPackageSizes(p);
@@ -404,6 +421,7 @@ function renderProducts(filter = "all", searchQuery = "") {
     ).join("");
 
     const catLabel = ARS_CATEGORIES[p.category]?.label || p.category.toUpperCase();
+    const mockupSrc = getProductMockupSrc(p.id, selectedPackaging);
 
     return `
     <article class="product-card" data-id="${p.id}" data-sno="${p.sNo || ''}" data-name="${p.name}" data-packaging="${selectedPackaging}" data-category="${p.category}">
@@ -412,9 +430,10 @@ function renderProducts(filter = "all", searchQuery = "") {
       </div>
       <button type="button" class="product-card__image-btn btn-open-product-details" data-id="${p.id}" aria-label="View details for ${p.name}">
         <span class="product-card__image">
+          <span class="product-card__pack-badge">${selectedPackaging}</span>
           <img
-            src="assets/products/mockups/${p.id}.jpg?v=5.0"
-            alt="${p.name} — A. Rehman & Sons Commercial Gallon"
+            src="${mockupSrc}"
+            alt="${p.name} — A. Rehman & Sons ${selectedPackaging}"
             class="product-mockup-img"
             loading="lazy"
             onerror="this.onerror=null; this.parentElement.innerHTML = renderGallonSvg('${p.name.replace(/'/g, "\\'")}', '${selectedPackaging}', '${p.category}', '${p.id}');"
@@ -511,7 +530,7 @@ function openProductModal(productId) {
       </div>
       <div class="tech-modal-footer">
         <div style="font-size: 0.85rem; color: var(--gray-600);">
-          Available Container Sizes: <strong>${(details.packagingOptions || ["25 kg"]).join(", ")}</strong>
+          Available Container Sizes: <strong>${(details.packagingOptions || getPackageSizes(p)).join(", ")}</strong>
         </div>
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
           <a href="products/${p.id}.html" class="btn btn-outline" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">Full Tech Page &rarr;</a>
@@ -537,7 +556,7 @@ function openProductModal(productId) {
         id: p.id,
         sNo: p.sNo,
         name: p.name,
-        packaging: p.packaging,
+        packaging: (typeof getDefaultPackaging === "function" ? getDefaultPackaging(p) : p.packaging),
         rate: p.rate,
         rateFormatted: p.rateFormatted,
         qty: 1
@@ -653,6 +672,7 @@ function initProductCardEvents() {
     const card = select.closest(".product-card");
     if (!card) return;
     card.dataset.packaging = select.value;
+    applyPackVisual(card, select.value);
     getCart(); // triggers save
   });
 
@@ -778,7 +798,7 @@ function initUrlAddProduct() {
       id: product.id,
       name: product.name,
       category: product.category,
-      packaging: product.packaging || "25 kg",
+      packaging: (typeof getDefaultPackaging === "function" ? getDefaultPackaging(product) : product.packaging) || "5 kg",
       qty: 1,
       rate: product.rate || 0
     });

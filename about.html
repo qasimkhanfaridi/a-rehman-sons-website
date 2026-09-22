@@ -31,7 +31,7 @@
 
   <title>About A. Rehman & Sons | Commercial Chemical Manufacturer Since 1988</title>
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=5.2">
+  <link rel="stylesheet" href="css/styles.css?v=5.4">
 
   <!-- Schema.org JSON-LD: AboutPage -->
   <script type="application/ld+json">
@@ -90,7 +90,7 @@
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
                 <div class="nav-dropdown-wrap">
-          <a href="products.html" class="nav-dropdown-trigger">Products</a>
+          <button type="button" class="nav-dropdown-trigger" aria-expanded="false">Products</button>
           <div class="nav-dropdown-menu" role="menu">
             <a href="products.html" role="menuitem">All Products (29)</a>
             <a href="products.html?cat=laundry" role="menuitem">Laundry (16)</a>
@@ -99,7 +99,7 @@
             <a href="products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
           </div>        </div>
         <a href="certifications.html">Certifications</a>
-        <a href="clients.html">Clients</a>
+        <a href="clients.html">Industries</a>
         <a href="international.html">Export</a>
         <a href="contact.html">Contact</a>
         <a href="order.html" class="nav-cta">Quote</a>
@@ -126,66 +126,61 @@
     </div>
   </section>
 
-  <!-- Company Overview & Story -->
-  <section class="about-section" style="padding: 4rem 0;">
+  <section class="about-section">
     <div class="container">
-      <div class="hero-grid" style="align-items: center; margin-bottom: 3.5rem;">
+      <div class="hero-grid about-story" style="align-items: center; margin-bottom: 3.5rem;">
         <div>
           <span class="section-eyebrow">Our Heritage</span>
-          <h2 style="font-size: 2.1rem; margin-bottom: 1.25rem;">Pioneering Commercial Chemical Solutions Since 1988</h2>
+          <h2 style="font-size: 2.1rem; margin-bottom: 1.25rem;">Pioneering commercial chemical solutions since 1988</h2>
           <p style="color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
-            Founded in 1988 in Rawalpindi, Pakistan, <strong>A. Rehman &amp; Sons (ARS)</strong> has grown from a specialized local detergent supplier into one of Pakistan's most respected manufacturers of industrial-grade chemical solutions.
+            Founded in Rawalpindi, <strong>A. Rehman &amp; Sons (ARS)</strong> grew from a specialist detergent supplier into one of Pakistan’s trusted manufacturers of institutional laundry, kitchen, and housekeeping chemicals.
           </p>
           <p style="color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
-            We pioneered automated liquid feed systems and water flush delivery technologies for institutional laundries over 35 years ago. Today, our formulations operate in major 5-star hotel laundries, tertiary care hospital infection-control programs, and commercial processing facilities nationwide.
+            We introduced automated liquid-feed and water-flush delivery for hotel laundries more than three decades ago. Today the same discipline runs in 5-star hotels, tertiary hospitals, and commercial washhouses nationwide.
           </p>
-          <div style="display: flex; gap: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-            <div>
-              <strong style="font-size: 2rem; color: var(--blue); display: block;">1988</strong>
-              <span style="font-size: 0.85rem; color: var(--gray-600);">Year Established</span>
+          <div class="about-stat-row">
+            <div class="about-stat">
+              <strong>1988</strong>
+              <span>Year established</span>
             </div>
-            <div>
-              <strong style="font-size: 2rem; color: var(--navy); display: block;">100%</strong>
-              <span style="font-size: 0.85rem; color: var(--gray-600);">In-House Quality Tested</span>
+            <div class="about-stat">
+              <strong>100%</strong>
+              <span>In-house quality tested</span>
             </div>
-            <div>
-              <strong style="font-size: 2rem; color: var(--accent); display: block;">40+</strong>
-              <span style="font-size: 0.85rem; color: var(--gray-600);">Formulated Products</span>
+            <div class="about-stat">
+              <strong>29</strong>
+              <span>Verified formulations</span>
             </div>
           </div>
         </div>
         <div>
-          <img src="assets/hero-facility.jpg" alt="A. Rehman &amp; Sons Manufacturing Facility" style="border-radius: var(--radius); width: 100%; box-shadow: var(--shadow-md);" onerror="this.src='assets/hero-products.jpg'">
+          <img class="about-photo" src="assets/hero-facility.jpg" alt="A. Rehman &amp; Sons manufacturing facility" onerror="this.src='assets/hero-products.jpg'">
         </div>
       </div>
 
-      <!-- Infrastructure & Laboratories -->
       <div class="section-head center" style="margin-bottom: 2.5rem;">
         <p class="section-eyebrow">Infrastructure &amp; Capabilities</p>
-        <h2>Purpose-Built Facility in Rawalpindi</h2>
-        <p>Equipped with advanced blending vessels, automated bulk packaging, and dedicated technical laboratories.</p>
+        <h2>Purpose-built facility in Rawalpindi</h2>
+        <p>Blending vessels, bulk packaging lines, and dedicated technical laboratories on one campus.</p>
       </div>
 
-      <div class="about-grid">
+      <div class="about-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
         <div class="about-card">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔬</div>
-          <h3>In-House QC &amp; R&amp;D Laboratories</h3>
+          <h3>QC &amp; R&amp;D laboratories</h3>
           <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Every production batch undergoes strict quality control testing for active concentration, pH balance, viscosity, and chemical stability. Our R&amp;D team continuously develops eco-conscious, caustic-free biological formulas and cold-water detergents.
+            Every batch is checked for active concentration, pH, viscosity, and stability. R&amp;D continues to develop caustic-free biological formulas and cold-water detergents.
           </p>
         </div>
         <div class="about-card">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
-          <h3>Advanced Wash Program Technology</h3>
+          <h3>Wash-program technology</h3>
           <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Our chemicals are engineered to operate across multi-temperature wash cycles (40°C to 90°C), preserving linen fiber life, boosting whiteness index, and substantially reducing hot water energy costs for hotel laundries.
+            Formulations are designed for 40°C to 90°C cycles — protecting linen fibre life, lifting whiteness, and lowering hotel laundry energy costs.
           </p>
         </div>
         <div class="about-card">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📦</div>
-          <h3>Industrial Bulk Supply &amp; Packaging</h3>
+          <h3>Bulk supply &amp; packaging</h3>
           <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6;">
-            Products are packaged in heavy-duty 5 kg, 10 kg, 25 kg HDPE jerrycans and 200 kg commercial drums. We maintain strategic warehouse stock in Rawalpindi for rapid nationwide dispatch and regional export fulfillment.
+            Standard packs start at 5 kg, then 10 kg, 25 kg HDPE jerrycans and 200 kg drums, with Rawalpindi warehouse stock for nationwide and export dispatch.
           </p>
         </div>
       </div>
@@ -264,9 +259,9 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/products.js?v=3.4"></script>
+  <script src="js/products.js?v=3.5"></script>
   <script src="js/clients.js?v=3.0"></script>
-  <script src="js/ui.js?v=5.2"></script>
-  <script src="js/order.js?v=3.4"></script>
+  <script src="js/ui.js?v=5.5"></script>
+  <script src="js/order.js?v=4.1"></script>
 </body>
 </html>

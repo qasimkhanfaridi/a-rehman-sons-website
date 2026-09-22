@@ -590,13 +590,33 @@ const ARS_PACKAGE_SIZES = {
   housekeeping: ["5 kg", "10 kg", "25 kg", "200 kg Drum"]
 };
 
-function getPackageSizes(product) {
-  if (product.fullDetails && product.fullDetails.packagingOptions) {
-    return product.fullDetails.packagingOptions;
+function isFiveKgPack(value) {
+  return /^5\s*kg/i.test(String(value || "").trim());
+}
+
+function ensureFiveKgOption(sizes) {
+  const list = Array.isArray(sizes) ? sizes.slice() : [];
+  if (!list.some(isFiveKgPack)) {
+    list.unshift("5 kg");
   }
-  return ARS_PACKAGE_SIZES[product.category] || ["5 kg", "25 kg"];
+  return list;
+}
+
+function getPackageSizes(product) {
+  let sizes;
+  if (product.fullDetails && product.fullDetails.packagingOptions) {
+    sizes = product.fullDetails.packagingOptions.slice();
+  } else {
+    sizes = (ARS_PACKAGE_SIZES[product.category] || ["5 kg", "25 kg"]).slice();
+  }
+  return ensureFiveKgOption(sizes);
+}
+
+function getDefaultPackaging(product) {
+  const sizes = getPackageSizes(product);
+  return sizes.find(isFiveKgPack) || sizes[0] || "5 kg";
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { ARS_PRODUCTS, ARS_CATEGORIES, ARS_PACKAGE_SIZES, getPackageSizes };
+  module.exports = { ARS_PRODUCTS, ARS_CATEGORIES, ARS_PACKAGE_SIZES, getPackageSizes, getDefaultPackaging, isFiveKgPack };
 }

@@ -29,9 +29,9 @@
   <meta name="geo.position" content="33.5973;73.0479">
   <meta name="ICBM" content="33.5973, 73.0479">
 
-  <title>Client Portfolio & Institutional Partners | A. Rehman & Sons</title>
+  <title>Industries We Serve | Hospitality, Healthcare &amp; Commercial | A. Rehman &amp; Sons</title>
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=5.2">
+  <link rel="stylesheet" href="css/styles.css?v=5.4">
 
   <!-- Schema.org JSON-LD: Clients Portfolio -->
   <script type="application/ld+json">
@@ -84,7 +84,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
                 <div class="nav-dropdown-wrap">
-          <a href="products.html" class="nav-dropdown-trigger">Products</a>
+          <button type="button" class="nav-dropdown-trigger" aria-expanded="false">Products</button>
           <div class="nav-dropdown-menu" role="menu">
             <a href="products.html" role="menuitem">All Products (29)</a>
             <a href="products.html?cat=laundry" role="menuitem">Laundry (16)</a>
@@ -93,7 +93,7 @@
             <a href="products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
           </div>        </div>
         <a href="certifications.html">Certifications</a>
-        <a href="clients.html" class="active">Clients</a>
+        <a href="clients.html" class="active">Industries</a>
         <a href="international.html">Export</a>
         <a href="contact.html">Contact</a>
         <a href="order.html" class="nav-cta">Quote</a>
@@ -113,31 +113,25 @@
   <section class="page-banner">
     <div class="container page-banner-inner">
       <div class="breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <strong>Clients</strong>
+        <a href="index.html">Home</a> <span>/</span> <strong>Industries</strong>
       </div>
-      <h1>Our Reputable Clients</h1>
-      <p>For over 35 years, Pakistan's most prestigious hospitality chains, healthcare networks, defense institutions, and commercial complexes have relied on ARS chemicals.</p>
+      <h1>Industries We Serve</h1>
+      <p>Hospitality, healthcare, and commercial facilities — each sector lists the chemical program and the institutions that specify ARS products.</p>
     </div>
   </section>
 
-  <!-- Clients Grid Section -->
-  <section style="padding: 4rem 0;">
+  <section class="industry-page-section">
     <div class="container">
       <div class="section-head center">
-        <p class="section-eyebrow">Proven Institutional Trust</p>
-        <h2>Serving Pakistan's Landmark Establishments</h2>
-        <p>From 5-star hotel banquet linens to hospital sterile ward laundry, our chemicals deliver unmatched hygiene standards.</p>
+        <p class="section-eyebrow">Sectors &amp; programs</p>
+        <h2>Industries and applications</h2>
+        <p>Every program is shown in full. Tap a sector card to open the matching product range.</p>
       </div>
 
-      <div class="clients-logo-grid" id="clients-grid"></div>
-
-      <!-- Sector breakdown -->
-      <div style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
-        <div class="about-card">
-          <h3>🏨 Luxury 5-Star Hospitality</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem;">
-            Daily supply of high-whiteness laundry detergents, enzymatic stain lifters, and HACCP stewarding chemicals to:
-          </p>
+      <div class="industry-detail-grid">
+        <article class="industry-open-card" id="hospitality">
+          <h3>Luxury hospitality &amp; hotels</h3>
+          <p>Daily supply of high-whiteness laundry detergents, enzymatic stain lifters, and HACCP stewarding chemicals for 5-star rooms, banquet linen, and spa textiles.</p>
           <ul class="about-list">
             <li>Islamabad Serena Hotel &amp; Serena Resorts</li>
             <li>Islamabad Marriott Hotel</li>
@@ -145,34 +139,40 @@
             <li>Mövenpick Hotel Karachi</li>
             <li>Ramada Hotels &amp; Best Western</li>
           </ul>
-        </div>
+          <a href="products.html?cat=laundry" class="btn btn-navy btn-sm">View laundry chemicals</a>
+        </article>
 
-        <div class="about-card">
-          <h3>🏥 Healthcare &amp; Defense Institutions</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem;">
-            Hospital-grade disinfection, infection control, and sterile linen processing chemicals supplied to:
-          </p>
+        <article class="industry-open-card" id="healthcare">
+          <h3>Healthcare &amp; defense</h3>
+          <p>Hospital-grade disinfection, infection-control chemistry, and sterile linen processing for wards, OT laundry, and defense healthcare networks.</p>
           <ul class="about-list">
             <li>Shifa International Hospital Islamabad</li>
             <li>Rawalpindi Institute of Cardiology (RIC)</li>
             <li>Combined Military Hospital (CMH)</li>
             <li>Fauji Foundation Healthcare System</li>
           </ul>
-        </div>
+          <a href="products.html?cat=housekeeping" class="btn btn-navy btn-sm">View housekeeping chemicals</a>
+        </article>
 
-        <div class="about-card">
-          <h3>🏛️ Commercial Complexes &amp; Clubs</h3>
-          <p style="color: var(--gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem;">
-            High-traffic commercial floor care, cooling tower descaling, and institutional washroom programs supplied to:
-          </p>
+        <article class="industry-open-card" id="commercial">
+          <h3>Commercial complexes &amp; clubs</h3>
+          <p>High-traffic floor care, cooling-tower descaling, kitchen stewarding, and washroom programs for malls, clubs, and commercial laundries.</p>
           <ul class="about-list">
             <li>The Centaurus Mall &amp; Residencia</li>
             <li>Giga Mall World Trade Center</li>
             <li>Islamabad Club</li>
-            <li>Commercial Dry Cleaners &amp; Laundromats</li>
+            <li>Commercial dry cleaners &amp; laundromats</li>
           </ul>
-        </div>
+          <a href="products.html?cat=kitchen" class="btn btn-navy btn-sm">View kitchen chemicals</a>
+        </article>
       </div>
+
+      <div class="section-head center">
+        <p class="section-eyebrow">Institutional trust</p>
+        <h2>Operators who specify ARS</h2>
+        <p>From banquet linen to sterile-ward laundry, the same catalog serves Pakistan’s landmark establishments.</p>
+      </div>
+      <div class="clients-logo-grid" id="clients-grid"></div>
     </div>
   </section>
 
@@ -248,9 +248,9 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/products.js?v=3.4"></script>
+  <script src="js/products.js?v=3.5"></script>
   <script src="js/clients.js?v=3.0"></script>
-  <script src="js/ui.js?v=5.2"></script>
-  <script src="js/order.js?v=3.4"></script>
+  <script src="js/ui.js?v=5.5"></script>
+  <script src="js/order.js?v=4.1"></script>
 </body>
 </html>

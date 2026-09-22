@@ -1,24 +1,28 @@
 /* A. Rehman & Sons — B2B industrial hygiene (Ecolab-tier layout, catalog brand accents) */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;700&display=swap");
+
 :root {
-  --navy: #003366;
-  --navy-light: #004d8c;
-  --blue: #0066b3;
-  --blue-light: #0085ca;
-  --teal: #00a3a1;
-  --accent: #a83279;
-  --accent-light: #c44d94;
+  --navy: #0f172a;
+  --navy-light: #1e3a8a;
+  --blue: #0369a1;
+  --blue-light: #0284c7;
+  --teal: #0f766e;
+  --accent: #9d174d;
+  --accent-light: #be185d;
+  --accent-gold: #a16207;
   --white: #ffffff;
-  --off-white: #f4f7fa;
+  --off-white: #f8fafc;
   --gray-50: #f8fafc;
   --gray-100: #eef2f6;
   --gray-400: #94a3b8;
   --gray-600: #475569;
   --gray-800: #1e293b;
-  --border: #dde4ec;
-  --shadow-sm: 0 1px 3px rgba(0, 51, 102, 0.08);
-  --shadow-md: 0 8px 30px rgba(0, 51, 102, 0.1);
-  --radius: 6px;
-  --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 8px 30px rgba(15, 23, 42, 0.1);
+  --radius: 8px;
+  --font: "Source Sans 3", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
   --max: 1200px;
 }
 
@@ -200,6 +204,22 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-dropdown-trigger {
   white-space: nowrap;
   flex-shrink: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
 }
 
 .nav-dropdown-trigger::after {
@@ -242,11 +262,34 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* Hero — corporate B2B */
 .hero {
-  background: linear-gradient(135deg, var(--navy) 0%, #004080 50%, var(--blue) 100%);
+  background-color: #0b1220;
+  background-image:
+    linear-gradient(105deg, rgba(11, 18, 32, 0.88) 0%, rgba(15, 23, 42, 0.72) 46%, rgba(3, 105, 161, 0.45) 100%),
+    url("../assets/backgrounds/hero-chemical-facility.jpg");
+  background-size: cover;
+  background-position: center;
   color: var(--white);
-  padding: 4rem 0 3.5rem;
+  padding: 5.25rem 0 4.5rem;
   position: relative;
   overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/backgrounds/hero-chemical-facility.jpg");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  animation: heroKen 22s ease-in-out infinite alternate;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+@keyframes heroKen {
+  from { transform: scale(1.04) translateY(0); }
+  to { transform: scale(1.12) translateY(-12px); }
 }
 
 .hero::after {
@@ -269,6 +312,12 @@ img { max-width: 100%; height: auto; display: block; }
   z-index: 1;
 }
 
+.hero > .container > .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+  gap: 0;
+}
+
 .hero-eyebrow {
   display: inline-block;
   font-size: 0.75rem;
@@ -279,7 +328,20 @@ img { max-width: 100%; height: auto; display: block; }
   margin-bottom: 1rem;
 }
 
+.hero h1,
+.page-banner h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.hero-lead,
+.page-banner p {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.hero h1,
 .hero h2 {
+  font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 700;
   line-height: 1.15;
@@ -340,6 +402,19 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero-content {
   animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content,
+  .hero-visual,
+  .product-card__image img,
+  .industry-card,
+  .industry-open-card,
+  .about-card,
+  .hero::before {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .hero-visual {
@@ -480,6 +555,7 @@ section { padding: 4rem 0; }
 }
 
 .section-head h2 {
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2rem);
   color: var(--navy);
   font-weight: 700;
@@ -494,7 +570,14 @@ section { padding: 4rem 0; }
 }
 
 /* Industries — Ecolab-style sectors */
-.industries-section { background: var(--white); }
+.industries-section {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.9) 100%),
+    url("../assets/backgrounds/bg-hospitality-laundry.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
 .industries-grid {
   display: grid;
@@ -508,12 +591,20 @@ section { padding: 4rem 0; }
   border-radius: var(--radius);
   padding: 1.5rem 1rem;
   text-align: center;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
 }
 
+a.industry-card:hover,
 .industry-card:hover {
   border-color: var(--blue-light);
   box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: inherit;
 }
 
 .industry-card svg {
@@ -531,7 +622,14 @@ section { padding: 4rem 0; }
 }
 
 /* About */
-.about-section { background: var(--off-white); }
+.about-section {
+  background-color: #f4f7fb;
+  background-image:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.93) 0%, rgba(248, 250, 252, 0.9) 100%),
+    url("../assets/backgrounds/bg-lab-quality.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
 .about-grid {
   display: grid;
@@ -843,7 +941,22 @@ section { padding: 4rem 0; }
   object-fit: contain !important;
   display: block !important;
   filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.14));
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  transition: height 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.product-card__pack-badge {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  z-index: 2;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
 }
 
 .product-card__image-btn:hover .product-mockup-img,
@@ -862,10 +975,24 @@ section { padding: 4rem 0; }
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clients-section { background: var(--off-white); }
+.clients-section {
+  background-color: #f4f7fb;
+  background-image:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(248, 250, 252, 0.88) 100%),
+    url("../assets/backgrounds/bg-hospitality-laundry.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
 /* Products */
-.products-section { background: var(--white); }
+.products-section {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.94) 0%, rgba(255, 255, 255, 0.9) 100%),
+    url("../assets/backgrounds/bg-product-studio.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
 .products-section .filter-bar {
   margin-bottom: 1.25rem;
@@ -1430,7 +1557,7 @@ section { padding: 4rem 0; }
   }
 
   .nav-dropdown-menu {
-    display: block !important;
+    display: none !important;
     position: static !important;
     box-shadow: none !important;
     border: none !important;
@@ -1438,6 +1565,11 @@ section { padding: 4rem 0; }
     background: transparent !important;
     padding: 0.25rem 0 0.5rem !important;
     min-width: 0 !important;
+    top: auto !important;
+    left: auto !important;
+  }
+  .nav-dropdown-wrap.is-open .nav-dropdown-menu {
+    display: block !important;
   }
   .nav-dropdown-menu a {
     display: flex;
@@ -1684,7 +1816,12 @@ section { padding: 4rem 0; }
 
 /* Page hero banner */
 .page-banner {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, var(--blue) 100%);
+  background-color: #0b1220;
+  background-image:
+    linear-gradient(120deg, rgba(11, 18, 32, 0.86) 0%, rgba(30, 58, 138, 0.62) 100%),
+    url("../assets/backgrounds/bg-hospitality-laundry.jpg");
+  background-size: cover;
+  background-position: center;
   color: var(--white);
   padding: 3.5rem 0 3rem;
   position: relative;
@@ -2393,4 +2530,284 @@ section { padding: 4rem 0; }
   font-size: 0.82rem;
   color: #cbd5e1;
   margin: 0;
+}
+
+/* Home / About / Industries redesign */
+.hero-panel {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 1.75rem;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+}
+
+.hero-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-panel__mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #0284c7;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.hero-panel__head h3 {
+  color: #fff;
+  font-size: 1.15rem;
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.hero-panel__head p {
+  color: #93c5fd;
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.hero-panel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.hero-panel__stat {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.9rem;
+}
+
+.hero-panel__stat span {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+}
+
+.hero-panel__stat strong {
+  color: #e0f2fe;
+  font-size: 1.2rem;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.hero-panel__stat em {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.hero-panel__foot {
+  background: rgba(2, 132, 199, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hero-panel__foot span {
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.hero-panel__foot a {
+  color: #7dd3fc;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.range-card {
+  border-top: 4px solid var(--blue);
+}
+
+.range-card--kitchen { border-top-color: #c2410c; }
+.range-card--steward { border-top-color: var(--teal); }
+.range-card--house { border-top-color: var(--navy-light); }
+
+.about-story h2,
+.about-stat strong {
+  font-family: var(--font-display);
+}
+
+.about-stat-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.about-stat strong {
+  font-size: 2rem;
+  color: var(--blue);
+  display: block;
+}
+
+.about-stat span {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.about-photo {
+  border-radius: var(--radius);
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.industry-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.industry-page-section {
+  background-color: #f4f7fb;
+  background-image:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.94) 0%, rgba(255, 255, 255, 0.9) 100%),
+    url("../assets/backgrounds/bg-hospitality-laundry.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.industry-open-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 1.45rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 88px;
+  animation: fadeRise 0.7s ease both;
+}
+
+.industry-open-card:nth-child(2) { animation-delay: 0.08s; }
+.industry-open-card:nth-child(3) { animation-delay: 0.16s; }
+
+.industry-open-card.is-highlight {
+  border-color: var(--blue-light);
+  box-shadow: var(--shadow-md);
+}
+
+.industry-open-card h3 {
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.industry-open-card p {
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+
+.industry-open-card .btn {
+  margin-top: 1rem;
+}
+
+@keyframes fadeRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.about-card,
+.range-card,
+.industry-card {
+  animation: fadeRise 0.65s ease both;
+}
+
+.industry-detail {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 88px;
+}
+
+.industry-detail[open] {
+  border-color: var(--blue-light);
+  box-shadow: var(--shadow-md);
+}
+
+.industry-detail summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.industry-detail summary::-webkit-details-marker { display: none; }
+
+.industry-detail summary::after {
+  content: "+";
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.industry-detail[open] summary::after { content: "–"; }
+
+.industry-detail__body {
+  padding: 0 1.35rem 1.4rem;
+}
+
+.industry-detail__body p {
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn-navy:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .industry-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-panel__grid {
+    grid-template-columns: 1fr;
+  }
 }

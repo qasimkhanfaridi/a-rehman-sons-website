@@ -101,7 +101,7 @@ for (const product of ARS_PRODUCTS) {
 
   <title>${escapeHtml(product.name)} — ${escapeHtml(catLabel)} Supplier Pakistan | ARS Chemicals</title>
   <link rel="icon" href="../assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="../css/styles.css?v=5.2">
+  <link rel="stylesheet" href="../css/styles.css?v=5.3">
 
   <!-- Schema.org JSON-LD: Product -->
   <script type="application/ld+json">
@@ -216,7 +216,7 @@ for (const product of ARS_PRODUCTS) {
         <a href="../index.html">Home</a>
         <a href="../about.html">About</a>
         <div class="nav-dropdown-wrap">
-          <a href="../products.html" class="nav-dropdown-trigger active">Products</a>
+          <button type="button" class="nav-dropdown-trigger active" aria-expanded="false">Products</button>
           <div class="nav-dropdown-menu" role="menu">
             <a href="../products.html" role="menuitem">All Products (29)</a>
             <a href="../products.html?cat=laundry" role="menuitem">Laundry (16)</a>
@@ -226,7 +226,7 @@ for (const product of ARS_PRODUCTS) {
           </div>
         </div>
         <a href="../certifications.html">Certifications</a>
-        <a href="../clients.html">Clients</a>
+        <a href="../clients.html">Industries</a>
         <a href="../international.html">Export</a>
         <a href="../contact.html">Contact</a>
         <a href="../order.html" class="nav-cta">Quote</a>
@@ -458,7 +458,7 @@ for (const product of ARS_PRODUCTS) {
   </a>
 
   <!-- Scripts -->
-  <script src="../js/ui.js?v=5.2"></script>
+  <script src="../js/ui.js?v=5.3"></script>
 </body>
 </html>`;
 

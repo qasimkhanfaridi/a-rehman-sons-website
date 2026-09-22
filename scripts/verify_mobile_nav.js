@@ -55,12 +55,22 @@ if (!js.includes('max-width: 991px')) {
 for (const file of htmlFiles) {
   const content = fs.readFileSync(path.join(ROOT, file), 'utf-8');
   
-  if (!content.includes('styles.css?v=5.2')) {
-    errors.push(`FAIL: ${file} missing styles.css?v=5.2`);
+  if (!content.includes('styles.css?v=5.4')) {
+    errors.push(`FAIL: ${file} missing styles.css?v=5.4`);
   }
   
-  if (!content.includes('ui.js?v=5.2')) {
-    errors.push(`FAIL: ${file} missing ui.js?v=5.2`);
+  if (!content.includes('ui.js?v=5.5')) {
+    errors.push(`FAIL: ${file} missing ui.js?v=5.5`);
+  }
+
+  if (!content.includes('class="nav-dropdown-trigger"') && !content.includes('class="nav-dropdown-trigger active"')) {
+    errors.push(`FAIL: ${file} missing nav-dropdown-trigger`);
+  }
+  if (content.includes('href="products.html" class="nav-dropdown-trigger"') || content.includes('href="../products.html" class="nav-dropdown-trigger"')) {
+    errors.push(`FAIL: ${file} Products trigger is still a link (should be button)`);
+  }
+  if (!content.includes('<button type="button" class="nav-dropdown-trigger')) {
+    errors.push(`FAIL: ${file} Products trigger should be a button`);
   }
   
   if (!content.includes('id="main-nav"')) {

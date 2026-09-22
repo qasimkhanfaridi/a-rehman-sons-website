@@ -76,7 +76,9 @@ function openNavDropdown(wrap) {
 
   wrap.classList.add("is-open");
   trigger.setAttribute("aria-expanded", "true");
-  positionNavDropdownMenu(wrap);
+  if (!isMobileNav()) {
+    positionNavDropdownMenu(wrap);
+  }
 }
 
 function isProductsPageLocation(loc = window.location) {
@@ -104,9 +106,6 @@ function initProductsNavDropdown() {
     trigger.setAttribute("aria-expanded", "false");
 
     trigger.addEventListener("click", (e) => {
-      // On mobile the dropdown is always expanded in the drawer — just navigate
-      if (isMobileNav()) return;
-
       e.preventDefault();
       e.stopPropagation();
       if (wrap.classList.contains("is-open")) {
@@ -138,7 +137,6 @@ function initProductsNavDropdown() {
   });
 
   document.addEventListener("click", (e) => {
-    if (isMobileNav()) return; // Don't auto-close dropdowns in mobile drawer
     if (e.target.closest(".nav-dropdown-wrap") || e.target.closest(".nav-dropdown-menu")) {
       return;
     }
@@ -275,7 +273,10 @@ function initMobileNav() {
     document.body.classList.remove("nav-open");
     toggle.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
+    closeAllNavDropdowns();
   }
+
+  closeNav();
 
   // Hamburger toggle
   toggle.addEventListener("click", (e) => {
@@ -303,8 +304,9 @@ function initMobileNav() {
     }
   });
 
-  // Clicking a nav link closes the drawer (with small delay so navigation fires)
+  // Clicking a nav link closes the drawer (not the Products toggle button)
   nav.querySelectorAll("a[href]").forEach((link) => {
+    if (link.classList.contains("nav-dropdown-trigger")) return;
     link.addEventListener("click", () => {
       if (isMobileNav()) {
         setTimeout(closeNav, 80);
@@ -318,9 +320,19 @@ function initMobileNav() {
   });
 }
 
+function initIndustryDetails() {
+  const hash = (window.location.hash || "").replace("#", "");
+  const target = hash ? document.getElementById(hash) : null;
+  if (target && target.classList.contains("industry-open-card")) {
+    target.classList.add("is-highlight");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavigationActiveState();
   initMobileNav();
+  initIndustryDetails();
   renderClients();
   renderCertificates();
 });
