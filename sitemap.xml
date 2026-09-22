@@ -5,53 +5,89 @@
   <!-- Main Canonical Pages -->
   <url>
     <loc>https://arschemicals.com/</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://arschemicals.com/assets/logo.png</image:loc>
-      <image:title>A. Rehman &amp; Sons Logo</image:title>
+      <image:title>A. Rehman & Sons Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/hero-chemical-facility.jpg</image:loc>
+      <image:title>ARS Chemical Manufacturing Facility</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/logo.png</image:loc>
+      <image:title>ARS Commercial Chemical Catalog 29 Formulations</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/international.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-export.jpg</image:loc>
+      <image:title>ARS Bulk Chemical Sea-Freight Export Supply</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/order.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://arschemicals.com/certifications.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://arschemicals.com/about.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-rd-lab.jpg</image:loc>
+      <image:title>ARS QC & R&D Laboratories</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-wash-program.jpg</image:loc>
+      <image:title>ARS Wash-Program Technology</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-warehouse.jpg</image:loc>
+      <image:title>ARS Bulk Supply Logistics Warehouse</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/clients.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-hospitality.jpg</image:loc>
+      <image:title>ARS Luxury Hotel Chemical Supply</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-healthcare.jpg</image:loc>
+      <image:title>ARS Hospital Infection Control Supplies</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://arschemicals.com/assets/backgrounds/industry-kitchen.jpg</image:loc>
+      <image:title>ARS Commercial Kitchen Chemical Supplies</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/contact.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -59,292 +95,408 @@
   <!-- Individual Commercial Chemical Product Pages (29 Formulations) -->
   <url>
     <loc>https://arschemicals.com/products/zepol-ab.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zepol-ab.jpg</image:loc>
+      <image:title>ZEPOL AB 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zepol-ab.jpg</image:loc>
-      <image:title>ZEPOL AB Commercial Chemical Canister</image:title>
+      <image:title>ZEPOL AB 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-s.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-s.jpg</image:loc>
+      <image:title>ZEKLOR S 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-s.jpg</image:loc>
-      <image:title>ZEKLOR S Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR S 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/descaler-h3.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/descaler-h3.jpg</image:loc>
+      <image:title>DESCALER H3 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/descaler-h3.jpg</image:loc>
-      <image:title>DESCALER H3 Commercial Chemical Canister</image:title>
+      <image:title>DESCALER H3 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/oven-cleaner.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/oven-cleaner.jpg</image:loc>
+      <image:title>OVEN CLEANER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/oven-cleaner.jpg</image:loc>
-      <image:title>OVEN CLEANER Commercial Chemical Canister</image:title>
+      <image:title>OVEN CLEANER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/grease-cutter.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/grease-cutter.jpg</image:loc>
+      <image:title>GREASE CUTTER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/grease-cutter.jpg</image:loc>
-      <image:title>GREASE CUTTER Commercial Chemical Canister</image:title>
+      <image:title>GREASE CUTTER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/bio-detergent.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/bio-detergent.jpg</image:loc>
+      <image:title>BIO-DETERGENT 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/bio-detergent.jpg</image:loc>
-      <image:title>BIO-DETERGENT Commercial Chemical Canister</image:title>
+      <image:title>BIO-DETERGENT 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/t-pol.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/t-pol.jpg</image:loc>
+      <image:title>T-POL 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/t-pol.jpg</image:loc>
-      <image:title>T-POL Commercial Chemical Canister</image:title>
+      <image:title>T-POL 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zepol-sc-10.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zepol-sc-10.jpg</image:loc>
+      <image:title>ZEPOL SC 10 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zepol-sc-10.jpg</image:loc>
-      <image:title>ZEPOL SC 10 Commercial Chemical Canister</image:title>
+      <image:title>ZEPOL SC 10 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zepol-sc-100.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zepol-sc-100.jpg</image:loc>
+      <image:title>ZEPOL SC 100 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zepol-sc-100.jpg</image:loc>
-      <image:title>ZEPOL SC 100 Commercial Chemical Canister</image:title>
+      <image:title>ZEPOL SC 100 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-ss.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-ss.jpg</image:loc>
+      <image:title>ZEKLOR SS 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-ss.jpg</image:loc>
-      <image:title>ZEKLOR SS Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR SS 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-o.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-o.jpg</image:loc>
+      <image:title>ZEKLOR O 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-o.jpg</image:loc>
-      <image:title>ZEKLOR O Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR O 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/d-sour-zx.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/d-sour-zx.jpg</image:loc>
+      <image:title>D-SOUR ZX 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/d-sour-zx.jpg</image:loc>
-      <image:title>D-SOUR ZX Commercial Chemical Canister</image:title>
+      <image:title>D-SOUR ZX 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/softener-cna.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/softener-cna.jpg</image:loc>
+      <image:title>SOFTENER CNA 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/softener-cna.jpg</image:loc>
-      <image:title>SOFTENER CNA Commercial Chemical Canister</image:title>
+      <image:title>SOFTENER CNA 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/soda-ash.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/soda-ash.jpg</image:loc>
+      <image:title>SODA ASH 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/soda-ash.jpg</image:loc>
-      <image:title>SODA ASH Commercial Chemical Canister</image:title>
+      <image:title>SODA ASH 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/neel.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/neel.jpg</image:loc>
+      <image:title>NEEL 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/neel.jpg</image:loc>
-      <image:title>NEEL Commercial Chemical Canister</image:title>
+      <image:title>NEEL 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/amrole.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/amrole.jpg</image:loc>
+      <image:title>AMROLE 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/amrole.jpg</image:loc>
-      <image:title>AMROLE Commercial Chemical Canister</image:title>
+      <image:title>AMROLE 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/rust-remour.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/rust-remour.jpg</image:loc>
+      <image:title>RUST REMOVER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/rust-remour.jpg</image:loc>
-      <image:title>RUST REMOVER Commercial Chemical Canister</image:title>
+      <image:title>RUST REMOVER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-hard.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-hard.jpg</image:loc>
+      <image:title>ZEKLOR HARD 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-hard.jpg</image:loc>
-      <image:title>ZEKLOR HARD Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR HARD 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/starch.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/starch.jpg</image:loc>
+      <image:title>STARCH 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/starch.jpg</image:loc>
-      <image:title>STARCH Commercial Chemical Canister</image:title>
+      <image:title>STARCH 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/bleach-powder.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/bleach-powder.jpg</image:loc>
+      <image:title>BLEACH POWDER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/bleach-powder.jpg</image:loc>
-      <image:title>BLEACH POWDER Commercial Chemical Canister</image:title>
+      <image:title>BLEACH POWDER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/caustic-soda.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/caustic-soda.jpg</image:loc>
+      <image:title>CAUSTIC SODA 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/caustic-soda.jpg</image:loc>
-      <image:title>CAUSTIC SODA Commercial Chemical Canister</image:title>
+      <image:title>CAUSTIC SODA 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/citric-acid.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/citric-acid.jpg</image:loc>
+      <image:title>CITRIC ACID 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/citric-acid.jpg</image:loc>
-      <image:title>CITRIC ACID Commercial Chemical Canister</image:title>
+      <image:title>CITRIC ACID 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-dry.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-dry.jpg</image:loc>
+      <image:title>ZEKLOR DRY 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-dry.jpg</image:loc>
-      <image:title>ZEKLOR DRY Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR DRY 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/carpet-shampoo.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/carpet-shampoo.jpg</image:loc>
+      <image:title>CARPET SHAMPOO 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/carpet-shampoo.jpg</image:loc>
-      <image:title>CARPET SHAMPOO Commercial Chemical Canister</image:title>
+      <image:title>CARPET SHAMPOO 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/gpc.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/gpc.jpg</image:loc>
+      <image:title>G.P.C 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/gpc.jpg</image:loc>
-      <image:title>G.P.C Commercial Chemical Canister</image:title>
+      <image:title>G.P.C 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/hand-cleaning-shampoo.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/hand-cleaning-shampoo.jpg</image:loc>
+      <image:title>HAND CLEANING SHAMPOO 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/hand-cleaning-shampoo.jpg</image:loc>
-      <image:title>HAND CLEANING SHAMPOO Commercial Chemical Canister</image:title>
+      <image:title>HAND CLEANING SHAMPOO 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/lavatory-floor-cleaner.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/lavatory-floor-cleaner.jpg</image:loc>
+      <image:title>LAVATORY / FLOOR CLEANER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/lavatory-floor-cleaner.jpg</image:loc>
-      <image:title>LAVATORY / FLOOR CLEANER Commercial Chemical Canister</image:title>
+      <image:title>LAVATORY / FLOOR CLEANER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/zeklor-chlorine.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-chlorine.jpg</image:loc>
+      <image:title>ZEKLOR CHLORINE 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-chlorine.jpg</image:loc>
-      <image:title>ZEKLOR CHLORINE Commercial Chemical Canister</image:title>
+      <image:title>ZEKLOR CHLORINE 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://arschemicals.com/products/glass-cleaner.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
+      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/glass-cleaner.jpg</image:loc>
+      <image:title>GLASS CLEANER 5 kg Canister with Red Safety Cap</image:title>
+    </image:image>
+    <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/glass-cleaner.jpg</image:loc>
-      <image:title>GLASS CLEANER Commercial Chemical Canister</image:title>
+      <image:title>GLASS CLEANER 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
 </urlset>

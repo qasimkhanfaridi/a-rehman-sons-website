@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 update_sitemap.py - Generates an exhaustive, high-priority sitemap.xml
-covering the 8 main pages + 29 individual product pages.
+covering the 8 main pages + 29 individual product pages with rich multi-pack image metadata.
 """
 
 import os
@@ -14,14 +14,29 @@ res = subprocess.check_output(node_cmd, shell=True, text=True)
 products = json.loads(res.strip())
 
 sitemap_entries = [
-    ("https://arschemicals.com/", "1.0", "weekly"),
-    ("https://arschemicals.com/products.html", "0.95", "weekly"),
-    ("https://arschemicals.com/international.html", "0.90", "monthly"),
-    ("https://arschemicals.com/order.html", "0.85", "weekly"),
-    ("https://arschemicals.com/certifications.html", "0.80", "monthly"),
-    ("https://arschemicals.com/about.html", "0.80", "monthly"),
-    ("https://arschemicals.com/clients.html", "0.80", "monthly"),
-    ("https://arschemicals.com/contact.html", "0.80", "monthly"),
+    ("https://arschemicals.com/", "1.0", "weekly", [
+        ("https://arschemicals.com/assets/logo.png", "A. Rehman & Sons Logo"),
+        ("https://arschemicals.com/assets/hero-chemical-facility.jpg", "ARS Chemical Manufacturing Facility")
+    ]),
+    ("https://arschemicals.com/products.html", "0.95", "weekly", [
+        ("https://arschemicals.com/assets/logo.png", "ARS Commercial Chemical Catalog 29 Formulations")
+    ]),
+    ("https://arschemicals.com/international.html", "0.90", "monthly", [
+        ("https://arschemicals.com/assets/backgrounds/industry-export.jpg", "ARS Bulk Chemical Sea-Freight Export Supply")
+    ]),
+    ("https://arschemicals.com/order.html", "0.85", "weekly", []),
+    ("https://arschemicals.com/certifications.html", "0.80", "monthly", []),
+    ("https://arschemicals.com/about.html", "0.80", "monthly", [
+        ("https://arschemicals.com/assets/backgrounds/industry-rd-lab.jpg", "ARS QC & R&D Laboratories"),
+        ("https://arschemicals.com/assets/backgrounds/industry-wash-program.jpg", "ARS Wash-Program Technology"),
+        ("https://arschemicals.com/assets/backgrounds/industry-warehouse.jpg", "ARS Bulk Supply Logistics Warehouse")
+    ]),
+    ("https://arschemicals.com/clients.html", "0.80", "monthly", [
+        ("https://arschemicals.com/assets/backgrounds/industry-hospitality.jpg", "ARS Luxury Hotel Chemical Supply"),
+        ("https://arschemicals.com/assets/backgrounds/industry-healthcare.jpg", "ARS Hospital Infection Control Supplies"),
+        ("https://arschemicals.com/assets/backgrounds/industry-kitchen.jpg", "ARS Commercial Kitchen Chemical Supplies")
+    ]),
+    ("https://arschemicals.com/contact.html", "0.80", "monthly", []),
 ]
 
 xml_lines = [
@@ -32,16 +47,16 @@ xml_lines = [
     '  <!-- Main Canonical Pages -->'
 ]
 
-for url, pri, freq in sitemap_entries:
+for url, pri, freq, imgs in sitemap_entries:
     xml_lines.append(f'  <url>')
     xml_lines.append(f'    <loc>{url}</loc>')
-    xml_lines.append(f'    <lastmod>2026-09-19</lastmod>')
+    xml_lines.append(f'    <lastmod>2026-09-22</lastmod>')
     xml_lines.append(f'    <changefreq>{freq}</changefreq>')
     xml_lines.append(f'    <priority>{pri}</priority>')
-    if url == "https://arschemicals.com/":
+    for img_loc, img_title in imgs:
         xml_lines.append('    <image:image>')
-        xml_lines.append('      <image:loc>https://arschemicals.com/assets/logo.png</image:loc>')
-        xml_lines.append('      <image:title>A. Rehman &amp; Sons Logo</image:title>')
+        xml_lines.append(f'      <image:loc>{img_loc}</image:loc>')
+        xml_lines.append(f'      <image:title>{img_title}</image:title>')
         xml_lines.append('    </image:image>')
     xml_lines.append(f'  </url>')
 
@@ -51,25 +66,29 @@ xml_lines.append('  <!-- Individual Commercial Chemical Product Pages (29 Formul
 for p in products:
     pid = p['id']
     pname = p['name']
-    img_url = f"https://arschemicals.com/assets/products/mockups/{pid}.jpg"
+    img_5kg = f"https://arschemicals.com/assets/products/mockups/5kg/{pid}.jpg"
+    img_25kg = f"https://arschemicals.com/assets/products/mockups/{pid}.jpg"
+    
     xml_lines.append(f'  <url>')
     xml_lines.append(f'    <loc>https://arschemicals.com/products/{pid}.html</loc>')
-    xml_lines.append(f'    <lastmod>2026-09-19</lastmod>')
+    xml_lines.append(f'    <lastmod>2026-09-22</lastmod>')
     xml_lines.append(f'    <changefreq>weekly</changefreq>')
     xml_lines.append(f'    <priority>0.85</priority>')
     xml_lines.append(f'    <image:image>')
-    xml_lines.append(f'      <image:loc>{img_url}</image:loc>')
-    xml_lines.append(f'      <image:title>{pname} Commercial Chemical Canister</image:title>')
+    xml_lines.append(f'      <image:loc>{img_5kg}</image:loc>')
+    xml_lines.append(f'      <image:title>{pname} 5 kg Canister with Red Safety Cap</image:title>')
+    xml_lines.append(f'    </image:image>')
+    xml_lines.append(f'    <image:image>')
+    xml_lines.append(f'      <image:loc>{img_25kg}</image:loc>')
+    xml_lines.append(f'      <image:title>{pname} 25 kg Industrial Jerrycan</image:title>')
     xml_lines.append(f'    </image:image>')
     xml_lines.append(f'  </url>')
 
 xml_lines.append('</urlset>')
 xml_lines.append('')
 
-sitemap_content = '\n'.join(xml_lines)
+sitemap_path = os.path.join(os.path.dirname(__file__), '..', 'sitemap.xml')
+with open(sitemap_path, 'w', encoding='utf-8') as f:
+    f.write('\n'.join(xml_lines))
 
-sitemap_path = os.path.join(r"C:\Users\qasim.faridi\source\repos\a-rehman-sons-website", "sitemap.xml")
-with open(sitemap_path, "w", encoding="utf-8") as f:
-    f.write(sitemap_content)
-
-print(f"Updated sitemap.xml with {len(sitemap_entries)} main pages and {len(products)} product pages (Total: {len(sitemap_entries) + len(products)} URLs).")
+print(f"Successfully generated sitemap.xml with 8 main pages and {len(products)} product pages with multi-pack image metadata.")
