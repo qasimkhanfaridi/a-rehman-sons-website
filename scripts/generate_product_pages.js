@@ -42,17 +42,17 @@ for (const product of ARS_PRODUCTS) {
   // Packaging Image Variants
   const mock5kgRel = `assets/products/mockups/5kg/${product.id}.jpg`;
   const has5kg = fs.existsSync(path.join(ROOT, mock5kgRel));
-  const img5kg = has5kg ? `../${mock5kgRel}` : `../assets/products/mockups/${product.id}.jpg`;
+  const img5kg = has5kg ? `../${mock5kgRel}?v=7.0` : `../assets/products/mockups/${product.id}.jpg?v=7.0`;
 
   const mock10kgRel = `assets/products/mockups/10kg/${product.id}.jpg`;
   const has10kg = fs.existsSync(path.join(ROOT, mock10kgRel));
-  const img10kg = has10kg ? `../${mock10kgRel}` : `../assets/products/packaging/canister-10kg.jpg`;
+  const img10kg = has10kg ? `../${mock10kgRel}?v=7.0` : `../assets/products/packaging/canister-10kg.jpg?v=7.0`;
 
   const mock25kgRel = `assets/products/mockups/${product.id}.jpg`;
   const has25kg = fs.existsSync(path.join(ROOT, mock25kgRel));
-  const img25kg = has25kg ? `../${mock25kgRel}` : img5kg;
+  const img25kg = has25kg ? `../${mock25kgRel}?v=7.0` : img5kg;
 
-  const img200kg = `../assets/products/packaging/drum-200kg.jpg`;
+  const img200kg = `../assets/products/packaging/drum-200kg.jpg?v=7.0`;
 
   let imgInUse = `../assets/backgrounds/industry-wash-program.jpg`;
   let inUseLabel = `Commercial Laundry Tunnel & Washhouse`;
@@ -108,14 +108,14 @@ for (const product of ARS_PRODUCTS) {
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:title" content="${escapeHtml(product.name)} | ${escapeHtml(catLabel)} | ARS Chemicals">
   <meta property="og:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
-  <meta property="og:image" content="https://arschemicals.com/${mock5kgRel}">
+  <meta property="og:image" content="https://arschemicals.com/${mock5kgRel}?v=7.0">
   <meta property="og:locale" content="en_PK">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(product.name)} | ARS Chemicals Pakistan">
   <meta name="twitter:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
-  <meta name="twitter:image" content="https://arschemicals.com/${mock5kgRel}">
+  <meta name="twitter:image" content="https://arschemicals.com/${mock5kgRel}?v=7.0">
 
   <!-- Geo Location Meta Tags -->
   <meta name="geo.region" content="PK-PB">

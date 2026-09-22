@@ -356,9 +356,17 @@ function renderGallonSvg(pname, packaging = "5 kg", cat = "laundry", uid = "defa
 }
 
 function getProductMockupSrc(id, pack) {
-  const fiveKg = typeof isFiveKgPack === "function" ? isFiveKgPack(pack) : /^5\s*kg/i.test(pack || "");
-  if (fiveKg) return `assets/products/mockups/5kg/${id}.jpg?v=5.6`;
-  return `assets/products/mockups/${id}.jpg?v=5.0`;
+  const p = (pack || "").toLowerCase().trim();
+  if (p.includes("10")) {
+    return `assets/products/mockups/10kg/${id}.jpg?v=7.0`;
+  }
+  if (p.includes("200") || p.includes("drum")) {
+    return `assets/products/packaging/drum-200kg.jpg?v=7.0`;
+  }
+  if (p.includes("25")) {
+    return `assets/products/mockups/${id}.jpg?v=7.0`;
+  }
+  return `assets/products/mockups/5kg/${id}.jpg?v=7.0`;
 }
 
 function applyPackVisual(card, pack) {
@@ -500,16 +508,15 @@ function openProductModal(productId) {
         </div>
         <button type="button" class="tech-modal-close" aria-label="Close modal">&times;</button>
       </div>
-      <div class="tech-modal-body">
         <div style="display: flex; gap: 1.25rem; align-items: center; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
-          <img id="modal-product-img" src="assets/products/mockups/5kg/${p.id}.jpg" alt="${p.name}" style="width: 90px; height: 90px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));" onerror="this.src='assets/products/mockups/${p.id}.jpg'">
+          <img id="modal-product-img" src="assets/products/mockups/5kg/${p.id}.jpg?v=7.0" alt="${p.name}" style="width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12)); transition: all 0.2s ease;" onerror="this.src='assets/products/mockups/${p.id}.jpg?v=7.0'">
           <div style="flex: 1;">
-            <div style="font-size: 0.78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.04em;">Standard Sizes Available (4 Formats)</div>
-            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem;">
-              <span style="background: #ffffff; border: 1px solid #bae6fd; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #0369a1;">🧴 5 kg (Safety Red Cap)</span>
-              <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #334155;">🛢️ 10 kg</span>
-              <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #334155;">📦 25 kg</span>
-              <span style="background: #ffffff; border: 1px solid #c7d2fe; border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #3730a3;">🏭 200 kg Drum</span>
+            <div style="font-size: 0.78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.35rem;">Standard Sizes (Click to preview format):</div>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" id="modal-pack-buttons">
+              <button type="button" class="modal-pack-btn active" data-pack="5kg" onclick="switchModalPack('${p.id}', '5kg')" style="background: #f0f9ff; border: 1.5px solid #0284c7; border-radius: 9999px; padding: 0.28rem 0.7rem; font-size: 0.75rem; font-weight: 700; color: #0284c7; cursor: pointer; transition: all 0.15s ease;">🧴 5 kg (Safety Red Cap)</button>
+              <button type="button" class="modal-pack-btn" data-pack="10kg" onclick="switchModalPack('${p.id}', '10kg')" style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 9999px; padding: 0.28rem 0.7rem; font-size: 0.75rem; font-weight: 700; color: #334155; cursor: pointer; transition: all 0.15s ease;">🛢️ 10 kg</button>
+              <button type="button" class="modal-pack-btn" data-pack="25kg" onclick="switchModalPack('${p.id}', '25kg')" style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 9999px; padding: 0.28rem 0.7rem; font-size: 0.75rem; font-weight: 700; color: #334155; cursor: pointer; transition: all 0.15s ease;">📦 25 kg</button>
+              <button type="button" class="modal-pack-btn" data-pack="200kg" onclick="switchModalPack('${p.id}', '200kg')" style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 9999px; padding: 0.28rem 0.7rem; font-size: 0.75rem; font-weight: 700; color: #334155; cursor: pointer; transition: all 0.15s ease;">🏭 200 kg Drum</button>
             </div>
           </div>
         </div>
@@ -589,6 +596,26 @@ function closeProductModal() {
     document.body.style.overflow = "";
   }
 }
+
+window.switchModalPack = function(productId, packKey) {
+  const img = document.getElementById("modal-product-img");
+  if (!img) return;
+  if (packKey === "10kg") {
+    img.src = `assets/products/mockups/10kg/${productId}.jpg?v=7.0`;
+  } else if (packKey === "25kg") {
+    img.src = `assets/products/mockups/${productId}.jpg?v=7.0`;
+  } else if (packKey === "200kg") {
+    img.src = `assets/products/packaging/drum-200kg.jpg?v=7.0`;
+  } else {
+    img.src = `assets/products/mockups/5kg/${productId}.jpg?v=7.0`;
+  }
+  document.querySelectorAll(".modal-pack-btn").forEach((btn) => {
+    const isActive = btn.dataset.pack === packKey;
+    btn.style.borderColor = isActive ? "#0284c7" : "#cbd5e1";
+    btn.style.color = isActive ? "#0284c7" : "#334155";
+    btn.style.background = isActive ? "#f0f9ff" : "#ffffff";
+  });
+};
 
 let activeFilter = "all";
 let activeQuery = "";
