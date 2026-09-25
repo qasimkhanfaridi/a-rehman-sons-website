@@ -684,6 +684,29 @@ function applyProductCategoryFilter(cat) {
 function initFilters() {
   activeFilter = readCategoryFromUrl();
 
+  if (typeof ARS_PRODUCTS !== "undefined" && Array.isArray(ARS_PRODUCTS)) {
+    const counts = {
+      all: ARS_PRODUCTS.length,
+      laundry: ARS_PRODUCTS.filter((p) => p.category === "laundry").length,
+      kitchen: ARS_PRODUCTS.filter((p) => p.category === "kitchen").length,
+      stewarding: ARS_PRODUCTS.filter((p) => p.stewarding || p.category === "kitchen").length,
+      housekeeping: ARS_PRODUCTS.filter((p) => p.category === "housekeeping").length,
+    };
+    const labels = {
+      all: `All (${counts.all})`,
+      laundry: `Laundry (${counts.laundry})`,
+      kitchen: `Kitchen (${counts.kitchen})`,
+      stewarding: `Stewarding (${counts.stewarding})`,
+      housekeeping: `Housekeeping (${counts.housekeeping})`,
+    };
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      const f = btn.dataset.filter;
+      if (f && labels[f]) {
+        btn.textContent = labels[f];
+      }
+    });
+  }
+
   document.querySelectorAll(".filter-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.filter === activeFilter);
     btn.addEventListener("click", () => {

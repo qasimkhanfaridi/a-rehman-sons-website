@@ -304,8 +304,8 @@ for (const product of ARS_PRODUCTS) {
         <div class="nav-dropdown-wrap">
           <button type="button" class="nav-dropdown-trigger active" aria-expanded="false">Products</button>
           <div class="nav-dropdown-menu" role="menu">
-            <a href="../products.html" role="menuitem">All Products (29)</a>
-            <a href="../products.html?cat=laundry" role="menuitem">Laundry (16)</a>
+            <a href="../products.html" role="menuitem">All Products (22)</a>
+            <a href="../products.html?cat=laundry" role="menuitem">Laundry (9)</a>
             <a href="../products.html?cat=kitchen" role="menuitem">Kitchen (7)</a>
             <a href="../products.html?cat=stewarding" role="menuitem">Stewarding (7)</a>
             <a href="../products.html?cat=housekeeping" role="menuitem">Housekeeping (6)</a>
@@ -581,7 +581,7 @@ for (const product of ARS_PRODUCTS) {
       <div class="footer-col">
         <h4>Chemical Divisions</h4>
         <ul>
-          <li><a href="../products.html?cat=laundry">Commercial Laundry Chemicals (16)</a></li>
+          <li><a href="../products.html?cat=laundry">Commercial Laundry Chemicals (9)</a></li>
           <li><a href="../products.html?cat=kitchen">Kitchen Stewarding Detergents (7)</a></li>
           <li><a href="../products.html?cat=housekeeping">Housekeeping &amp; Floor Care (6)</a></li>
           <li><a href="../international.html">Global Bulk Sea-Freight Export</a></li>

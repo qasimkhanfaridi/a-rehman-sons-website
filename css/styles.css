@@ -1917,7 +1917,7 @@ a.industry-card:hover,
     color: var(--navy);
   }
   .nav-dropdown-trigger::after {
-    content: " (29) ▾";
+    content: " (22) ▾";
     font-size: 0.8em;
     color: var(--blue);
     font-weight: 700;
