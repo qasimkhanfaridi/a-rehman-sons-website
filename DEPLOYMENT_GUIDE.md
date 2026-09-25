@@ -152,7 +152,7 @@ Simply add or edit an item in `js/order.js`. Both `products.html` and `order.htm
 WhatsApp numbers are defined in **`js/order.js`**:
 ```javascript
 const WHATSAPP_CONFIG = {
-  primaryNumber: "923218502997",    // Format: CountryCode + Number (without + or dashes)
+  primaryNumber: "923318502997",    // Format: CountryCode + Number (without + or dashes)
   secondaryNumber: "923332158113"
 };
 ```

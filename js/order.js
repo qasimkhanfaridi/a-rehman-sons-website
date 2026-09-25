@@ -5,8 +5,8 @@ const ARS_CONTACT = {
   address: "G.P.O. Box No. 1020, Rawalpindi, Pakistan",
   warehouse: "Rawalpindi",
   tel: "051-5503203",
-  whatsapp: ["923218502997", "923318502997", "923332158113"],
-  whatsappDisplay: ["0321-8502997", "0331-8502997", "0333-2158113"],
+  whatsapp: ["923318502997", "923332158113"],
+  whatsappDisplay: ["0331-8502997", "0333-2158113"],
   email: "ar_sons@hotmail.com"
 };
 
@@ -55,8 +55,14 @@ function buildEmailBody(formData, cart) {
 
 function openWhatsApp(formData, cart, numberIndex = 0) {
   const msg = encodeURIComponent(buildOrderMessage(formData, cart));
-  const number = ARS_CONTACT.whatsapp[numberIndex] || ARS_CONTACT.whatsapp[0];
-  window.open(`https://wa.me/${number}?text=${msg}`, "_blank");
+  const number = (typeof ARS_CONTACT !== "undefined" && ARS_CONTACT.whatsapp && ARS_CONTACT.whatsapp[numberIndex])
+    ? ARS_CONTACT.whatsapp[numberIndex]
+    : "923318502997";
+  const url = `https://api.whatsapp.com/send?phone=${number}&text=${msg}`;
+  const win = window.open(url, "_blank");
+  if (!win || win.closed || typeof win.closed === "undefined") {
+    window.location.href = url;
+  }
 }
 
 function openEmail(formData, cart) {
@@ -161,7 +167,7 @@ function initCartSummary() {
 }
 
 function initOrderForm() {
-    document.getElementById("btn-whatsapp")?.addEventListener("click", () => {
+  document.getElementById("btn-whatsapp")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
     openWhatsApp(formData, getCart(), 0);
@@ -170,13 +176,13 @@ function initOrderForm() {
   document.getElementById("btn-whatsapp-331")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
-    openWhatsApp(formData, getCart(), 1);
+    openWhatsApp(formData, getCart(), 0);
   });
 
   document.getElementById("btn-whatsapp-2")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
-    openWhatsApp(formData, getCart(), 2);
+    openWhatsApp(formData, getCart(), 1);
   });
 
   document.getElementById("btn-email")?.addEventListener("click", () => {
