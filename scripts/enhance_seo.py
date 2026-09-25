@@ -183,8 +183,7 @@ SEO_DATA = {
       "@type": "IndustrialSupplyStore",
       "name": "A. Rehman & Sons",
       "url": "https://arschemicals.com/",
-      "telephone": "+92-51-5503203",
-      "priceRange": "$$"
+      "telephone": "+92-51-5503203"
     }
   }
   </script>"""

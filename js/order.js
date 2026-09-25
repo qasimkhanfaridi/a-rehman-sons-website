@@ -84,8 +84,6 @@ function getCart() {
           sNo: prod ? prod.sNo : card.dataset.sno,
           name: card.dataset.name,
           packaging: packSelect?.value || card.dataset.packaging,
-          rate: prod ? prod.rate : parseFloat(card.dataset.rate || "0"),
-          rateFormatted: prod ? prod.rateFormatted : card.dataset.rateFormatted,
           qty
         });
       }
@@ -577,8 +575,6 @@ function openProductModal(productId) {
         sNo: p.sNo,
         name: p.name,
         packaging: (typeof getDefaultPackaging === "function" ? getDefaultPackaging(p) : p.packaging),
-        rate: p.rate,
-        rateFormatted: p.rateFormatted,
         qty: 1
       });
     }
@@ -840,7 +836,6 @@ function initUrlAddProduct() {
       category: product.category,
       packaging: (typeof getDefaultPackaging === "function" ? getDefaultPackaging(product) : product.packaging) || "5 kg",
       qty: 1,
-      rate: product.rate || 0
     });
   }
   saveStoredCart(cart);

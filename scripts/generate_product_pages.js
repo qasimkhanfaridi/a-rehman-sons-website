@@ -218,17 +218,6 @@ for (const product of ARS_PRODUCTS) {
       "@type": "Organization",
       "name": "A. Rehman & Sons",
       "url": "https://arschemicals.com/"
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": "${canonicalUrl}",
-      "priceCurrency": "PKR",
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "A. Rehman & Sons"
-      }
     }
   }
   </script>

@@ -14,8 +14,6 @@ const ARS_PRODUCTS = [
     name: "ZEPOL AB",
     category: "kitchen",
     stewarding: true,
-    rate: 105.00,
-    rateFormatted: "Rs. 105.00 / Kg",
     packaging: "25 kg",
     description: "Heavy-duty commercial dishwashing & degreasing liquid detergent — 100% biodegradable & benzene-free.",
     fullDetails: {
@@ -34,8 +32,6 @@ const ARS_PRODUCTS = [
     name: "ZEKLOR S",
     category: "kitchen",
     stewarding: true,
-    rate: 90.00,
-    rateFormatted: "Rs. 90.00 / Kg",
     packaging: "25 kg",
     description: "Specialized destaining sanitizer for ceramic cups, teapots, coffee urns, and melamine crockery.",
     fullDetails: {
@@ -54,8 +50,6 @@ const ARS_PRODUCTS = [
     name: "DESCALER H3",
     category: "kitchen",
     stewarding: true,
-    rate: 500.00,
-    rateFormatted: "Rs. 500.00 / Kg",
     packaging: "25 kg",
     description: "Concentrated food-grade acid descaler for commercial dishwashers, bain-maries, boilers, and water heaters.",
     fullDetails: {
@@ -74,8 +68,6 @@ const ARS_PRODUCTS = [
     name: "OVEN CLEANER",
     category: "kitchen",
     stewarding: true,
-    rate: 170.00,
-    rateFormatted: "Rs. 170.00 / Kg",
     packaging: "25 kg",
     description: "Extra-strength viscous carbon & baked-on grease stripper for commercial ovens, grills, and rotisseries.",
     fullDetails: {
@@ -94,8 +86,6 @@ const ARS_PRODUCTS = [
     name: "GREASE CUTTER",
     category: "kitchen",
     stewarding: true,
-    rate: 250.00,
-    rateFormatted: "Rs. 250.00 / Kg",
     packaging: "25 kg",
     description: "Fast-acting industrial solvent-detergent degreaser for kitchen exhaust hoods, filters, and quarry tile floors.",
     fullDetails: {
@@ -114,8 +104,6 @@ const ARS_PRODUCTS = [
     name: "BIO-DETERGENT",
     category: "kitchen",
     stewarding: true,
-    rate: 150.00,
-    rateFormatted: "Rs. 150.00 / Kg",
     packaging: "25 kg",
     description: "Multi-enzyme food-waste breakdown detergent for automated dishwashing and kitchen grease trap maintenance.",
     fullDetails: {
@@ -134,8 +122,6 @@ const ARS_PRODUCTS = [
     name: "T-POL",
     category: "kitchen",
     stewarding: true,
-    rate: 130.00,
-    rateFormatted: "Rs. 130.00 / Kg",
     packaging: "25 kg",
     description: "Universal multi-surface liquid detergent for general catering, glass, tableware, and food prep counters.",
     fullDetails: {
@@ -157,8 +143,6 @@ const ARS_PRODUCTS = [
     sNo: "2.1",
     name: "ZEPOL SC 10",
     category: "laundry",
-    rate: 190.00,
-    rateFormatted: "Rs. 190.00 / Kg",
     packaging: "25 kg",
     description: "Enzyme-boosted liquid laundry detergent designed for protein, blood, food, and organic stains in hotels & hospitals.",
     fullDetails: {
@@ -176,8 +160,6 @@ const ARS_PRODUCTS = [
     sNo: "2.2",
     name: "ZEPOL SC 100",
     category: "laundry",
-    rate: 280.00,
-    rateFormatted: "Rs. 280.00 / Kg",
     packaging: "25 kg",
     description: "Heavy-duty built single-shot synthetic detergent liquid for heavy grease and high-temperature laundering.",
     fullDetails: {
@@ -195,8 +177,6 @@ const ARS_PRODUCTS = [
     sNo: "2.3",
     name: "ZEKLOR SS",
     category: "laundry",
-    rate: 80.00,
-    rateFormatted: "Rs. 80.00 / Kg",
     packaging: "25 kg",
     description: "Stabilized commercial liquid chlorine bleach for brilliant whites and hospital-grade sanitization.",
     fullDetails: {
@@ -214,8 +194,6 @@ const ARS_PRODUCTS = [
     sNo: "2.4",
     name: "ZEKLOR O",
     category: "laundry",
-    rate: 480.00,
-    rateFormatted: "Rs. 480.00 / Kg",
     packaging: "25 kg",
     description: "High-grade 130-volume oxygen color-safe liquid bleach effective on both colored and delicate fabrics.",
     fullDetails: {
@@ -233,8 +211,6 @@ const ARS_PRODUCTS = [
     sNo: "2.5",
     name: "D-SOUR ZX",
     category: "laundry",
-    rate: 120.00,
-    rateFormatted: "Rs. 120.00 / Kg",
     packaging: "25 kg",
     description: "Liquid laundry sour & antichlor neutralizer for the final rinse cycle — prevents yellowing and fabric degradation.",
     fullDetails: {
@@ -252,8 +228,6 @@ const ARS_PRODUCTS = [
     sNo: "2.6",
     name: "SOFTENER CNA",
     category: "laundry",
-    rate: 250.00,
-    rateFormatted: "Rs. 250.00 / Kg",
     packaging: "25 kg",
     description: "Premium cationic fabric softener with antistatic properties and long-lasting fresh fragrance for hotel linens.",
     fullDetails: {
@@ -271,8 +245,6 @@ const ARS_PRODUCTS = [
     sNo: "2.7",
     name: "SODA ASH",
     category: "laundry",
-    rate: 135.00,
-    rateFormatted: "Rs. 135.00 / Kg",
     packaging: "50 kg",
     description: "Industrial Sodium Carbonate (Dense / Light) washing booster for water softening and grease saponification.",
     fullDetails: {
@@ -290,8 +262,6 @@ const ARS_PRODUCTS = [
     sNo: "2.8",
     name: "NEEL",
     category: "laundry",
-    rate: 500.00,
-    rateFormatted: "Rs. 500.00 / Kg",
     packaging: "25 kg",
     description: "Premium optical bluing / tinting compound for brilliant snow-white finish on hotel linens and bedsheets.",
     fullDetails: {
@@ -309,8 +279,6 @@ const ARS_PRODUCTS = [
     sNo: "2.9",
     name: "AMROLE",
     category: "laundry",
-    rate: 1500.00,
-    rateFormatted: "Rs. 1,500.00 / Kg",
     packaging: "25 kg",
     description: "Specialized high-potency textile auxiliary & stain lifter for stubborn dye-run, cosmetics, and industrial stains.",
     fullDetails: {
@@ -328,8 +296,6 @@ const ARS_PRODUCTS = [
     sNo: "2.10",
     name: "RUST REMOVER",
     category: "laundry",
-    rate: 4000.00,
-    rateFormatted: "Rs. 4,000.00 / Kg",
     packaging: "5 kg",
     description: "Professional concentrated rust stain eliminator for boiler water iron spots, rust stains, and metal oxidation marks.",
     fullDetails: {
@@ -347,8 +313,6 @@ const ARS_PRODUCTS = [
     sNo: "2.11",
     name: "ZEKLOR HARD",
     category: "laundry",
-    rate: 290.00,
-    rateFormatted: "Rs. 290.00 / Kg",
     packaging: "25 kg",
     description: "Hard water sequestering agent & calcium/magnesium chelating booster for commercial washhouses.",
     fullDetails: {
@@ -366,8 +330,6 @@ const ARS_PRODUCTS = [
     sNo: "2.12",
     name: "STARCH",
     category: "laundry",
-    rate: 220.00,
-    rateFormatted: "Rs. 220.00 / Kg",
     packaging: "25 kg",
     description: "Refined industrial finishing starch for crisp table linen, napkins, pillowcases, and executive uniform collars.",
     fullDetails: {
@@ -385,8 +347,6 @@ const ARS_PRODUCTS = [
     sNo: "2.13",
     name: "BLEACH POWDER",
     category: "laundry",
-    rate: 135.00,
-    rateFormatted: "Rs. 135.00 / Kg",
     packaging: "25 kg",
     description: "High-grade Calcium Hypochlorite powder (65–70% chlorine) for bleaching, deep sanitizing, and water treatment.",
     fullDetails: {
@@ -404,8 +364,6 @@ const ARS_PRODUCTS = [
     sNo: "2.14",
     name: "CAUSTIC SODA",
     category: "laundry",
-    rate: 260.00,
-    rateFormatted: "Rs. 260.00 / Kg",
     packaging: "25 kg",
     description: "Pure Sodium Hydroxide flakes (99% purity) for heavy saponification of fats, oils, and industrial grease.",
     fullDetails: {
@@ -423,8 +381,6 @@ const ARS_PRODUCTS = [
     sNo: "2.15",
     name: "CITRIC ACID",
     category: "laundry",
-    rate: 700.00,
-    rateFormatted: "Rs. 700.00 / Kg",
     packaging: "25 kg",
     description: "High purity anhydrous food-grade citric acid for eco-friendly neutralizing sour, descaling, and odor removal.",
     fullDetails: {
@@ -442,8 +398,6 @@ const ARS_PRODUCTS = [
     sNo: "2.16",
     name: "ZEKLOR DRY",
     category: "laundry",
-    rate: 300.00,
-    rateFormatted: "Rs. 300.00 / Kg",
     packaging: "25 kg",
     description: "High-concentration dry powder detergent booster with oxygen bleaching agents for institutional wash wheels.",
     fullDetails: {
@@ -465,8 +419,6 @@ const ARS_PRODUCTS = [
     sNo: "3.1",
     name: "CARPET SHAMPOO",
     category: "housekeeping",
-    rate: 260.00,
-    rateFormatted: "Rs. 260.00 / Kg",
     packaging: "25 kg",
     description: "High-foam dry extraction carpet & upholstery shampoo — revives fibers, removes traffic stains, and dries to vacuumable powder.",
     fullDetails: {
@@ -484,8 +436,6 @@ const ARS_PRODUCTS = [
     sNo: "3.2",
     name: "G.P.C",
     category: "housekeeping",
-    rate: 150.00,
-    rateFormatted: "Rs. 150.00 / Kg",
     packaging: "25 kg",
     description: "General Purpose Cleaner for daily streak-free cleaning of tiles, marble, vinyl, laminate, and painted walls.",
     fullDetails: {
@@ -503,8 +453,6 @@ const ARS_PRODUCTS = [
     sNo: "3.3",
     name: "HAND CLEANING SHAMPOO",
     category: "housekeeping",
-    rate: 350.00,
-    rateFormatted: "Rs. 350.00 / Kg",
     packaging: "25 kg",
     description: "Luxurious antibacterial pearlized hand soap with cosmetic glycerine for hotel restrooms, hospitals, and executive offices.",
     fullDetails: {
@@ -522,8 +470,6 @@ const ARS_PRODUCTS = [
     sNo: "3.4",
     name: "LAVATORY / FLOOR CLEANER",
     category: "housekeeping",
-    rate: 150.00,
-    rateFormatted: "Rs. 150.00 / Kg",
     packaging: "25 kg",
     description: "Heavy-duty germicidal acid cleaner for toilet bowls, urinals, shower cubicles, and ceramic bathroom tiling.",
     fullDetails: {
@@ -541,8 +487,6 @@ const ARS_PRODUCTS = [
     sNo: "3.5",
     name: "ZEKLOR CHLORINE",
     category: "housekeeping",
-    rate: 100.00,
-    rateFormatted: "Rs. 100.00 / Kg",
     packaging: "25 kg",
     description: "Commercial surface disinfectant & odor eliminator for hospital floors, waste disposal areas, and sanitary facilities.",
     fullDetails: {
@@ -560,8 +504,6 @@ const ARS_PRODUCTS = [
     sNo: "3.6",
     name: "GLASS CLEANER",
     category: "housekeeping",
-    rate: 250.00,
-    rateFormatted: "Rs. 250.00 / Kg",
     packaging: "25 kg",
     description: "Professional fast-evaporating glass & mirror polish — leaves glass crystal-clear with zero streaks, haze, or film.",
     fullDetails: {
