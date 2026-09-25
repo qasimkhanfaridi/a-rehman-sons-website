@@ -1,3 +1,15 @@
+const ARS_CONTACT = {
+  name: "A. Rehman & Sons",
+  tagline: "Chemical & General Order Supplier",
+  established: 1988,
+  address: "G.P.O. Box No. 1020, Rawalpindi, Pakistan",
+  warehouse: "Rawalpindi",
+  tel: "051-5503203",
+  whatsapp: ["923218502997", "923318502997", "923332158113"],
+  whatsappDisplay: ["0321-8502997", "0331-8502997", "0333-2158113"],
+  email: "ar_sons@hotmail.com"
+};
+
 /** WhatsApp & email order builder — inquiry only, no checkout */
 
 function buildOrderMessage(formData, cart) {
@@ -149,16 +161,22 @@ function initCartSummary() {
 }
 
 function initOrderForm() {
-  document.getElementById("btn-whatsapp")?.addEventListener("click", () => {
+    document.getElementById("btn-whatsapp")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
     openWhatsApp(formData, getCart(), 0);
   });
 
-  document.getElementById("btn-whatsapp-2")?.addEventListener("click", () => {
+  document.getElementById("btn-whatsapp-331")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
     openWhatsApp(formData, getCart(), 1);
+  });
+
+  document.getElementById("btn-whatsapp-2")?.addEventListener("click", () => {
+    const formData = getFormData();
+    if (!validateForm(formData)) return;
+    openWhatsApp(formData, getCart(), 2);
   });
 
   document.getElementById("btn-email")?.addEventListener("click", () => {
