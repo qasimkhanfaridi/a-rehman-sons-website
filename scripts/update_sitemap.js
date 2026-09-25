@@ -16,7 +16,7 @@ const sitemap_entries = [
     pri: "0.95",
     freq: "weekly",
     imgs: [
-      { loc: "https://arschemicals.com/assets/logo.png", title: "ARS Commercial Chemical Catalog 29 Formulations" }
+      { loc: "https://arschemicals.com/assets/logo.png", title: "ARS Commercial Chemical Catalog 22 Formulations" }
     ]
   },
   {
@@ -91,7 +91,7 @@ for (const entry of sitemap_entries) {
 }
 
 xmlLines.push('');
-xmlLines.push('  <!-- Individual Commercial Chemical Product Pages (29 Formulations) -->');
+xmlLines.push('  <!-- Individual Commercial Chemical Product Pages (22 Formulations) -->');
 
 for (const p of ARS_PRODUCTS) {
   const img5kg = `https://arschemicals.com/assets/products/mockups/5kg/${p.id}.jpg`;

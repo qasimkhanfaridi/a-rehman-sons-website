@@ -20,7 +20,7 @@
     <priority>0.95</priority>
     <image:image>
       <image:loc>https://arschemicals.com/assets/logo.png</image:loc>
-      <image:title>ARS Commercial Chemical Catalog 29 Formulations</image:title>
+      <image:title>ARS Commercial Chemical Catalog 22 Formulations</image:title>
     </image:image>
   </url>
   <url>
@@ -88,7 +88,7 @@
     <priority>0.80</priority>
   </url>
 
-  <!-- Individual Commercial Chemical Product Pages (29 Formulations) -->
+  <!-- Individual Commercial Chemical Product Pages (22 Formulations) -->
   <url>
     <loc>https://arschemicals.com/products/zepol-ab.html</loc>
     <lastmod>2026-09-22</lastmod>
@@ -324,42 +324,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://arschemicals.com/products/soda-ash.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/soda-ash.jpg</image:loc>
-      <image:title>SODA ASH 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/soda-ash.jpg</image:loc>
-      <image:title>SODA ASH 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/soda-ash.jpg</image:loc>
-      <image:title>SODA ASH 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/neel.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/neel.jpg</image:loc>
-      <image:title>NEEL 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/neel.jpg</image:loc>
-      <image:title>NEEL 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/neel.jpg</image:loc>
-      <image:title>NEEL 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://arschemicals.com/products/amrole.html</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -411,96 +375,6 @@
     <image:image>
       <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-hard.jpg</image:loc>
       <image:title>ZEKLOR HARD 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/starch.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/starch.jpg</image:loc>
-      <image:title>STARCH 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/starch.jpg</image:loc>
-      <image:title>STARCH 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/starch.jpg</image:loc>
-      <image:title>STARCH 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/bleach-powder.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/bleach-powder.jpg</image:loc>
-      <image:title>BLEACH POWDER 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/bleach-powder.jpg</image:loc>
-      <image:title>BLEACH POWDER 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/bleach-powder.jpg</image:loc>
-      <image:title>BLEACH POWDER 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/caustic-soda.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/caustic-soda.jpg</image:loc>
-      <image:title>CAUSTIC SODA 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/caustic-soda.jpg</image:loc>
-      <image:title>CAUSTIC SODA 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/caustic-soda.jpg</image:loc>
-      <image:title>CAUSTIC SODA 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/citric-acid.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/citric-acid.jpg</image:loc>
-      <image:title>CITRIC ACID 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/citric-acid.jpg</image:loc>
-      <image:title>CITRIC ACID 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/citric-acid.jpg</image:loc>
-      <image:title>CITRIC ACID 25 kg Industrial Jerrycan</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://arschemicals.com/products/zeklor-dry.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/5kg/zeklor-dry.jpg</image:loc>
-      <image:title>ZEKLOR DRY 5 kg Canister with Red Safety Cap</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/10kg/zeklor-dry.jpg</image:loc>
-      <image:title>ZEKLOR DRY 10 kg Stackable Commercial Canister</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://arschemicals.com/assets/products/mockups/zeklor-dry.jpg</image:loc>
-      <image:title>ZEKLOR DRY 25 kg Industrial Jerrycan</image:title>
     </image:image>
   </url>
   <url>
