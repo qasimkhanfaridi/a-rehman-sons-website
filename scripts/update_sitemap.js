@@ -75,10 +75,12 @@ const xmlLines = [
   '  <!-- Main Canonical Pages -->'
 ];
 
+const todayDate = new Date().toISOString().split('T')[0];
+
 for (const entry of sitemap_entries) {
   xmlLines.push('  <url>');
   xmlLines.push(`    <loc>${entry.url}</loc>`);
-  xmlLines.push('    <lastmod>2026-09-22</lastmod>');
+  xmlLines.push(`    <lastmod>${todayDate}</lastmod>`);
   xmlLines.push(`    <changefreq>${entry.freq}</changefreq>`);
   xmlLines.push(`    <priority>${entry.pri}</priority>`);
   for (const img of entry.imgs) {
@@ -100,7 +102,7 @@ for (const p of ARS_PRODUCTS) {
 
   xmlLines.push('  <url>');
   xmlLines.push(`    <loc>https://arschemicals.com/products/${p.id}.html</loc>`);
-  xmlLines.push('    <lastmod>2026-09-22</lastmod>');
+  xmlLines.push(`    <lastmod>${todayDate}</lastmod>`);
   xmlLines.push('    <changefreq>weekly</changefreq>');
   xmlLines.push('    <priority>0.85</priority>');
   xmlLines.push('    <image:image>');

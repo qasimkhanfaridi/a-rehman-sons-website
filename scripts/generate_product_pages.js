@@ -96,7 +96,7 @@ for (const product of ARS_PRODUCTS) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Buy ${escapeHtml(product.name)} commercial ${catShort.toLowerCase()} chemical in Pakistan. Official supplier A. Rehman &amp; Sons, Rawalpindi. 5 kg, 10 kg, 25 kg, and 200 kg packaging with factory-direct wholesale pricing upon quotation.">
+  <meta name="description" content="Commercial ${catShort.toLowerCase()} chemical ${escapeHtml(product.name)} manufactured by A. Rehman &amp; Sons, Rawalpindi. Supplied in 5 kg, 10 kg, 25 kg, and 200 kg containers with custom institutional quotation.">
   <meta name="keywords" content="${escapeHtml(product.name.toLowerCase())}, ${catShort.toLowerCase()} chemicals pakistan, commercial chemical supplier rawalpindi, institutional cleaning supplies islamabad, chemical manufacturer pakistan">
   <meta name="author" content="A. Rehman &amp; Sons">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -107,14 +107,14 @@ for (const product of ARS_PRODUCTS) {
   <meta property="og:site_name" content="A. Rehman &amp; Sons">
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:title" content="${escapeHtml(product.name)} | ${escapeHtml(catLabel)} | ARS Chemicals">
-  <meta property="og:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
+  <meta property="og:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale supply upon quotation.">
   <meta property="og:image" content="https://arschemicals.com/${mock5kgRel}?v=7.0">
   <meta property="og:locale" content="en_PK">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(product.name)} | ARS Chemicals Pakistan">
-  <meta name="twitter:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale pricing upon quotation.">
+  <meta name="twitter:description" content="${escapeHtml(product.description)} Factory-direct commercial wholesale supply upon quotation.">
   <meta name="twitter:image" content="https://arschemicals.com/${mock5kgRel}?v=7.0">
 
   <!-- Geo Location Meta Tags -->
@@ -444,7 +444,7 @@ for (const product of ARS_PRODUCTS) {
           <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;">
             <div style="font-size: 0.85rem; color: #0369a1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Commercial Supply &amp; Quotation</div>
             <div style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin: 0.25rem 0;">
-              Wholesale Pricing Upon Quotation
+              Wholesale Supply Upon Quotation
             </div>
             <div style="font-size: 0.85rem; color: var(--gray-600);">
               Standard Packaging Sizes: <strong>5 kg, 10 kg, 25 kg, 200 kg Bulk Drum</strong> · Free delivery across Rawalpindi &amp; Islamabad · Nationwide &amp; Export dispatch daily.
