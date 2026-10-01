@@ -1,0 +1,16 @@
+# Permanent 301 Redirects for Decommissioned Dry Powder Chemicals to Active Catalog
+/products/starch.html /products.html 301
+/products/soda-ash.html /products.html 301
+/products/neel.html /products.html 301
+/products/bleach-powder.html /products.html 301
+/products/caustic-soda.html /products.html 301
+/products/citric-acid.html /products.html 301
+/products/zeklor-dry.html /products.html 301
+
+/products/starch /products.html 301
+/products/soda-ash /products.html 301
+/products/neel /products.html 301
+/products/bleach-powder /products.html 301
+/products/caustic-soda /products.html 301
+/products/citric-acid /products.html 301
+/products/zeklor-dry /products.html 301

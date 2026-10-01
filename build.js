@@ -46,7 +46,9 @@ const itemsToCopy = [
   'favicon-192x192.png',
   'favicon-512x512.png',
   'apple-touch-icon.png',
-  'site.webmanifest'
+  'site.webmanifest',
+  '_redirects',
+  '404.html'
 ];
 
 for (const item of itemsToCopy) {
