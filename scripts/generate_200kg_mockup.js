@@ -79,7 +79,7 @@ function buildDrumSvg() {
   <!-- 5. Contact Footer -->
   <g transform="translate(${LABEL.x + 8}, ${LABEL.y + 190})" fill="#002b5c" font-family="'Segoe UI', Arial, sans-serif">
     <line x1="0" y1="0" x2="${LABEL.w - 16}" y2="0" stroke="#bae6fd" stroke-width="0.8"/>
-    <text x="0" y="9" font-size="5" font-weight="700">📍 Plot # 152, St. # 1, Millat Colony, Rawalpindi · Tel: 051-5503203 · Mob: 0321-8502997</text>
+    <text x="0" y="9" font-size="5" font-weight="700">📍 Plot # 152, St. # 1, Millat Colony, Rawalpindi · Tel: 051-5503203 · Mob: 0310-8502997</text>
     <text x="0" y="17" font-size="5" font-weight="700">✉ ar_sons@hotmail.com · ISO 9001:2015 · Halal Certified · HACCP Compliant</text>
   </g>
 

@@ -5,8 +5,8 @@ const ARS_CONTACT = {
   address: "G.P.O. Box No. 1020, Rawalpindi, Pakistan",
   warehouse: "Rawalpindi",
   tel: "051-5503203",
-  whatsapp: ["923318502997", "923332158113"],
-  whatsappDisplay: ["0331-8502997", "0333-2158113"],
+  whatsapp: ["923108502997", "923332158113"],
+  whatsappDisplay: ["0310-8502997", "0333-2158113"],
   email: "ar_sons@hotmail.com"
 };
 
@@ -57,7 +57,7 @@ function openWhatsApp(formData, cart, numberIndex = 0) {
   const msg = encodeURIComponent(buildOrderMessage(formData, cart));
   const number = (typeof ARS_CONTACT !== "undefined" && ARS_CONTACT.whatsapp && ARS_CONTACT.whatsapp[numberIndex])
     ? ARS_CONTACT.whatsapp[numberIndex]
-    : "923318502997";
+    : "923108502997";
   const url = `https://api.whatsapp.com/send?phone=${number}&text=${msg}`;
   const win = window.open(url, "_blank");
   if (!win || win.closed || typeof win.closed === "undefined") {
@@ -173,7 +173,7 @@ function initOrderForm() {
     openWhatsApp(formData, getCart(), 0);
   });
 
-  document.getElementById("btn-whatsapp-331")?.addEventListener("click", () => {
+  document.getElementById("btn-whatsapp-310")?.addEventListener("click", () => {
     const formData = getFormData();
     if (!validateForm(formData)) return;
     openWhatsApp(formData, getCart(), 0);
@@ -371,7 +371,7 @@ function renderGallonSvg(pname, packaging = "5 kg", cat = "laundry", uid = "defa
 
       <!-- Purple Contact & Safety Footer Band (from checking.png) -->
       <path d="M 48 238 Q 120 234 192 238 L 192 254 L 48 254 Z" fill="#0f172a"/>
-      <text x="120" y="244" text-anchor="middle" font-size="3.7" font-weight="600" fill="#93c5fd">Rawalpindi · Mob: 0321-8502997, 0333-2158113</text>
+      <text x="120" y="244" text-anchor="middle" font-size="3.7" font-weight="600" fill="#93c5fd">Rawalpindi · Mob: 0310-8502997, 0333-2158113</text>
       <text x="120" y="249" text-anchor="middle" font-size="3.4" font-weight="500" fill="#cbd5e1">Email: ar_sons@hotmail.com · G.P.O. Box 1020</text>
     </g>
   </svg>`;

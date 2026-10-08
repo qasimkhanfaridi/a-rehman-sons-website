@@ -16,7 +16,7 @@ Static B2B website for **A. Rehman & Sons**, commercial laundry, stewarding and 
 | | |
 |---|---|
 | **Tel** | 051-5503203 |
-| **WhatsApp** | 0321-8502997 · 0333-2158113 |
+| **WhatsApp** | 0310-8502997 · 0333-2158113 |
 | **Email** | ar_sons@hotmail.com |
 | **Address** | G.P.O. Box No. 1020, Rawalpindi, Pakistan |
 

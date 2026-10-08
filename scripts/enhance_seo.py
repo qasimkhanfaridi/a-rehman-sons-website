@@ -38,7 +38,7 @@ SEO_DATA = {
       "description": "Manufacturer and imported chemical supplier in Rawalpindi, Pakistan specializing in commercial laundry, stewarding & kitchen, and institutional housekeeping chemicals since 1988.",
       "url": "https://arschemicals.com/",
       "logo": "https://arschemicals.com/assets/logo.png",
-      "telephone": ["+92-51-5503203", "+92-321-8502997"],
+      "telephone": ["+92-51-5503203", "+92-310-8502997"],
       "email": "ar_sons@hotmail.com",
       "address": {
         "@type": "PostalAddress",
@@ -126,7 +126,7 @@ SEO_DATA = {
     },
     "contact.html": {
         "title": "Contact Us & Factory Location Rawalpindi | A. Rehman & Sons",
-        "description": "Contact A. Rehman & Sons commercial chemical supplier in Rawalpindi, Pakistan. Direct sales desk: +92-51-5503203, WhatsApp: +92-321-8502997, email: ar_sons@hotmail.com.",
+        "description": "Contact A. Rehman & Sons commercial chemical supplier in Rawalpindi, Pakistan. Direct sales desk: +92-51-5503203, WhatsApp: +92-310-8502997, email: ar_sons@hotmail.com.",
         "canonical": "https://arschemicals.com/contact.html",
         "og_title": "Contact Us & Factory Location Rawalpindi | A. Rehman & Sons",
         "og_description": "Direct chemical sales desk, factory warehouse, and procurement inquiries for commercial laundry, kitchen, and housekeeping chemicals in Rawalpindi.",
@@ -140,7 +140,7 @@ SEO_DATA = {
     "mainEntity": {
       "@type": "IndustrialSupplyStore",
       "name": "A. Rehman & Sons",
-      "telephone": ["+92-51-5503203", "+92-321-8502997", "+92-333-2158113"],
+      "telephone": ["+92-51-5503203", "+92-310-8502997", "+92-333-2158113"],
       "email": "ar_sons@hotmail.com",
       "address": {
         "@type": "PostalAddress",

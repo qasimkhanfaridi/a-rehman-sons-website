@@ -134,7 +134,7 @@ function buildSvg(prod, sizeText = '10 KG') {
     <line x1="0" y1="0" x2="${LABEL.w - 24}" y2="0" stroke="#bae6fd" stroke-width="1"/>
     
     <text x="0" y="12" font-size="7" font-weight="700">📍 Plot # 152, St. # 1, Millat Colony, Rawalpindi (G.P.O. Box 1020)</text>
-    <text x="0" y="23" font-size="7" font-weight="700">📞 Mob: 0321-8502997, 0333-2158113 · Tel: 051-5503203</text>
+    <text x="0" y="23" font-size="7" font-weight="700">📞 Mob: 0310-8502997, 0333-2158113 · Tel: 051-5503203</text>
     <text x="0" y="34" font-size="7" font-weight="700">✉ E-mail: ar_sons@hotmail.com · Fax: 051-5953130</text>
     <text x="0" y="45" font-size="6.5" fill="#0284c7" font-weight="600">ISO 9001:2015 · Halal Certified · HACCP Compliant · Rawalpindi Manufacturing</text>
   </g>
